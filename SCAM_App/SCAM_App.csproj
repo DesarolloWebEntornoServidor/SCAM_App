@@ -32,8 +32,17 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Bunifu_UI_v1.5.3">
+      <HintPath>..\..\..\..\..\..\..\..\Program Files (x86)\Bunifu Technologies\Bunifu Framework Manager\bin\updates\Bunifu UI 1.5.3\Bunifu_UI_v1.5.3.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.VisualBasic" />
+    <Reference Include="MySql.Data, Version=6.9.8.0, Culture=neutral, PublicKeyToken=c5687fc88969c44d, processorArchitecture=MSIL" />
     <Reference Include="System" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Configuration.Install" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Management" />
+    <Reference Include="System.Transactions" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -45,14 +54,123 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Form1.cs">
+    <Compile Include="Conexion.cs" />
+    <Compile Include="FormLogin.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Form1.Designer.cs">
-      <DependentUpon>Form1.cs</DependentUpon>
+    <Compile Include="FormLogin.Designer.cs">
+      <DependentUpon>FormLogin.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FormAccesoDetalles.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormAccesoDetalles.Designer.cs">
+      <DependentUpon>FormAccesoDetalles.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FormAccesoEmpDetalles.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormAccesoEmpDetalles.Designer.cs">
+      <DependentUpon>FormAccesoEmpDetalles.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FormAccesos.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormAccesos.Designer.cs">
+      <DependentUpon>FormAccesos.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FormAccesosEmpleados.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormAccesosEmpleados.Designer.cs">
+      <DependentUpon>FormAccesosEmpleados.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FormDepartamento.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormDepartamento.Designer.cs">
+      <DependentUpon>FormDepartamento.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FormDeptoDetalles.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormDeptoDetalles.Designer.cs">
+      <DependentUpon>FormDeptoDetalles.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FormEmpDetalles.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormEmpDetalles.Designer.cs">
+      <DependentUpon>FormEmpDetalles.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FormEmpleados.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormEmpleados.Designer.cs">
+      <DependentUpon>FormEmpleados.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FormInicio.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormInicio.Designer.cs">
+      <DependentUpon>FormInicio.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FormUsuarioDetalle.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormUsuarioDetalle.Designer.cs">
+      <DependentUpon>FormUsuarioDetalle.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FormUsuarios.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormUsuarios.Designer.cs">
+      <DependentUpon>FormUsuarios.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Help\FormHelpCodigoAcceso.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Help\FormHelpCodigoAcceso.Designer.cs">
+      <DependentUpon>FormHelpCodigoAcceso.cs</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="FormLogin.resx">
+      <DependentUpon>FormLogin.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormAccesoDetalles.resx">
+      <DependentUpon>FormAccesoDetalles.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormAccesoEmpDetalles.resx">
+      <DependentUpon>FormAccesoEmpDetalles.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormAccesos.resx">
+      <DependentUpon>FormAccesos.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormAccesosEmpleados.resx">
+      <DependentUpon>FormAccesosEmpleados.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormDepartamento.resx">
+      <DependentUpon>FormDepartamento.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormDeptoDetalles.resx">
+      <DependentUpon>FormDeptoDetalles.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormEmpDetalles.resx">
+      <DependentUpon>FormEmpDetalles.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormEmpleados.resx">
+      <DependentUpon>FormEmpleados.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormInicio.resx">
+      <DependentUpon>FormInicio.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormUsuarioDetalle.resx">
+      <DependentUpon>FormUsuarioDetalle.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormUsuarios.resx">
+      <DependentUpon>FormUsuarios.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
@@ -74,6 +192,12 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\DatosNegocios\DatosNegocios.csproj">
+      <Project>{ce949796-1f3d-41b6-b07f-7510220a1503}</Project>
+      <Name>DatosNegocios</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
