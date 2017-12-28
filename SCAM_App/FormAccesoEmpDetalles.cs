@@ -83,7 +83,7 @@ namespace SCAM_App
                 nombreCodigosChecados.Add(items);
             }
 
-            int idEmp = cbEmpleado.SelectedIndex;        
+            int idEmp = Convert.ToInt32(cbEmpleado.SelectedValue);        
 
             int resultado = AccesoEmpleadoDAO.InsertarGrupoAccesos(idEmp, nombreCodigosChecados);
 

@@ -109,22 +109,36 @@ namespace SCAM_App
                 if (DialogResult.No == MessageBox.Show("¿está seguro de eliminar a\n" + dgvUsuarios.Rows[fila].Cells[1].Value + "?", "Confirmar", MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2))
                     return;
 
-                UsuarioDAO.BorarRegistro(valor);
+                int retorno = UsuarioDAO.BorarRegistro(valor);
 
-                MessageBox.Show("Acceso Borrado con Exito !!!");
+                if (retorno > 0)
+                    MessageBox.Show("Usuario Borrado con Exito !!!");
+                else
+                    MessageBox.Show("Error !!! Este Usuario está Vinculado a un Empleado !!!");
 
                 dgvUsuarios.Rows.Clear();
                 CargaDGV();
             }
             else if (dgvUsuarios.Columns[colum].HeaderText == "Modificar")// <-- he pulsado el botón Borrar
             {
+                colum = e.ColumnIndex;
+                fila = e.RowIndex;
+
+                int idUsu = Convert.ToInt32(dgvUsuarios.Rows[fila].Cells[0].Value);
+
+                Usuario usu = UsuarioDAO.ObtenerUsuario(idUsu);
+
+                if (colum < 0)
+                    return;
                 //// modificar usuario ////////////////////////////
                 this.Close();
-                FormUsuarioDetalle fa = new FormUsuarioDetalle();
+                FormUsuarioDetalle fa = new FormUsuarioDetalle(usu); 
+
                 fa.Width = 579;
                 fa.Height = 435;
                 fa.Location = new Point(280, 160);
                 fa.ShowDialog();
+                fa.Dispose();
             }
             else
                 return; // <-- No he pulsado ninguno de los botones que me iteresan

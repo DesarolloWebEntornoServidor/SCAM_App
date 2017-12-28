@@ -48,13 +48,14 @@ namespace DatosNegocios
 
             MySqlConnection cmd = Conexion.ObtenerConexion();
 
-            MySqlCommand comando = new MySqlCommand(String.Format("SELECT idCodigoAcceso, codigoDeAcceso, descripcionAcceso FROM codigosacceso where idCodigoAcceso={0}", id), cmd);
+            MySqlCommand comando = new MySqlCommand(String.Format("SELECT idCodigoAcceso, codigoDeAcceso, descripcionAcceso, pTodos FROM codigosacceso where idCodigoAcceso={0}", id), cmd);
             MySqlDataReader cods = comando.ExecuteReader();
             while (cods.Read())
             {
                 codigo.IdCodigoAcceso = cods.GetInt32(0);
                 codigo.CodigoDeAcceso = cods.GetString(1);
                 codigo.DescripcionAcceso = cods.GetString(2);
+                codigo.PTodos = Convert.ToInt32(cods.GetBoolean(3));
 
             }
 
@@ -64,13 +65,24 @@ namespace DatosNegocios
 
         }
 
+        public static int ModificarCodigoAcceso(CodigoAcceso codA)
+        {
+            int retorno = 0;               
+
+            MySqlCommand comando = new MySqlCommand(string.Format("update codigosacceso set codigoDeAcceso = '{0}', descripcionAcceso = '{1}', pTodos = '{2}' where idCodigoAcceso={3}",
+                Util.Encriptar(codA.CodigoDeAcceso), codA.DescripcionAcceso, codA.PTodos, codA.IdCodigoAcceso), Conexion.ObtenerConexion());
+
+            retorno = comando.ExecuteNonQuery();
+            return retorno;
+        }
+
         public static List<int> ObtenerCodigoAccesoPorNombre(List<string> descCodigo)
         {
             List<int> codigosEnteros = new List<int>();
 
             for (int i = 0; i < descCodigo.Count; i++)
             {
-                MySqlCommand comando = new MySqlCommand(String.Format("SELECT idCodigoAcceso, codigoDeAcceso, descripcionAcceso FROM codigosacceso where descripcionAcceso='" + descCodigo[i] + "'"), Conexion.ObtenerConexion());
+                MySqlCommand comando = new MySqlCommand(String.Format("SELECT idCodigoAcceso, codigoDeAcceso, descripcionAcceso, pTodos FROM codigosacceso where descripcionAcceso='" + descCodigo[i] + "'"), Conexion.ObtenerConexion());
 
                 MySqlDataReader cods = comando.ExecuteReader();
                 while (cods.Read())
@@ -83,6 +95,46 @@ namespace DatosNegocios
             Conexion.CerrarConexion();
 
             return codigosEnteros;
+        }
+
+        public static List<CodigoAcceso> Localizar(string buscar)
+        {
+            List<CodigoAcceso> lista = new List<CodigoAcceso>();
+
+            MySqlCommand comando = new MySqlCommand(String.Format("select idCodigoAcceso, descripcionAcceso, pTodos FROM codigosacceso " +
+                "WHERE descripcionAcceso LIKE '%" + buscar + "%'"), Conexion.ObtenerConexion());
+
+            MySqlDataReader codigos = comando.ExecuteReader();
+            while (codigos.Read())
+            {
+                CodigoAcceso cods = new CodigoAcceso();
+                cods.IdCodigoAcceso = codigos.GetInt32(0);
+                cods.DescripcionAcceso = codigos.GetString(1);
+                cods.PTodos = codigos.GetInt32(2);
+
+                lista.Add(cods);
+            }
+
+            Conexion.CerrarConexion();
+            return lista;
+        }
+
+        public static int BorarRegistro(int id)
+        {
+            int retorno = 0;
+            try
+            {
+                MySqlCommand comando = new MySqlCommand(string.Format("delete FROM codigosacceso where idCodigoAcceso={0}", id), Conexion.ObtenerConexion());
+
+                retorno = comando.ExecuteNonQuery();
+            }
+            catch (Exception)
+            {
+
+                Conexion.CerrarConexion();
+            }
+
+            return retorno;
         }
     }
 }

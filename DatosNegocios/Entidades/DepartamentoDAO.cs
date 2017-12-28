@@ -25,7 +25,7 @@ namespace DatosNegocios
         {
             List<Departamento> lista = new List<Departamento>();
 
-            MySqlCommand comando = new MySqlCommand(String.Format("select idDepartamento, descripcion, idCodigoAcceso from departamentos"), Conexion.ObtenerConexion());
+            MySqlCommand comando = new MySqlCommand(String.Format("select idDepartamento, descripcion, idCodigoAcceso from departamentos order by descripcion"), Conexion.ObtenerConexion());
             MySqlDataReader codigos = comando.ExecuteReader();
             while (codigos.Read())
             {
@@ -60,6 +60,61 @@ namespace DatosNegocios
 
             return depart;
 
+        }
+
+        public static List<Departamento> Localizar(string buscar)
+        {
+            List<Departamento> lista = new List<Departamento>();
+
+            MySqlCommand comando = new MySqlCommand(String.Format("select idDepartamento, descripcion, d.idCodigoAcceso from departamentos d " +
+                "join codigosacceso c on (d.idCodigoAcceso=c.idCodigoAcceso)" +
+                "WHERE descripcion LIKE '%" + buscar + "%' OR c.descripcionAcceso LIKE '%" + buscar + "%' OR d.idCodigoAcceso LIKE '%" + buscar + "%'"), Conexion.ObtenerConexion());
+
+            MySqlDataReader cods = comando.ExecuteReader();
+
+            while (cods.Read())
+            {
+                Departamento depart = new Departamento();
+
+                depart.IdDepartamento = cods.GetInt32(0);
+                depart.Descripcion = cods.GetString(1);
+                depart.IdCodigoAcceso = cods.GetInt32(2);
+
+                lista.Add(depart);
+            }
+
+            Conexion.CerrarConexion();
+            return lista;
+        }
+
+        public static int ModificarDepartamento(Departamento dep)
+        {
+            int retorno = 0;
+
+            MySqlCommand comando = new MySqlCommand(string.Format("update departamentos set descripcion = '{0}', idCodigoAcceso = '{1}' where idDepartamento={2}",
+                dep.Descripcion, dep.IdCodigoAcceso, dep.IdDepartamento), Conexion.ObtenerConexion());
+
+            retorno = comando.ExecuteNonQuery();
+            return retorno;
+        }
+
+        public static int BorarRegistro(int id)
+        {
+            int retorno = 0;
+            try
+            {
+                MySqlCommand comando = new MySqlCommand(string.Format("delete FROM departamentos where idDepartamento={0}", id), Conexion.ObtenerConexion());
+
+                retorno = comando.ExecuteNonQuery();
+            }
+            catch (Exception)
+            {
+                
+                Conexion.CerrarConexion();
+            }
+
+            return retorno;
+            
         }
     }
 }

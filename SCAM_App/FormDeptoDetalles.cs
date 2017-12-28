@@ -13,9 +13,22 @@ namespace SCAM_App
 {
     public partial class FormDeptoDetalles : Form
     {
+        private Departamento dep;
+        private CodigoAcceso codV = null;
+        List<CodigoAcceso> listaCodigos;
+        bool esNuevo = true;
+
         public FormDeptoDetalles()
         {
             InitializeComponent();
+        }
+
+        public FormDeptoDetalles(Departamento dep)
+        {
+            InitializeComponent();
+
+            this.dep = dep;
+            esNuevo = false;
         }
 
         private void FormDeptoDetalles_Load(object sender, EventArgs e)
@@ -23,13 +36,27 @@ namespace SCAM_App
             txtIdDepto.Enabled = false;
 
             cargaCombo();
+
+            if (esNuevo == false)
+            {
+                txtIdDepto.Text = dep.IdDepartamento.ToString();
+
+                txtDescripcion.Text = dep.Descripcion;
+
+                codV = CodigoAccesoDAO.ObtenerCodigoAcceso(dep.IdCodigoAcceso); // Solicita el empleado que esta vinculado a ese usuario ///
+
+                if (codV.IdCodigoAcceso > 0)
+                    cbCodigosAcceso.SelectedValue = codV.IdCodigoAcceso;
+                else
+                    cbCodigosAcceso.Text = "Seleccione un Nivel de Acceso";
+            }
         }
 
         private void cargaCombo()
         {
-            List<CodigoAcceso> listaCodigos = CodigoAccesoDAO.ListarCodigosAcceso();
-
-            listaCodigos.Insert(0, new CodigoAcceso(0, "Mensagen", "Seleccione el Nivel de Acceso")); 
+            listaCodigos = CodigoAccesoDAO.ListarCodigosAcceso();
+            if(esNuevo)
+                listaCodigos.Insert(0, new CodigoAcceso(0, "Mensagen", "Seleccione el Nivel de Acceso")); 
 
 
             cbCodigosAcceso.DataSource = listaCodigos;
@@ -42,8 +69,8 @@ namespace SCAM_App
             this.Hide();
 
             FormDepartamento fa = new FormDepartamento();
-            fa.Width = 860;
-            fa.Height = 450;
+            fa.Width = 579;
+            fa.Height = 435;
             fa.Location = new Point(280, 160);
             fa.ShowDialog();
         }
@@ -53,15 +80,29 @@ namespace SCAM_App
             Departamento dep = new Departamento();
 
             dep.Descripcion = txtDescripcion.Text.Trim();
-            dep.IdCodigoAcceso = cbCodigosAcceso.SelectedIndex;
+            dep.IdCodigoAcceso = Convert.ToInt32( cbCodigosAcceso.SelectedValue);
 
-            int resultado = DepartamentoDAO.Insertar(dep);
+            int resultado = 0;
+            if (esNuevo)
+                resultado = DepartamentoDAO.Insertar(dep); // recibe el resultado positivo al insertar
+            else
+            {
+                int idCod = cbCodigosAcceso.SelectedIndex;
+                dep.IdDepartamento = Convert.ToInt32(txtIdDepto.Text);
+                resultado = DepartamentoDAO.ModificarDepartamento(dep);
+            }
 
             if (resultado > 0)
             {
                 MessageBox.Show("Departamento Guardado Con Exito!!", "Guardado", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                txtDescripcion.Text = "";
-                txtDescripcion.Focus();
+
+                this.Hide();
+
+                FormDepartamento fa = new FormDepartamento();
+                fa.Width = 579;
+                fa.Height = 435;
+                fa.Location = new Point(280, 160);
+                fa.ShowDialog();
             }
             else
             {
@@ -69,6 +110,29 @@ namespace SCAM_App
             }
         }
 
-     
+        protected override bool ProcessCmdKey(ref Message msg, Keys keyData)
+        {
+            switch (keyData)
+            {
+                case Keys.F1:
+                    // Llamamos al Formulario de Ayuda
+                    //
+                    Help.FormHelpCodigoAcceso frm = new Help.FormHelpCodigoAcceso();
+                    frm.ShowDialog();
+                    frm.Dispose();
+                    break;
+                case Keys.Escape:
+                    this.Hide();
+                    FormDepartamento fa = new FormDepartamento();
+                    fa.Width = 579;
+                    fa.Height = 435;
+                    fa.Location = new Point(280, 160);
+                    fa.ShowDialog();
+                    break;
+
+            }
+            return base.ProcessCmdKey(ref msg, keyData);
+        }
+
     }
 }

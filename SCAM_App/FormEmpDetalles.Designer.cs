@@ -34,7 +34,6 @@
             this.panel1 = new System.Windows.Forms.Panel();
             this.btnVolver = new Bunifu.Framework.UI.BunifuImageButton();
             this.bunifuCustomLabel1 = new Bunifu.Framework.UI.BunifuCustomLabel();
-            this.bunifuImageButton1 = new Bunifu.Framework.UI.BunifuImageButton();
             this.btnAnadirEmpleado = new Bunifu.Framework.UI.BunifuThinButton2();
             this.tbIdEmpleado = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
@@ -67,10 +66,8 @@
             this.label13 = new System.Windows.Forms.Label();
             this.fechaEntrada = new Bunifu.Framework.UI.BunifuDatepicker();
             this.btnCargaImagen = new Bunifu.Framework.UI.BunifuFlatButton();
-            this.dataAux = new System.Windows.Forms.DateTimePicker();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.btnVolver)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.bunifuImageButton1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictBoxFoto)).BeginInit();
             this.SuspendLayout();
             // 
@@ -84,11 +81,10 @@
             this.panel1.BackColor = System.Drawing.Color.RoyalBlue;
             this.panel1.Controls.Add(this.btnVolver);
             this.panel1.Controls.Add(this.bunifuCustomLabel1);
-            this.panel1.Controls.Add(this.bunifuImageButton1);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel1.Location = new System.Drawing.Point(0, 0);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(685, 40);
+            this.panel1.Size = new System.Drawing.Size(800, 50);
             this.panel1.TabIndex = 1;
             // 
             // btnVolver
@@ -96,9 +92,9 @@
             this.btnVolver.BackColor = System.Drawing.Color.RoyalBlue;
             this.btnVolver.Image = ((System.Drawing.Image)(resources.GetObject("btnVolver.Image")));
             this.btnVolver.ImageActive = null;
-            this.btnVolver.Location = new System.Drawing.Point(624, 8);
+            this.btnVolver.Location = new System.Drawing.Point(694, 5);
             this.btnVolver.Name = "btnVolver";
-            this.btnVolver.Size = new System.Drawing.Size(36, 26);
+            this.btnVolver.Size = new System.Drawing.Size(41, 39);
             this.btnVolver.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.btnVolver.TabIndex = 7;
             this.btnVolver.TabStop = false;
@@ -114,19 +110,6 @@
             this.bunifuCustomLabel1.Size = new System.Drawing.Size(168, 21);
             this.bunifuCustomLabel1.TabIndex = 6;
             this.bunifuCustomLabel1.Text = "Datos del Empleado";
-            // 
-            // bunifuImageButton1
-            // 
-            this.bunifuImageButton1.BackColor = System.Drawing.Color.RoyalBlue;
-            this.bunifuImageButton1.Image = ((System.Drawing.Image)(resources.GetObject("bunifuImageButton1.Image")));
-            this.bunifuImageButton1.ImageActive = null;
-            this.bunifuImageButton1.Location = new System.Drawing.Point(686, 8);
-            this.bunifuImageButton1.Name = "bunifuImageButton1";
-            this.bunifuImageButton1.Size = new System.Drawing.Size(36, 26);
-            this.bunifuImageButton1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.bunifuImageButton1.TabIndex = 5;
-            this.bunifuImageButton1.TabStop = false;
-            this.bunifuImageButton1.Zoom = 10;
             // 
             // btnAnadirEmpleado
             // 
@@ -146,7 +129,7 @@
             this.btnAnadirEmpleado.IdleFillColor = System.Drawing.Color.SeaGreen;
             this.btnAnadirEmpleado.IdleForecolor = System.Drawing.Color.Silver;
             this.btnAnadirEmpleado.IdleLineColor = System.Drawing.Color.SeaGreen;
-            this.btnAnadirEmpleado.Location = new System.Drawing.Point(362, 350);
+            this.btnAnadirEmpleado.Location = new System.Drawing.Point(354, 395);
             this.btnAnadirEmpleado.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.btnAnadirEmpleado.Name = "btnAnadirEmpleado";
             this.btnAnadirEmpleado.Size = new System.Drawing.Size(151, 42);
@@ -174,7 +157,7 @@
             // cbDepartamento
             // 
             this.cbDepartamento.FormattingEnabled = true;
-            this.cbDepartamento.Location = new System.Drawing.Point(483, 235);
+            this.cbDepartamento.Location = new System.Drawing.Point(598, 235);
             this.cbDepartamento.Name = "cbDepartamento";
             this.cbDepartamento.Size = new System.Drawing.Size(167, 21);
             this.cbDepartamento.TabIndex = 19;
@@ -183,7 +166,7 @@
             // 
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Century Gothic", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(549, 216);
+            this.label2.Location = new System.Drawing.Point(664, 216);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(101, 16);
             this.label2.TabIndex = 18;
@@ -192,7 +175,7 @@
             // cbUsuario
             // 
             this.cbUsuario.FormattingEnabled = true;
-            this.cbUsuario.Location = new System.Drawing.Point(497, 282);
+            this.cbUsuario.Location = new System.Drawing.Point(612, 287);
             this.cbUsuario.Name = "cbUsuario";
             this.cbUsuario.Size = new System.Drawing.Size(153, 21);
             this.cbUsuario.TabIndex = 21;
@@ -201,7 +184,7 @@
             // 
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("Century Gothic", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.Location = new System.Drawing.Point(523, 263);
+            this.label3.Location = new System.Drawing.Point(638, 268);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(127, 16);
             this.label3.TabIndex = 20;
@@ -317,7 +300,7 @@
             // pictBoxFoto
             // 
             this.pictBoxFoto.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.pictBoxFoto.Location = new System.Drawing.Point(550, 58);
+            this.pictBoxFoto.Location = new System.Drawing.Point(665, 58);
             this.pictBoxFoto.Name = "pictBoxFoto";
             this.pictBoxFoto.Size = new System.Drawing.Size(100, 111);
             this.pictBoxFoto.TabIndex = 33;
@@ -411,7 +394,7 @@
             this.chkActivo.Checked = true;
             this.chkActivo.CheckedOnColor = System.Drawing.Color.FromArgb(((int)(((byte)(51)))), ((int)(((byte)(205)))), ((int)(((byte)(117)))));
             this.chkActivo.ForeColor = System.Drawing.Color.White;
-            this.chkActivo.Location = new System.Drawing.Point(552, 318);
+            this.chkActivo.Location = new System.Drawing.Point(667, 326);
             this.chkActivo.Name = "chkActivo";
             this.chkActivo.Size = new System.Drawing.Size(20, 20);
             this.chkActivo.TabIndex = 45;
@@ -420,7 +403,7 @@
             // 
             this.label13.AutoSize = true;
             this.label13.Font = new System.Drawing.Font("Century Gothic", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label13.Location = new System.Drawing.Point(574, 319);
+            this.label13.Location = new System.Drawing.Point(689, 327);
             this.label13.Name = "label13";
             this.label13.Size = new System.Drawing.Size(49, 16);
             this.label13.TabIndex = 46;
@@ -463,7 +446,7 @@
             this.btnCargaImagen.IconVisible = true;
             this.btnCargaImagen.IconZoom = 90D;
             this.btnCargaImagen.IsTab = false;
-            this.btnCargaImagen.Location = new System.Drawing.Point(550, 174);
+            this.btnCargaImagen.Location = new System.Drawing.Point(665, 174);
             this.btnCargaImagen.Name = "btnCargaImagen";
             this.btnCargaImagen.Normalcolor = System.Drawing.Color.FromArgb(((int)(((byte)(46)))), ((int)(((byte)(139)))), ((int)(((byte)(87)))));
             this.btnCargaImagen.OnHovercolor = System.Drawing.Color.FromArgb(((int)(((byte)(36)))), ((int)(((byte)(129)))), ((int)(((byte)(77)))));
@@ -477,20 +460,11 @@
             this.btnCargaImagen.TextFont = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnCargaImagen.Click += new System.EventHandler(this.btnCargaImagen_Click);
             // 
-            // dataAux
-            // 
-            this.dataAux.Format = System.Windows.Forms.DateTimePickerFormat.Short;
-            this.dataAux.Location = new System.Drawing.Point(316, 58);
-            this.dataAux.Name = "dataAux";
-            this.dataAux.Size = new System.Drawing.Size(200, 20);
-            this.dataAux.TabIndex = 49;
-            // 
             // FormEmpDetalles
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(685, 402);
-            this.Controls.Add(this.dataAux);
+            this.ClientSize = new System.Drawing.Size(800, 450);
             this.Controls.Add(this.btnCargaImagen);
             this.Controls.Add(this.fechaEntrada);
             this.Controls.Add(this.label13);
@@ -532,7 +506,6 @@
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.btnVolver)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.bunifuImageButton1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictBoxFoto)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -544,7 +517,6 @@
         private Bunifu.Framework.UI.BunifuElipse bunifuElipse1;
         private System.Windows.Forms.Panel panel1;
         private Bunifu.Framework.UI.BunifuCustomLabel bunifuCustomLabel1;
-        private Bunifu.Framework.UI.BunifuImageButton bunifuImageButton1;
         private Bunifu.Framework.UI.BunifuThinButton2 btnAnadirEmpleado;
         private System.Windows.Forms.TextBox tbIdEmpleado;
         private System.Windows.Forms.Label label1;
@@ -578,6 +550,5 @@
         private Bunifu.Framework.UI.BunifuImageButton btnVolver;
         private Bunifu.Framework.UI.BunifuDatepicker fechaEntrada;
         private Bunifu.Framework.UI.BunifuFlatButton btnCargaImagen;
-        private System.Windows.Forms.DateTimePicker dataAux;
     }
 }

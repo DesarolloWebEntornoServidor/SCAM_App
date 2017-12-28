@@ -58,7 +58,7 @@
             this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel1.Location = new System.Drawing.Point(0, 0);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(685, 40);
+            this.panel1.Size = new System.Drawing.Size(669, 50);
             this.panel1.TabIndex = 0;
             // 
             // bunifuCustomLabel1
@@ -76,9 +76,9 @@
             this.bunifuImageButton1.BackColor = System.Drawing.Color.RoyalBlue;
             this.bunifuImageButton1.Image = ((System.Drawing.Image)(resources.GetObject("bunifuImageButton1.Image")));
             this.bunifuImageButton1.ImageActive = null;
-            this.bunifuImageButton1.Location = new System.Drawing.Point(633, 7);
+            this.bunifuImageButton1.Location = new System.Drawing.Point(491, 6);
             this.bunifuImageButton1.Name = "bunifuImageButton1";
-            this.bunifuImageButton1.Size = new System.Drawing.Size(36, 26);
+            this.bunifuImageButton1.Size = new System.Drawing.Size(40, 40);
             this.bunifuImageButton1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.bunifuImageButton1.TabIndex = 5;
             this.bunifuImageButton1.TabStop = false;
@@ -103,7 +103,7 @@
             this.btnAnadirAcceso.IdleFillColor = System.Drawing.Color.SeaGreen;
             this.btnAnadirAcceso.IdleForecolor = System.Drawing.Color.Silver;
             this.btnAnadirAcceso.IdleLineColor = System.Drawing.Color.SeaGreen;
-            this.btnAnadirAcceso.Location = new System.Drawing.Point(245, 279);
+            this.btnAnadirAcceso.Location = new System.Drawing.Point(176, 303);
             this.btnAnadirAcceso.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.btnAnadirAcceso.Name = "btnAnadirAcceso";
             this.btnAnadirAcceso.Size = new System.Drawing.Size(203, 42);
@@ -113,14 +113,14 @@
             // 
             // txtDescripcion
             // 
-            this.txtDescripcion.Location = new System.Drawing.Point(307, 137);
+            this.txtDescripcion.Location = new System.Drawing.Point(245, 140);
             this.txtDescripcion.Name = "txtDescripcion";
             this.txtDescripcion.Size = new System.Drawing.Size(220, 20);
             this.txtDescripcion.TabIndex = 13;
             // 
             // txtIdDepto
             // 
-            this.txtIdDepto.Location = new System.Drawing.Point(307, 95);
+            this.txtIdDepto.Location = new System.Drawing.Point(245, 98);
             this.txtIdDepto.Name = "txtIdDepto";
             this.txtIdDepto.Size = new System.Drawing.Size(67, 20);
             this.txtIdDepto.TabIndex = 11;
@@ -129,7 +129,7 @@
             // 
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("Century Gothic", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.Location = new System.Drawing.Point(157, 138);
+            this.label3.Location = new System.Drawing.Point(95, 141);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(85, 16);
             this.label3.TabIndex = 10;
@@ -139,7 +139,7 @@
             // 
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Century Gothic", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(157, 184);
+            this.label2.Location = new System.Drawing.Point(95, 187);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(129, 16);
             this.label2.TabIndex = 9;
@@ -149,7 +149,7 @@
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Century Gothic", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(157, 99);
+            this.label1.Location = new System.Drawing.Point(95, 102);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(56, 16);
             this.label1.TabIndex = 8;
@@ -158,7 +158,7 @@
             // cbCodigosAcceso
             // 
             this.cbCodigosAcceso.FormattingEnabled = true;
-            this.cbCodigosAcceso.Location = new System.Drawing.Point(307, 184);
+            this.cbCodigosAcceso.Location = new System.Drawing.Point(245, 187);
             this.cbCodigosAcceso.Name = "cbCodigosAcceso";
             this.cbCodigosAcceso.Size = new System.Drawing.Size(220, 21);
             this.cbCodigosAcceso.TabIndex = 15;
@@ -167,7 +167,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(685, 402);
+            this.ClientSize = new System.Drawing.Size(669, 453);
             this.Controls.Add(this.cbCodigosAcceso);
             this.Controls.Add(this.btnAnadirAcceso);
             this.Controls.Add(this.txtDescripcion);

@@ -16,9 +16,26 @@ namespace SCAM_App
 {
     public partial class FormEmpDetalles : Form
     {
+        private Empleado emp;
+
+        private Departamento depV = null;
+        List<Departamento> listaDeparts;
+
+        private Usuario usuV = null;
+        List<Usuario> listaUsuarios;
+        bool esNuevo = true;
+
         public FormEmpDetalles()
         {
             InitializeComponent();
+        }
+
+        public FormEmpDetalles(Empleado emp)
+        {
+            InitializeComponent();
+
+            this.emp = emp;
+            esNuevo = false;
         }
 
         private void btnVolver_Click(object sender, EventArgs e)
@@ -37,11 +54,52 @@ namespace SCAM_App
             tbIdEmpleado.Enabled = false;
 
             cargaCombos();
+
+            if (esNuevo == false)
+            {
+                 tbIdEmpleado.Text = emp.IdEmpleado.ToString();
+                 tbNombre.Text = emp.Nombre;
+                 tbApellidos.Text = emp.Apellidos;
+               // emp.FechaNacto = Convert.ToDateTime(fechaNacimiento.Value.Year + "/" + fechaNacimiento.Value.Month + "/" + fechaNacimiento.Value.Day);
+               fechaNacimiento.Value = emp.FechaNacto;
+
+                tbDni.Text = emp.Dni;
+                tbFuncion.Text = emp.Funcion;
+                tbTelefono.Text = emp.Telefono;
+                tbEmail.Text = emp.Email;
+
+                fechaEntrada.Value = emp.FechaEntrada;
+
+                tbSalario.Text = emp.Salario.ToString("N2");
+
+                depV = DepartamentoDAO.ObtenerDepartamento(emp.IdDepartamento); // Solicita el Departamento que esta vinculado ese Empleado ///
+                usuV = UsuarioDAO.ObtenerUsuario(emp.IdUsuario); // Solicita el Departamento que esta vinculado ese Empleado ///
+
+                if (depV.IdDepartamento > 0)
+                    cbDepartamento.SelectedValue = depV.IdDepartamento;
+                else
+                    cbDepartamento.Text = "Seleccione un Departamento";
+
+                if (usuV.IdUsuario > 0)
+                    cbUsuario.SelectedValue = usuV.IdUsuario;
+                else
+                    cbUsuario.Text = "Seleccione un Usuario";
+
+                if (emp.Sexo == "H")
+                    radioHombre.Checked = true;
+                else if (emp.Sexo == "M")
+                    radioMujer.Checked = true;
+
+                if (emp.Activo == 1)
+                    chkActivo.Checked = true;
+                else
+                    chkActivo.Checked = false;
+            }
         }
 
         private void cargaCombos()
         {
-            List<Departamento> listaDeparts = DepartamentoDAO.ListarDepartamentos();
+            listaDeparts = DepartamentoDAO.ListarDepartamentos();
 
             listaDeparts.Insert(0, new Departamento(0, 0, "Seleccione el Departamento"));
 
@@ -49,7 +107,7 @@ namespace SCAM_App
             cbDepartamento.DisplayMember = "descripcion";
             cbDepartamento.ValueMember = "IdDepartamento";
 
-            List<Usuario> listaUsuarios = UsuarioDAO.ListarUsuarios();
+            listaUsuarios = UsuarioDAO.ListarUsuarios();
 
             listaUsuarios.Insert(0, new Usuario("Seleccione el Usuario"));
 
@@ -63,10 +121,9 @@ namespace SCAM_App
         {
             Empleado emp = new Empleado();
 
+            emp.IdEmpleado = Convert.ToInt32(tbIdEmpleado.Text);
             emp.Nombre = tbNombre.Text.Trim();
             emp.Apellidos = tbApellidos.Text.Trim();
-            emp.FechaNacto = Convert.ToDateTime(fechaNacimiento.Value.Year + "/" + fechaNacimiento.Value.Month + "/" + fechaNacimiento.Value.Day);
-
 
             emp.FechaNacto = fechaNacimiento.Value;
 
@@ -77,7 +134,6 @@ namespace SCAM_App
 
             emp.FechaEntrada = fechaEntrada.Value;
 
-
             emp.Salario = Convert.ToDouble(tbSalario.Text);
 
             if (radioHombre.Checked)
@@ -85,8 +141,8 @@ namespace SCAM_App
             else if (radioMujer.Checked)
                 emp.Sexo = "M";
             
-            emp.IdDepartamento = cbDepartamento.SelectedIndex;
-            emp.IdUsuario = cbUsuario.SelectedIndex;
+            emp.IdDepartamento = Convert.ToInt32(cbDepartamento.SelectedValue);
+            emp.IdUsuario = Convert.ToInt32(cbUsuario.SelectedValue);
 
             if (chkActivo.Checked)
                 emp.Activo = 1;
@@ -94,20 +150,24 @@ namespace SCAM_App
                 emp.Activo = 0;
 
 
-            // Asignando el valor de la imagen
+            //// Asignando el valor de la imagen
 
-            // Stream usado como buffer
-            MemoryStream ms = new System.IO.MemoryStream();
-            // Se guarda la imagen en el buffer
-            pictBoxFoto.Image.Save(ms, ImageFormat.Jpeg);
-            // Se extraen los bytes del buffer para asignarlos como valor para el 
-            // parámetro.
-            byte[] im = ms.GetBuffer();
-           // emp.Foto =  ms.GetBuffer();
+            //// Stream usado como buffer
+            //MemoryStream ms = new System.IO.MemoryStream();
+            //// Se guarda la imagen en el buffer
+            //pictBoxFoto.Image.Save(ms, ImageFormat.Jpeg);
+            //// Se extraen los bytes del buffer para asignarlos como valor para el 
+            //// parámetro.
+            //byte[] im = ms.GetBuffer();
+            //// emp.Foto =  ms.GetBuffer();
 
-
-
-            int resultado = EmpleadoDAO.Insertar(emp);
+            int resultado = 0;
+            if (esNuevo)
+                resultado = EmpleadoDAO.Insertar(emp); // recibe el resultado positivo al insertar
+            else
+            {
+                resultado = EmpleadoDAO.ModificarEmpleado(emp);
+            }
 
             if (resultado > 0)
             {
