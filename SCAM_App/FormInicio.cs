@@ -3,6 +3,7 @@ using Datos_Negocios;
 using System.Windows.Forms;
 using System.Drawing;
 using WindowsFormsControlLibrary1;
+using BarcodeLib;
 
 namespace SCAM_App
 {
@@ -11,6 +12,7 @@ namespace SCAM_App
         public FormInicio()
         {
             InitializeComponent();
+
             if (FormLogin.usuNivelAcceso == 0)
             {
                 MessageBox.Show("Usuario no está Activado Aún, Contacte el Administrador");
@@ -156,5 +158,26 @@ namespace SCAM_App
             fa.Location = new Point(280, 160);
             fa.ShowDialog();
         }
+
+        private void btnGenerarTarjeta_Click(object sender, EventArgs e)
+        {
+
+            LogoTransition.HideSync(logo);
+            sideMenu.Visible = false;
+            sideMenu.Width = 50;
+            PanelAnimator.ShowSync(sideMenu);
+            btnMenuBarra.Visible = true;
+            logoMini.Visible = true;
+
+
+            FormEmpleados fe = new FormEmpleados();
+
+            fe.Width = 860;
+            fe.Height = 450;
+            fe.Location = new Point(280, 160);
+            fe.ShowDialog();
+
+        }
+
     }
 }

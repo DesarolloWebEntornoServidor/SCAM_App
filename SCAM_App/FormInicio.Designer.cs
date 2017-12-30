@@ -117,7 +117,7 @@ namespace SCAM_App
             this.btnGenerarAcceso.Size = new System.Drawing.Size(190, 37);
             this.btnGenerarAcceso.TabIndex = 9;
             this.btnGenerarAcceso.Text = "   Generar Acceso";
-            this.btnGenerarAcceso.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnGenerarAcceso.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.btnGenerarAcceso.Textcolor = System.Drawing.Color.OliveDrab;
             this.btnGenerarAcceso.TextFont = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnGenerarAcceso.Click += new System.EventHandler(this.btnGenerarAcceso_Click);

@@ -63,9 +63,9 @@
             this.bunifuCustomLabel2.Font = new System.Drawing.Font("Century Gothic", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.bunifuCustomLabel2.Location = new System.Drawing.Point(54, 151);
             this.bunifuCustomLabel2.Name = "bunifuCustomLabel2";
-            this.bunifuCustomLabel2.Size = new System.Drawing.Size(448, 16);
+            this.bunifuCustomLabel2.Size = new System.Drawing.Size(452, 16);
             this.bunifuCustomLabel2.TabIndex = 1;
-            this.bunifuCustomLabel2.Text = "Todas as telas puede salir con la tecla ESC (escape) o clicando en ";
+            this.bunifuCustomLabel2.Text = "Todas las telas puede salir con la tecla ESC (escape) o clicando en ";
             // 
             // bunifuCustomLabel3
             // 
