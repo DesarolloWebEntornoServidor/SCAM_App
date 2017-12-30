@@ -60,7 +60,6 @@ namespace SCAM_App
 
              CodigoAcceso cod = new CodigoAcceso();
 
-            cod.IdCodigoAcceso = Convert.ToInt32(txtIdCodigo.Text);
             cod.CodigoDeAcceso = txtCodigoAceso.Text.Trim();
             cod.DescripcionAcceso = txtDescripcion.Text.Trim();
             cod.PTodos = 0;
@@ -70,9 +69,13 @@ namespace SCAM_App
 
             int resultado = 0;
             if (esNuevo)
+            {
                 resultado = CodigoAccesoDAO.Insertar(cod); // recibe el resultado positivo al insertar
+            }
             else
             {
+                cod.IdCodigoAcceso = Convert.ToInt32(txtIdCodigo.Text);
+
                 resultado = CodigoAccesoDAO.ModificarCodigoAcceso(cod);
             }
 

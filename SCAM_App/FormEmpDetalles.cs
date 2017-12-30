@@ -11,6 +11,7 @@ using System.Windows.Forms;
 using DatosNegocios;
 using System.IO;
 using System.Drawing.Imaging;
+using System.Text.RegularExpressions;
 
 namespace SCAM_App
 {
@@ -24,6 +25,12 @@ namespace SCAM_App
         private Usuario usuV = null;
         List<Usuario> listaUsuarios;
         bool esNuevo = true;
+        bool hayError = false; 
+
+        string nombreRuta = "";
+        string nombreImagen = "";
+
+        public string NombreRuta { get => nombreRuta; set => nombreRuta = value; }
 
         public FormEmpDetalles()
         {
@@ -36,6 +43,7 @@ namespace SCAM_App
 
             this.emp = emp;
             esNuevo = false;
+
         }
 
         private void btnVolver_Click(object sender, EventArgs e)
@@ -57,11 +65,10 @@ namespace SCAM_App
 
             if (esNuevo == false)
             {
-                 tbIdEmpleado.Text = emp.IdEmpleado.ToString();
-                 tbNombre.Text = emp.Nombre;
-                 tbApellidos.Text = emp.Apellidos;
-               // emp.FechaNacto = Convert.ToDateTime(fechaNacimiento.Value.Year + "/" + fechaNacimiento.Value.Month + "/" + fechaNacimiento.Value.Day);
-               fechaNacimiento.Value = emp.FechaNacto;
+                tbIdEmpleado.Text = emp.IdEmpleado.ToString();
+                tbNombre.Text = emp.Nombre;
+                tbApellidos.Text = emp.Apellidos;
+                fechaNacimiento.Value = emp.FechaNacto;
 
                 tbDni.Text = emp.Dni;
                 tbFuncion.Text = emp.Funcion;
@@ -72,36 +79,59 @@ namespace SCAM_App
 
                 tbSalario.Text = emp.Salario.ToString("N2");
 
+                // Busca imagen en la carpeta por la ruta y mostra en la ficha del empleado
+                if (emp.Foto == "")
+                {
+                    MessageBox.Show("el archivo de foto esta vazio !!!!!");
+                }
+                else
+                {
+                    Image image = Image.FromFile(emp.Foto.Replace("--", "\\"));
+
+                    var ms1 = new MemoryStream();
+
+                    image.Save(ms1, ImageFormat.Png);
+
+                    var ima = ms1.ToArray();
+
+                    MemoryStream imagenMemory = new MemoryStream(ima);
+
+                    pictBoxFoto.Image = Image.FromStream(ms1);
+                    pictBoxFoto.SizeMode = PictureBoxSizeMode.StretchImage;
+
+                    ms1.Dispose();
+                }
+
                 depV = DepartamentoDAO.ObtenerDepartamento(emp.IdDepartamento); // Solicita el Departamento que esta vinculado ese Empleado ///
                 usuV = UsuarioDAO.ObtenerUsuario(emp.IdUsuario); // Solicita el Departamento que esta vinculado ese Empleado ///
 
                 if (depV.IdDepartamento > 0)
-                    cbDepartamento.SelectedValue = depV.IdDepartamento;
+                    cbDepartamento.SelectedValue = depV.IdDepartamento; // utiliza el departametno que ya exste en la base
                 else
                     cbDepartamento.Text = "Seleccione un Departamento";
 
                 if (usuV.IdUsuario > 0)
-                    cbUsuario.SelectedValue = usuV.IdUsuario;
+                    cbUsuario.SelectedValue = usuV.IdUsuario;  // utiliza el usuario que ya existe en la base
                 else
                     cbUsuario.Text = "Seleccione un Usuario";
 
-                if (emp.Sexo == "H")
+                if (emp.Sexo == "H")  // activa el radio check, con el sexo que ya existe en la base
                     radioHombre.Checked = true;
                 else if (emp.Sexo == "M")
                     radioMujer.Checked = true;
 
-                if (emp.Activo == 1)
+                if (emp.Activo == 1) // activa el check box si ya esta activado en la base
                     chkActivo.Checked = true;
                 else
                     chkActivo.Checked = false;
             }
         }
 
-        private void cargaCombos()
+        private void cargaCombos() // varga los comboos de Departamento e Usuario para el empleado //
         {
             listaDeparts = DepartamentoDAO.ListarDepartamentos();
 
-            listaDeparts.Insert(0, new Departamento(0, 0, "Seleccione el Departamento"));
+            listaDeparts.Insert(0, new Departamento(0, 0, "Seleccione un Departamento"));
 
             cbDepartamento.DataSource = listaDeparts;
             cbDepartamento.DisplayMember = "descripcion";
@@ -119,9 +149,16 @@ namespace SCAM_App
 
         private void btnAnadirEmpleado_Click(object sender, EventArgs e)
         {
-            Empleado emp = new Empleado();
+            hayError = HayErrorEnFormulario();
 
-            emp.IdEmpleado = Convert.ToInt32(tbIdEmpleado.Text);
+            if (hayError)
+            {
+                MessageBox.Show("Presione F1 si necesitas ayuda !!!");
+                return;
+            }
+
+            Empleado emp = new Empleado();  // coge los datos del formulario y mete en el Objeto Empleado
+
             emp.Nombre = tbNombre.Text.Trim();
             emp.Apellidos = tbApellidos.Text.Trim();
 
@@ -149,31 +186,42 @@ namespace SCAM_App
             else
                 emp.Activo = 0;
 
+            // guardo la imagen en la carpeta y en el atributo Foto
+            if(NombreRuta != "")
+            {
+                Image image = Image.FromFile(NombreRuta);
 
-            //// Asignando el valor de la imagen
+                MemoryStream ms1 = new MemoryStream();
 
-            //// Stream usado como buffer
-            //MemoryStream ms = new System.IO.MemoryStream();
-            //// Se guarda la imagen en el buffer
-            //pictBoxFoto.Image.Save(ms, ImageFormat.Jpeg);
-            //// Se extraen los bytes del buffer para asignarlos como valor para el 
-            //// parámetro.
-            //byte[] im = ms.GetBuffer();
-            //// emp.Foto =  ms.GetBuffer();
+                image.Save(ms1, ImageFormat.Png);
+
+                byte[] ima = ms1.ToArray();
+
+                emp.Foto = nombreRuta.Replace("\\", "--"); // cambio las barras por -- para guardar en la base de datos  //
+            }
+                
+
 
             int resultado = 0;
             if (esNuevo)
                 resultado = EmpleadoDAO.Insertar(emp); // recibe el resultado positivo al insertar
             else
             {
+                emp.IdEmpleado = Convert.ToInt32(tbIdEmpleado.Text);
+
                 resultado = EmpleadoDAO.ModificarEmpleado(emp);
             }
 
             if (resultado > 0)
             {
                 MessageBox.Show("Empleado Guardado Con Exito!!", "Guardado", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                tbNombre.Text = "";
-                tbNombre.Focus();
+                this.Hide();
+
+                FormEmpleados fa = new FormEmpleados();
+                fa.Width = 860;
+                fa.Height = 450;
+                fa.Location = new Point(280, 160);
+                fa.ShowDialog();
             }
             else
             {
@@ -182,18 +230,130 @@ namespace SCAM_App
         }
 
         private void btnCargaImagen_Click(object sender, EventArgs e)
-        {
-            // Se crea el OpenFileDialog
-            OpenFileDialog dialog = new OpenFileDialog();
-            // Se muestra al usuario esperando una acción
-            DialogResult result = dialog.ShowDialog();
+        {         
+            OpenFileDialog abrir = new OpenFileDialog(); // inicia a carga del imagen del empleado
+            abrir.Filter = "*.jpg;*.png|*.jpg;*.png";
+            abrir.RestoreDirectory = true;
+            string nuevaRuta = "";
 
-            // Si seleccionó un archivo (asumiendo que es una imagen lo que seleccionó)
-            // la mostramos en el PictureBox de la inferfaz
-            if (result == DialogResult.OK)
+            if (abrir.ShowDialog() == DialogResult.OK)
             {
-                pictBoxFoto.Image = Image.FromFile(dialog.FileName);
+                pictBoxFoto.Image = Image.FromFile(abrir.FileName);
+                pictBoxFoto.SizeMode = PictureBoxSizeMode.StretchImage;
+
+                nuevaRuta = Path.Combine(@"..\..\..\FotosEmpleados", Path.GetFileName(abrir.FileName));
+                try   // para que no de error al aparecer una foto igual a una existente en la carpeta
+                {
+                    File.Copy(abrir.FileName, nuevaRuta);
+                }
+                catch (IOException)
+                {
+                    MessageBox.Show("Ya existe un archivo con ese nombre !!!");
+                }
             }
+            else
+            {
+                pictBoxFoto.Image = null;
+            }
+
+            nombreRuta = nuevaRuta;
+            nombreImagen = abrir.SafeFileName;
+        }
+
+        protected override bool ProcessCmdKey(ref Message msg, Keys keyData)
+        {
+            switch (keyData)
+            {
+                case Keys.F1:
+                    // Llamamos al Formulario de Ayuda
+                    //
+                    Help.FormHelpEmpleado frm = new Help.FormHelpEmpleado();
+                    frm.ShowDialog();
+                    frm.Dispose();
+                    break;
+                case Keys.Escape:
+                    this.Hide();
+
+                    FormEmpleados fa = new FormEmpleados();
+                    fa.Width = 860;
+                    fa.Height = 450;
+                    fa.Location = new Point(280, 160);
+                    fa.ShowDialog();
+                    break;
+
+            }
+            return base.ProcessCmdKey(ref msg, keyData);
+        }
+        private bool HayErrorEnFormulario()
+        {
+            string pathernNombre = @"[a-zA-ZñÑ]{3,40}";
+            string paternTelefono = @"^([95]{2})[4-5]{1}[0-9]{6}$";
+           // string paternMovil = @"^([6-7]{1})[0-9]{8}$";
+            string pathernDni = @"^(([A-Z]\d{8})|(\d{8}-[A-Z]))$";
+            string patherMail = @"\w+([-+.']\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*";
+
+            if (!Regex.IsMatch(tbNombre.Text, pathernNombre))
+            {
+                errorProvider1.SetError(tbNombre, "Error en el Formato del Nombre ");
+
+                hayError = true;
+            }
+            else
+                errorProvider1.SetError(tbNombre, "");
+
+            if (!Regex.IsMatch(tbApellidos.Text, pathernNombre))
+            {
+                errorProvider1.SetError(tbApellidos, "Error en el Formato del Apellido ");
+
+                hayError = true;
+            }
+            else
+                errorProvider1.SetError(tbApellidos, "");
+
+            if (!Regex.IsMatch(tbDni.Text, pathernDni))
+            {
+                errorProvider1.SetError(tbDni, "Error en el Formato del DNI ");
+
+                hayError = true;
+            }
+            else
+                errorProvider1.SetError(tbDni, "");
+
+            if (!Regex.IsMatch(tbTelefono.Text, paternTelefono))
+            {
+                errorProvider1.SetError(tbTelefono, "Error en el Formato de telefono ");
+                hayError = true;
+            }
+            else
+                errorProvider1.SetError(tbTelefono, "");
+
+            if (!Regex.IsMatch(tbEmail.Text, patherMail))
+            {
+                errorProvider1.SetError(tbEmail, "Error en el Formato del Correo ");
+
+                hayError = true;
+            }
+            else
+                errorProvider1.SetError(tbEmail, "");
+
+
+            if (cbDepartamento.Text == "Seleccione un Departamento")
+            {
+                errorProvider1.SetError(cbDepartamento, "Error, Tieenes que seleccionar algun Departamento ");
+                hayError = true;
+
+            }
+            // Ese tambien funciona
+            //Regex regex = new Regex(@"^([\w\.\-]+)@([\w\-]+)((\.(\w){2,3})+)$");
+            //Match match = regex.Match(txbMail.Text);
+            //if (!match.Success)
+            //{
+            //    errorProvider1.SetError(txbMail, "Email incorreto");
+            //    return true;
+            //} else
+            //    errorProvider1.SetError(txbMail, "");
+
+            return hayError;
         }
     }
 }

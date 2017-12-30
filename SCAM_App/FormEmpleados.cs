@@ -175,5 +175,30 @@ namespace SCAM_App
             else
                 return; // <-- No he pulsado ninguno de los botones que me iteresan
         }
+
+        protected override bool ProcessCmdKey(ref Message msg, Keys keyData)
+        {
+            switch (keyData)
+            {
+                case Keys.F1:
+                    // Llamamos al Formulario de Ayuda
+                    //
+                    Help.FormHelpCodigoAcceso frm = new Help.FormHelpCodigoAcceso();
+                    frm.ShowDialog();
+                    frm.Dispose();
+                    break;
+                case Keys.Escape:
+                    this.Close();
+
+                    //FormEmpleados fa = new FormEmpleados();
+                    //fa.Width = 860;
+                    //fa.Height = 450;
+                    //fa.Location = new Point(280, 160);
+                    //fa.ShowDialog();
+                    break;
+
+            }
+            return base.ProcessCmdKey(ref msg, keyData);
+        }
     }
 }

@@ -66,9 +66,13 @@
             this.label13 = new System.Windows.Forms.Label();
             this.fechaEntrada = new Bunifu.Framework.UI.BunifuDatepicker();
             this.btnCargaImagen = new Bunifu.Framework.UI.BunifuFlatButton();
+            this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
+            this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
+            this.errorProvider1 = new System.Windows.Forms.ErrorProvider(this.components);
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.btnVolver)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictBoxFoto)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).BeginInit();
             this.SuspendLayout();
             // 
             // bunifuElipse1
@@ -460,6 +464,14 @@
             this.btnCargaImagen.TextFont = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnCargaImagen.Click += new System.EventHandler(this.btnCargaImagen_Click);
             // 
+            // openFileDialog1
+            // 
+            this.openFileDialog1.FileName = "openFileDialog1";
+            // 
+            // errorProvider1
+            // 
+            this.errorProvider1.ContainerControl = this;
+            // 
             // FormEmpDetalles
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -507,6 +519,7 @@
             this.panel1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.btnVolver)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictBoxFoto)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -550,5 +563,8 @@
         private Bunifu.Framework.UI.BunifuImageButton btnVolver;
         private Bunifu.Framework.UI.BunifuDatepicker fechaEntrada;
         private Bunifu.Framework.UI.BunifuFlatButton btnCargaImagen;
+        private System.Windows.Forms.OpenFileDialog openFileDialog1;
+        private System.Windows.Forms.SaveFileDialog saveFileDialog1;
+        private System.Windows.Forms.ErrorProvider errorProvider1;
     }
 }

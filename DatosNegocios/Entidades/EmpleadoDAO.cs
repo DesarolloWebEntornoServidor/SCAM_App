@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.IO;
 
 namespace DatosNegocios
 {
@@ -45,7 +46,10 @@ namespace DatosNegocios
                 emps.FechaEntrada = Convert.ToDateTime(data.Year + "/" + data.Month + "/" + data.Day);
                 emps.Salario = codigos.GetDouble(9);
                 emps.Sexo = codigos.GetString(10);
-                emps.Foto = null;
+                if (codigos.GetString(11) != null)
+                    emps.Foto = codigos.GetString(11);
+                else
+                    emps.Foto = "";
                 emps.IdDepartamento = codigos.GetInt32(12);
                 emps.IdUsuario = codigos.GetInt32(13);
                 emps.Activo = Convert.ToInt32( codigos.GetBoolean(14));
@@ -101,7 +105,10 @@ namespace DatosNegocios
                 emps.FechaEntrada = codigos.GetDateTime(8);
                 emps.Salario = codigos.GetDouble(9);
                 emps.Sexo = codigos.GetString(10);
-                emps.Foto = null;
+                if (codigos.GetString(11) != null)
+                    emps.Foto = codigos.GetString(11);
+                else
+                    emps.Foto = "";
                 emps.IdDepartamento = codigos.GetInt32(12);
                 emps.IdUsuario = codigos.GetInt32(13);
                 emps.Activo = Convert.ToInt32(codigos.GetBoolean(14));
@@ -144,6 +151,7 @@ namespace DatosNegocios
 
             MySqlCommand comando = new MySqlCommand(String.Format("select idEmpleado, Nombre, Apellidos, FechaNacto, Dni, Funcion, Telefono, Email, FechaEntrada, Salario, Sexo, Foto, IdDepartamento, idUsuario, activo from empleados where idEmpleado={0}", id), cmd);
             MySqlDataReader empleados = comando.ExecuteReader();
+
             while (empleados.Read())
             {
                 emps.IdEmpleado = empleados.GetInt32(0);
@@ -157,14 +165,19 @@ namespace DatosNegocios
                 emps.FechaEntrada = empleados.GetDateTime(8);
                 emps.Salario = empleados.GetDouble(9);
                 emps.Sexo = empleados.GetString(10);
-                emps.Foto = null;
+                if(empleados.GetString(11) != null)
+                   emps.Foto = empleados.GetString(11);
+                else
+                    emps.Foto = "";
                 emps.IdDepartamento = empleados.GetInt32(12);
                 emps.IdUsuario = empleados.GetInt32(13);
                 emps.Activo = Convert.ToInt32(empleados.GetBoolean(14));
 
             }
 
+
             cmd.Close();
+
 
             return emps;
 

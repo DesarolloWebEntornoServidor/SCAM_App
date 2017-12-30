@@ -26,7 +26,7 @@ namespace DatosNegocios
         DateTime fechaEntrada;
         double salario;
         string sexo;
-        Image foto;
+        string foto;
         int idUsuario;
         int activo;
  
@@ -50,7 +50,7 @@ namespace DatosNegocios
             this.activo = 1;
         }
 
-        public Empleado(int idEmpleado, string nombre, string apellidos, DateTime fechaNacto, string dni, string funcion, string telefono, string email, DateTime fechaEntrada, double salario, string sexo, Image foto, int idDepartamento, int idUsuario, int activo)
+        public Empleado(int idEmpleado, string nombre, string apellidos, DateTime fechaNacto, string dni, string funcion, string telefono, string email, DateTime fechaEntrada, double salario, string sexo, string foto, int idDepartamento, int idUsuario, int activo)
         {
             this.idEmpleado = idEmpleado;
             this.idDepartamento = idDepartamento;
@@ -86,9 +86,9 @@ namespace DatosNegocios
         public string Email { get => email; set => email = value; }
         public DateTime FechaEntrada { get => fechaEntrada; set => fechaEntrada = value; }
         public double Salario { get => salario; set => salario = value; }
-        public Image Foto { get => foto; set => foto = value; }
         public string Sexo { get => sexo; set => sexo = value; }
         public int IdUsuario { get => idUsuario; set => idUsuario = value; }
         public int Activo { get => activo; set => activo = value; }
+        public string Foto { get => foto; set => foto = value; }
     }
 }

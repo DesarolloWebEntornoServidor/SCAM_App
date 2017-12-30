@@ -117,7 +117,7 @@ namespace SCAM_App
                 case Keys.F1:
                     // Llamamos al Formulario de Ayuda
                     //
-                    Help.FormHelpCodigoAcceso frm = new Help.FormHelpCodigoAcceso();
+                    Help.FormHelpEmpleado frm = new Help.FormHelpEmpleado();
                     frm.ShowDialog();
                     frm.Dispose();
                     break;
