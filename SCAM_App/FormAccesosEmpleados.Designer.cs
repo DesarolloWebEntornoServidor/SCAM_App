@@ -34,6 +34,8 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             this.bunifuElipse1 = new Bunifu.Framework.UI.BunifuElipse(this.components);
             this.panel1 = new System.Windows.Forms.Panel();
+            this.btnExcel = new Bunifu.Framework.UI.BunifuImageButton();
+            this.btnPdf = new Bunifu.Framework.UI.BunifuImageButton();
             this.btnInserir = new Bunifu.Framework.UI.BunifuImageButton();
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
@@ -45,6 +47,8 @@
             this.borrar = new System.Windows.Forms.DataGridViewButtonColumn();
             this.bunifuFormFadeTransition1 = new Bunifu.Framework.UI.BunifuFormFadeTransition(this.components);
             this.panel1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.btnExcel)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.btnPdf)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.btnInserir)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.bunifuImageButton1)).BeginInit();
@@ -59,6 +63,8 @@
             // panel1
             // 
             this.panel1.BackColor = System.Drawing.Color.RoyalBlue;
+            this.panel1.Controls.Add(this.btnExcel);
+            this.panel1.Controls.Add(this.btnPdf);
             this.panel1.Controls.Add(this.btnInserir);
             this.panel1.Controls.Add(this.textBox1);
             this.panel1.Controls.Add(this.pictureBox1);
@@ -69,12 +75,40 @@
             this.panel1.Size = new System.Drawing.Size(579, 74);
             this.panel1.TabIndex = 0;
             // 
+            // btnExcel
+            // 
+            this.btnExcel.BackColor = System.Drawing.Color.RoyalBlue;
+            this.btnExcel.Image = ((System.Drawing.Image)(resources.GetObject("btnExcel.Image")));
+            this.btnExcel.ImageActive = null;
+            this.btnExcel.Location = new System.Drawing.Point(390, 12);
+            this.btnExcel.Name = "btnExcel";
+            this.btnExcel.Size = new System.Drawing.Size(45, 51);
+            this.btnExcel.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.btnExcel.TabIndex = 26;
+            this.btnExcel.TabStop = false;
+            this.btnExcel.Zoom = 10;
+            this.btnExcel.Click += new System.EventHandler(this.btnExcel_Click);
+            // 
+            // btnPdf
+            // 
+            this.btnPdf.BackColor = System.Drawing.Color.RoyalBlue;
+            this.btnPdf.Image = ((System.Drawing.Image)(resources.GetObject("btnPdf.Image")));
+            this.btnPdf.ImageActive = null;
+            this.btnPdf.Location = new System.Drawing.Point(327, 12);
+            this.btnPdf.Name = "btnPdf";
+            this.btnPdf.Size = new System.Drawing.Size(45, 51);
+            this.btnPdf.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.btnPdf.TabIndex = 25;
+            this.btnPdf.TabStop = false;
+            this.btnPdf.Zoom = 10;
+            this.btnPdf.Click += new System.EventHandler(this.btnPdf_Click);
+            // 
             // btnInserir
             // 
             this.btnInserir.BackColor = System.Drawing.Color.RoyalBlue;
             this.btnInserir.Image = ((System.Drawing.Image)(resources.GetObject("btnInserir.Image")));
             this.btnInserir.ImageActive = null;
-            this.btnInserir.Location = new System.Drawing.Point(336, 6);
+            this.btnInserir.Location = new System.Drawing.Point(233, 6);
             this.btnInserir.Name = "btnInserir";
             this.btnInserir.Size = new System.Drawing.Size(53, 56);
             this.btnInserir.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
@@ -210,6 +244,8 @@
             this.Load += new System.EventHandler(this.FormAccesosEmpleados_Load);
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.btnExcel)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.btnPdf)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.btnInserir)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.bunifuImageButton1)).EndInit();
@@ -232,5 +268,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn empleado;
         private System.Windows.Forms.DataGridViewTextBoxColumn codigoAcceso;
         private System.Windows.Forms.DataGridViewButtonColumn borrar;
+        private Bunifu.Framework.UI.BunifuImageButton btnExcel;
+        private Bunifu.Framework.UI.BunifuImageButton btnPdf;
     }
 }

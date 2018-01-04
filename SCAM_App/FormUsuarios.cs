@@ -4,6 +4,12 @@ using System.Drawing;
 using System.Windows.Forms;
 using DatosNegocios;
 
+using Microsoft.Office.Interop.Excel;
+
+using iTextSharp.text;
+using iTextSharp.text.pdf;
+using System.IO;
+
 namespace SCAM_App
 {
     public partial class FormUsuarios : Form
@@ -86,7 +92,7 @@ namespace SCAM_App
 
             fa.Width = 579;
             fa.Height = 435;
-            fa.Location = new Point(280, 160);
+            fa.Location = new System.Drawing.Point(280, 160);
             fa.ShowDialog();
         }
 
@@ -162,7 +168,7 @@ namespace SCAM_App
 
                 fa.Width = 579;
                 fa.Height = 435;
-                fa.Location = new Point(280, 160);
+                fa.Location = new System.Drawing.Point(280, 160);
                 fa.ShowDialog();
                 fa.Dispose();
             }
@@ -178,7 +184,7 @@ namespace SCAM_App
 
                 // diseña el boton de deletar //
                 DataGridViewButtonCell celBoton = this.dgvUsuarios.Rows[e.RowIndex].Cells["borrar"] as DataGridViewButtonCell;
-                Icon icoAtomico = new Icon(Environment.CurrentDirectory + @"..\..\..\..\img\edit_delete.ico");
+                System.Drawing.Icon icoAtomico = new System.Drawing.Icon(Environment.CurrentDirectory + @"..\..\..\..\img\edit_delete.ico");
                 e.Graphics.DrawIcon(icoAtomico, e.CellBounds.Left + 3, e.CellBounds.Top + 3);
 
                 this.dgvUsuarios.Rows[e.RowIndex].Height = icoAtomico.Height + 3;
@@ -193,7 +199,7 @@ namespace SCAM_App
 
                 // diseña el boton de modificar //
                 DataGridViewButtonCell celBoton1 = this.dgvUsuarios.Rows[e.RowIndex].Cells["modificar"] as DataGridViewButtonCell;
-                Icon icoAtomico1 = new Icon(Environment.CurrentDirectory + @"..\..\..\..\img\modificar.ico");
+                System.Drawing.Icon icoAtomico1 = new System.Drawing.Icon(Environment.CurrentDirectory + @"..\..\..\..\img\modificar.ico");
                 e.Graphics.DrawIcon(icoAtomico1, e.CellBounds.Left + 3, e.CellBounds.Top + 3);
 
                 this.dgvUsuarios.Rows[e.RowIndex].Height = icoAtomico1.Height + 3;
@@ -212,43 +218,98 @@ namespace SCAM_App
             CargaDGV(localizados);
         }
 
-        private void btnPdf_Click(object sender, EventArgs e)
+        private void btnPdf_Click(object sender, EventArgs e) // Exportar del datagridviwe a PDF  //
         {
+            try
+            {
 
+                Document doc = new Document(PageSize.LETTER, 10, 10, 42, 35);
+                PdfWriter wri = PdfWriter.GetInstance(doc, new FileStream(@"..\..\..\ArchivosPDF\usuarios.pdf", FileMode.Create));
+                doc.Open();
+
+                iTextSharp.text.Image logo = iTextSharp.text.Image.GetInstance(@"..\..\..\img\logo.png");
+                logo.ScalePercent(25f);
+
+                doc.Add(logo);
+
+                doc.Add(new Phrase("Sistema de Controle de Accesos"));
+                doc.Add(new Paragraph(""));
+                doc.Add(new Paragraph(""));
+                doc.Add(new Paragraph("                                         Lista de Usuarios"));
+                doc.Add(new Paragraph(""));
+                doc.Add(new Paragraph(""));
+
+                PdfPTable tabla = new PdfPTable(dgvUsuarios.Columns.Count-2);
+
+                tabla.HorizontalAlignment = 1; // central
+
+                for (int j = 0; j < dgvUsuarios.Columns.Count-2; j++)
+                {
+                    tabla.AddCell(new Phrase(dgvUsuarios.Columns[j].HeaderText));
+                }
+
+                tabla.HeaderRows = 1;
+
+
+                for (int i = 0; i < dgvUsuarios.Rows.Count-2; i++)
+                {
+                    for (int h = 0; h < dgvUsuarios.Columns.Count-2; h++)
+                    {
+                        if(dgvUsuarios[h,i].Value != null)
+                        {
+                            tabla.AddCell(new Phrase(dgvUsuarios[h, i].Value.ToString()));
+                        }
+                    }
+                }
+
+                doc.Add(tabla);
+                doc.Close();
+
+                MessageBox.Show("Archivo Generado con Exito");
+            }
+            catch (Exception)
+            {
+
+                MessageBox.Show("Error, El Archivo Actual está Abierto !!");
+            }
         }
+
+        //public override void VerifyRenderingInServerForm(Control control) { }
 
         private void bunifuImageButton2_Click(object sender, EventArgs e)
         {
-            //Util.ExportarDataGridViewExcel(listaUsuarios);
+            exportaraexcel(dgvUsuarios);
         }
 
-        //private void ExportarDataGridViewExcel()
-        //{
-        //    SaveFileDialog fichero = new SaveFileDialog();
-        //    fichero.Filter = "Excel (*.xls)|*.xls";
-        //    if (fichero.ShowDialog() == DialogResult.OK)
-        //    {
-        //        Microsoft.Office.Interop.Excel.Application aplicacion;
-        //        Microsoft.Office.Interop.Excel.Workbook libros_trabajo;
-        //        Microsoft.Office.Interop.Excel.Worksheet hoja_trabajo;
-        //        aplicacion = new Microsoft.Office.Interop.Excel.Application();
-        //        libros_trabajo = aplicacion.Workbooks.Add();
-        //        hoja_trabajo = (Microsoft.Office.Interop.Excel.Worksheet)libros_trabajo.Worksheets.get_Item(1);
-        //        //Recorremos el DataGridView rellenando la hoja de trabajo
-        //        for (int i = 0; i < dgvUsuarios.Rows.Count - 1; i++)
-        //        {
-        //            for (int j = 0; j < dgvUsuarios.Columns.Count; j++)
-        //            {
-        //                hoja_trabajo.Cells[i + 1, j + 1] = dgvUsuarios.Rows[i].Cells[j].Value.ToString();
-        //            }
-        //        }
-        //        libros_trabajo.SaveAs(fichero.FileName, Microsoft.Office.Interop.Excel.XlFileFormat.xlWorkbookNormal);
-        //        libros_trabajo.Close(true);
-        //        aplicacion.Quit();
-        //    }
-        //}
+        public void exportaraexcel(DataGridView tabla) // Exporta DatagridView para Excel  //
+        {
+            Microsoft.Office.Interop.Excel.Application excel = new Microsoft.Office.Interop.Excel.Application();
+            excel.Application.Workbooks.Add(true);
 
-            private void Modificar(int idUsu)
+            int indiceColumna = 0;
+            foreach (DataGridViewColumn col in tabla.Columns) //Columnas
+            {
+                indiceColumna++;
+
+                if(col.Name != "borrar" && col.Name !="modificar")
+                    excel.Cells[1, indiceColumna] = col.Name;
+            }
+
+            int indiceFila = 0;
+            foreach (DataGridViewRow row in tabla.Rows) //Filas
+            {
+                indiceFila++;
+                indiceColumna = 0;
+                foreach (DataGridViewColumn col in tabla.Columns)
+                {
+                    indiceColumna++;
+                    excel.Cells[indiceFila + 1, indiceColumna] = row.Cells[col.Name].Value;
+                }
+            }
+            excel.Visible = true;
+        }
+
+        private void Modificar(int idUsu)
             {
                 Usuario usu = UsuarioDAO.ObtenerUsuario(idUsu);
 
@@ -261,7 +322,7 @@ namespace SCAM_App
 
                 fa.Width = 579;
                 fa.Height = 435;
-                fa.Location = new Point(280, 160);
+                fa.Location = new System.Drawing.Point(280, 160);
                 fa.ShowDialog();
 
         }

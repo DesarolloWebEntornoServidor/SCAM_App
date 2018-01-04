@@ -10,6 +10,10 @@ using System.Windows.Forms;
 using DatosNegocios;
 using MySql.Data.MySqlClient;
 
+using iTextSharp.text;
+using iTextSharp.text.pdf;
+using System.IO;
+
 namespace SCAM_App
 {
     public partial class FormAccesos : Form
@@ -192,6 +196,94 @@ namespace SCAM_App
             else
                 return; // <-- No he pulsado ninguno de los botones que me iteresan
         }
-    
+
+        private void btnExcel_Click(object sender, EventArgs e)
+        {
+            exportaraexcel(dgvAccesos);
+        }
+
+        public void exportaraexcel(DataGridView tabla) // Exporta DatagridView para Excel  //
+        {
+            Microsoft.Office.Interop.Excel.Application excel = new Microsoft.Office.Interop.Excel.Application();
+            excel.Application.Workbooks.Add(true);
+
+            int indiceColumna = 0;
+            foreach (DataGridViewColumn col in tabla.Columns) //Columnas
+            {
+                indiceColumna++;
+
+                if (col.Name != "borrar" && col.Name != "modificar")
+                    excel.Cells[1, indiceColumna] = col.Name;
+            }
+
+            int indiceFila = 0;
+            foreach (DataGridViewRow row in tabla.Rows) //Filas
+            {
+                indiceFila++;
+                indiceColumna = 0;
+                foreach (DataGridViewColumn col in tabla.Columns)
+                {
+                    indiceColumna++;
+                    excel.Cells[indiceFila + 1, indiceColumna] = row.Cells[col.Name].Value;
+                }
+            }
+            excel.Visible = true;
+        }
+
+        private void btnPdf_Click(object sender, EventArgs e)
+        {
+            try
+            {
+
+                Document doc = new Document(PageSize.LETTER, 10, 10, 42, 35);
+                PdfWriter wri = PdfWriter.GetInstance(doc, new FileStream(@"..\..\..\ArchivosPDF\codigosDeAcceso.pdf", FileMode.Create));
+                doc.Open();
+
+                iTextSharp.text.Image logo = iTextSharp.text.Image.GetInstance(@"..\..\..\img\logo.png");
+                logo.ScalePercent(25f);
+
+                doc.Add(logo);
+
+                doc.Add(new Phrase("Sistema de Controle de Accesos"));
+                doc.Add(new Paragraph(""));
+                doc.Add(new Paragraph(""));
+                doc.Add(new Paragraph("                                         Lista de Codigos de Acceso"));
+                doc.Add(new Paragraph(""));
+                doc.Add(new Paragraph(""));
+
+                PdfPTable tabla = new PdfPTable(dgvAccesos.Columns.Count - 2);
+
+                tabla.HorizontalAlignment = 1; // central
+
+                for (int j = 0; j < dgvAccesos.Columns.Count - 2; j++)
+                {
+                    tabla.AddCell(new Phrase(dgvAccesos.Columns[j].HeaderText));
+                }
+
+                tabla.HeaderRows = 1;
+
+
+                for (int i = 0; i < dgvAccesos.Rows.Count - 2; i++)
+                {
+                    for (int h = 0; h < dgvAccesos.Columns.Count - 2; h++)
+                    {
+                        if (dgvAccesos[h, i].Value != null)
+                        {
+                            tabla.AddCell(new Phrase(dgvAccesos[h, i].Value.ToString()));
+                        }
+                    }
+                }
+
+                doc.Add(tabla);
+                doc.Close();
+
+                MessageBox.Show("Archivo Generado con Exito");
+            }
+            catch (Exception)
+            {
+
+                MessageBox.Show("Error, El Archivo Actual está Abierto !!");
+            }
+        }
     }
 }

@@ -34,6 +34,8 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             this.bunifuElipse1 = new Bunifu.Framework.UI.BunifuElipse(this.components);
             this.bunifuGradientPanel1 = new Bunifu.Framework.UI.BunifuGradientPanel();
+            this.bunifuImageButton2 = new Bunifu.Framework.UI.BunifuImageButton();
+            this.btnPdf = new Bunifu.Framework.UI.BunifuImageButton();
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.btnInserir = new Bunifu.Framework.UI.BunifuImageButton();
@@ -47,16 +49,14 @@
             this.acceso = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.borrar = new System.Windows.Forms.DataGridViewButtonColumn();
             this.modificar = new System.Windows.Forms.DataGridViewButtonColumn();
-            this.btnPdf = new Bunifu.Framework.UI.BunifuImageButton();
-            this.bunifuImageButton2 = new Bunifu.Framework.UI.BunifuImageButton();
             this.bunifuGradientPanel1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.bunifuImageButton2)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.btnPdf)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.btnInserir)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.btnVolver)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.bunifuImageButton1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvUsuarios)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.btnPdf)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.bunifuImageButton2)).BeginInit();
             this.SuspendLayout();
             // 
             // bunifuElipse1
@@ -86,6 +86,34 @@
             this.bunifuGradientPanel1.Size = new System.Drawing.Size(771, 74);
             this.bunifuGradientPanel1.TabIndex = 1;
             // 
+            // bunifuImageButton2
+            // 
+            this.bunifuImageButton2.BackColor = System.Drawing.Color.RoyalBlue;
+            this.bunifuImageButton2.Image = ((System.Drawing.Image)(resources.GetObject("bunifuImageButton2.Image")));
+            this.bunifuImageButton2.ImageActive = null;
+            this.bunifuImageButton2.Location = new System.Drawing.Point(407, 12);
+            this.bunifuImageButton2.Name = "bunifuImageButton2";
+            this.bunifuImageButton2.Size = new System.Drawing.Size(45, 51);
+            this.bunifuImageButton2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.bunifuImageButton2.TabIndex = 18;
+            this.bunifuImageButton2.TabStop = false;
+            this.bunifuImageButton2.Zoom = 10;
+            this.bunifuImageButton2.Click += new System.EventHandler(this.bunifuImageButton2_Click);
+            // 
+            // btnPdf
+            // 
+            this.btnPdf.BackColor = System.Drawing.Color.RoyalBlue;
+            this.btnPdf.Image = ((System.Drawing.Image)(resources.GetObject("btnPdf.Image")));
+            this.btnPdf.ImageActive = null;
+            this.btnPdf.Location = new System.Drawing.Point(344, 12);
+            this.btnPdf.Name = "btnPdf";
+            this.btnPdf.Size = new System.Drawing.Size(45, 51);
+            this.btnPdf.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.btnPdf.TabIndex = 17;
+            this.btnPdf.TabStop = false;
+            this.btnPdf.Zoom = 10;
+            this.btnPdf.Click += new System.EventHandler(this.btnPdf_Click);
+            // 
             // textBox1
             // 
             this.textBox1.Location = new System.Drawing.Point(22, 32);
@@ -110,7 +138,7 @@
             this.btnInserir.BackColor = System.Drawing.Color.RoyalBlue;
             this.btnInserir.Image = ((System.Drawing.Image)(resources.GetObject("btnInserir.Image")));
             this.btnInserir.ImageActive = null;
-            this.btnInserir.Location = new System.Drawing.Point(342, 9);
+            this.btnInserir.Location = new System.Drawing.Point(239, 7);
             this.btnInserir.Name = "btnInserir";
             this.btnInserir.Size = new System.Drawing.Size(53, 56);
             this.btnInserir.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
@@ -240,34 +268,6 @@
             this.modificar.ReadOnly = true;
             this.modificar.Width = 60;
             // 
-            // btnPdf
-            // 
-            this.btnPdf.BackColor = System.Drawing.Color.RoyalBlue;
-            this.btnPdf.Image = ((System.Drawing.Image)(resources.GetObject("btnPdf.Image")));
-            this.btnPdf.ImageActive = null;
-            this.btnPdf.Location = new System.Drawing.Point(248, 12);
-            this.btnPdf.Name = "btnPdf";
-            this.btnPdf.Size = new System.Drawing.Size(45, 51);
-            this.btnPdf.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.btnPdf.TabIndex = 17;
-            this.btnPdf.TabStop = false;
-            this.btnPdf.Zoom = 10;
-            this.btnPdf.Click += new System.EventHandler(this.btnPdf_Click);
-            // 
-            // bunifuImageButton2
-            // 
-            this.bunifuImageButton2.BackColor = System.Drawing.Color.RoyalBlue;
-            this.bunifuImageButton2.Image = ((System.Drawing.Image)(resources.GetObject("bunifuImageButton2.Image")));
-            this.bunifuImageButton2.ImageActive = null;
-            this.bunifuImageButton2.Location = new System.Drawing.Point(425, 14);
-            this.bunifuImageButton2.Name = "bunifuImageButton2";
-            this.bunifuImageButton2.Size = new System.Drawing.Size(45, 51);
-            this.bunifuImageButton2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.bunifuImageButton2.TabIndex = 18;
-            this.bunifuImageButton2.TabStop = false;
-            this.bunifuImageButton2.Zoom = 10;
-            this.bunifuImageButton2.Click += new System.EventHandler(this.bunifuImageButton2_Click);
-            // 
             // FormUsuarios
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -282,13 +282,13 @@
             this.Load += new System.EventHandler(this.FormUsuarios_Load);
             this.bunifuGradientPanel1.ResumeLayout(false);
             this.bunifuGradientPanel1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.bunifuImageButton2)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.btnPdf)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.btnInserir)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.btnVolver)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.bunifuImageButton1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvUsuarios)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.btnPdf)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.bunifuImageButton2)).EndInit();
             this.ResumeLayout(false);
 
         }

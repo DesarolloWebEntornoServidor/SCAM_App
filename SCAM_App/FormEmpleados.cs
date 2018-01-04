@@ -10,6 +10,8 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using DatosNegocios;
 using BarcodeLib;
+using iTextSharp.text;
+using iTextSharp.text.pdf;
 using System.IO;
 using System.Drawing.Imaging;
 
@@ -242,7 +244,7 @@ namespace SCAM_App
                 }
                 else
                 {
-                    Image image = Image.FromFile(emp.Foto.Replace("--", "\\"));
+                    System.Drawing.Image image = System.Drawing.Image.FromFile(emp.Foto.Replace("--", "\\"));
 
                     var ms1 = new MemoryStream();
 
@@ -252,7 +254,7 @@ namespace SCAM_App
 
                     MemoryStream imagenMemory = new MemoryStream(ima);
 
-                    pictFotoTarjeta.Image = Image.FromStream(ms1);
+                    pictFotoTarjeta.Image = System.Drawing.Image.FromStream(ms1);
                     pictFotoTarjeta.SizeMode = PictureBoxSizeMode.StretchImage;
 
                     ms1.Dispose();
@@ -332,6 +334,95 @@ namespace SCAM_App
             btnPrinter.Visible = false;
 
 
+        }
+
+        private void btnExcel_Click(object sender, EventArgs e)
+        {
+            exportaraexcel(dgvEmpleados);
+        }
+
+        public void exportaraexcel(DataGridView tabla) // Exporta DatagridView para Excel  //
+        {
+            Microsoft.Office.Interop.Excel.Application excel = new Microsoft.Office.Interop.Excel.Application();
+            excel.Application.Workbooks.Add(true);
+
+            int indiceColumna = 0;
+            foreach (DataGridViewColumn col in tabla.Columns) //Columnas
+            {
+                indiceColumna++;
+
+                if (col.Name != "borrar" && col.Name != "modificar" && col.Name != "tarjeta")
+                    excel.Cells[1, indiceColumna] = col.Name;
+            }
+
+            int indiceFila = 0;
+            foreach (DataGridViewRow row in tabla.Rows) //Filas
+            {
+                indiceFila++;
+                indiceColumna = 0;
+                foreach (DataGridViewColumn col in tabla.Columns)
+                {
+                    indiceColumna++;
+                    excel.Cells[indiceFila + 1, indiceColumna] = row.Cells[col.Name].Value;
+                }
+            }
+            excel.Visible = true;
+        }
+
+        private void btnPdf_Click(object sender, EventArgs e)
+        {
+            try
+            {
+
+                Document doc = new Document(PageSize.LETTER, 10, 10, 42, 35);
+                PdfWriter wri = PdfWriter.GetInstance(doc, new FileStream(@"..\..\..\ArchivosPDF\empleados.pdf", FileMode.Create));
+                doc.Open();
+
+                iTextSharp.text.Image logo = iTextSharp.text.Image.GetInstance(@"..\..\..\img\logo.png");
+                logo.ScalePercent(25f);
+
+                doc.Add(logo);
+
+                doc.Add(new Phrase("Sistema de Controle de Accesos"));
+                doc.Add(new Paragraph(""));
+                doc.Add(new Paragraph(""));
+                doc.Add(new Paragraph("                                         Lista de Empleados"));
+                doc.Add(new Paragraph(""));
+                doc.Add(new Paragraph(""));
+
+                PdfPTable tabla = new PdfPTable(dgvEmpleados.Columns.Count-3);
+
+                tabla.HorizontalAlignment = 1; // central
+
+                for (int j = 0; j < dgvEmpleados.Columns.Count-3; j++)
+                {
+                    tabla.AddCell(new Phrase(dgvEmpleados.Columns[j].HeaderText));
+                }
+
+                tabla.HeaderRows = 1;
+
+
+                for (int i = 0; i < dgvEmpleados.Rows.Count-3; i++)
+                {
+                    for (int h = 0; h < dgvEmpleados.Columns.Count-3; h++)
+                    {
+                        if (dgvEmpleados[h, i].Value != null)
+                        {
+                            tabla.AddCell(new Phrase(dgvEmpleados[h, i].Value.ToString()));
+                        }
+                    }
+                }
+
+                doc.Add(tabla);
+                doc.Close();
+
+                MessageBox.Show("Archivo Generado con Exito");
+            }
+            catch (Exception)
+            {
+
+                MessageBox.Show("Error, El Archivo Actual está Abierto !!");
+            }
         }
     }
 }
