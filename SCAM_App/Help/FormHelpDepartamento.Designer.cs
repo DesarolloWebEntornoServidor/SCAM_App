@@ -1,6 +1,6 @@
 ﻿namespace SCAM_App.Help
 {
-    partial class FormHelpCodigoAcceso
+    partial class FormHelpDepartamento
     {
         /// <summary>
         /// Required designer variable.
@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormHelpCodigoAcceso));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormHelpDepartamento));
             this.bunifuElipse1 = new Bunifu.Framework.UI.BunifuElipse(this.components);
             this.bunifuCustomLabel5 = new Bunifu.Framework.UI.BunifuCustomLabel();
             this.btnVolver = new Bunifu.Framework.UI.BunifuImageButton();
@@ -48,19 +48,18 @@
             // 
             this.bunifuCustomLabel5.AutoSize = true;
             this.bunifuCustomLabel5.Font = new System.Drawing.Font("Century Gothic", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.bunifuCustomLabel5.Location = new System.Drawing.Point(25, 106);
+            this.bunifuCustomLabel5.Location = new System.Drawing.Point(34, 99);
             this.bunifuCustomLabel5.Name = "bunifuCustomLabel5";
-            this.bunifuCustomLabel5.Size = new System.Drawing.Size(783, 16);
-            this.bunifuCustomLabel5.TabIndex = 15;
-            this.bunifuCustomLabel5.Text = "Código de Acceso es una palavra que Generará el Código Codificado que será guarda" +
-    "do en las Tarjetas Magneticas";
+            this.bunifuCustomLabel5.Size = new System.Drawing.Size(500, 16);
+            this.bunifuCustomLabel5.TabIndex = 13;
+            this.bunifuCustomLabel5.Text = "El nombre tiene un maximo de 40 caracteres y empieza con Letra Maiucula";
             // 
             // btnVolver
             // 
             this.btnVolver.BackColor = System.Drawing.Color.RoyalBlue;
             this.btnVolver.Image = ((System.Drawing.Image)(resources.GetObject("btnVolver.Image")));
             this.btnVolver.ImageActive = null;
-            this.btnVolver.Location = new System.Drawing.Point(753, 6);
+            this.btnVolver.Location = new System.Drawing.Point(638, 5);
             this.btnVolver.Name = "btnVolver";
             this.btnVolver.Size = new System.Drawing.Size(32, 38);
             this.btnVolver.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
@@ -76,30 +75,31 @@
             this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel1.Location = new System.Drawing.Point(0, 0);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(824, 50);
-            this.panel1.TabIndex = 14;
+            this.panel1.Size = new System.Drawing.Size(732, 50);
+            this.panel1.TabIndex = 12;
             // 
             // bunifuCustomLabel1
             // 
             this.bunifuCustomLabel1.AutoSize = true;
             this.bunifuCustomLabel1.Font = new System.Drawing.Font("Century Gothic", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.bunifuCustomLabel1.Location = new System.Drawing.Point(25, 151);
+            this.bunifuCustomLabel1.Location = new System.Drawing.Point(34, 143);
             this.bunifuCustomLabel1.Name = "bunifuCustomLabel1";
-            this.bunifuCustomLabel1.Size = new System.Drawing.Size(531, 16);
-            this.bunifuCustomLabel1.TabIndex = 16;
-            this.bunifuCustomLabel1.Text = "La Descripción tiene un maximo de 30 caracteres y empieza con Letra Maiucula";
+            this.bunifuCustomLabel1.Size = new System.Drawing.Size(586, 16);
+            this.bunifuCustomLabel1.TabIndex = 14;
+            this.bunifuCustomLabel1.Text = "Debes  Indicar un Nivel de Acceso para Controlar el Acceso por parte de los Emple" +
+    "ados";
             // 
-            // FormHelpCodigoAcceso
+            // FormHelpDepartamento
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(824, 223);
+            this.ClientSize = new System.Drawing.Size(732, 217);
             this.Controls.Add(this.bunifuCustomLabel1);
             this.Controls.Add(this.bunifuCustomLabel5);
             this.Controls.Add(this.panel1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
-            this.Name = "FormHelpCodigoAcceso";
-            this.Text = "FormHelpCodigoAcceso";
+            this.Name = "FormHelpDepartamento";
+            this.Text = "FormHelpDepartamento";
             ((System.ComponentModel.ISupportInitialize)(this.btnVolver)).EndInit();
             this.panel1.ResumeLayout(false);
             this.ResumeLayout(false);

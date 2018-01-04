@@ -37,6 +37,8 @@
             this.bunifuImageButton1 = new Bunifu.Framework.UI.BunifuImageButton();
             this.panel1 = new System.Windows.Forms.Panel();
             this.bunifuImageButton2 = new Bunifu.Framework.UI.BunifuImageButton();
+            this.bunifuCustomLabel4 = new Bunifu.Framework.UI.BunifuCustomLabel();
+            this.bunifuCustomLabel5 = new Bunifu.Framework.UI.BunifuCustomLabel();
             ((System.ComponentModel.ISupportInitialize)(this.bunifuImageButton1)).BeginInit();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.bunifuImageButton2)).BeginInit();
@@ -61,7 +63,7 @@
             // 
             this.bunifuCustomLabel2.AutoSize = true;
             this.bunifuCustomLabel2.Font = new System.Drawing.Font("Century Gothic", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.bunifuCustomLabel2.Location = new System.Drawing.Point(54, 151);
+            this.bunifuCustomLabel2.Location = new System.Drawing.Point(55, 145);
             this.bunifuCustomLabel2.Name = "bunifuCustomLabel2";
             this.bunifuCustomLabel2.Size = new System.Drawing.Size(452, 16);
             this.bunifuCustomLabel2.TabIndex = 1;
@@ -71,7 +73,7 @@
             // 
             this.bunifuCustomLabel3.AutoSize = true;
             this.bunifuCustomLabel3.Font = new System.Drawing.Font("Century Gothic", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.bunifuCustomLabel3.Location = new System.Drawing.Point(55, 113);
+            this.bunifuCustomLabel3.Location = new System.Drawing.Point(55, 112);
             this.bunifuCustomLabel3.Name = "bunifuCustomLabel3";
             this.bunifuCustomLabel3.Size = new System.Drawing.Size(218, 16);
             this.bunifuCustomLabel3.TabIndex = 2;
@@ -106,7 +108,7 @@
             this.bunifuImageButton2.BackColor = System.Drawing.Color.RoyalBlue;
             this.bunifuImageButton2.Image = ((System.Drawing.Image)(resources.GetObject("bunifuImageButton2.Image")));
             this.bunifuImageButton2.ImageActive = null;
-            this.bunifuImageButton2.Location = new System.Drawing.Point(501, 141);
+            this.bunifuImageButton2.Location = new System.Drawing.Point(505, 135);
             this.bunifuImageButton2.Name = "bunifuImageButton2";
             this.bunifuImageButton2.Size = new System.Drawing.Size(32, 38);
             this.bunifuImageButton2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
@@ -115,11 +117,34 @@
             this.bunifuImageButton2.Zoom = 10;
             this.bunifuImageButton2.Click += new System.EventHandler(this.bunifuImageButton1_Click);
             // 
+            // bunifuCustomLabel4
+            // 
+            this.bunifuCustomLabel4.AutoSize = true;
+            this.bunifuCustomLabel4.Font = new System.Drawing.Font("Century Gothic", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.bunifuCustomLabel4.Location = new System.Drawing.Point(55, 178);
+            this.bunifuCustomLabel4.Name = "bunifuCustomLabel4";
+            this.bunifuCustomLabel4.Size = new System.Drawing.Size(600, 16);
+            this.bunifuCustomLabel4.TabIndex = 6;
+            this.bunifuCustomLabel4.Text = "Nombre, Apellidos y Función, debe ser Introduzcido con lel Primero Caracter en Ma" +
+    "iusculo";
+            // 
+            // bunifuCustomLabel5
+            // 
+            this.bunifuCustomLabel5.AutoSize = true;
+            this.bunifuCustomLabel5.Font = new System.Drawing.Font("Century Gothic", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.bunifuCustomLabel5.Location = new System.Drawing.Point(55, 211);
+            this.bunifuCustomLabel5.Name = "bunifuCustomLabel5";
+            this.bunifuCustomLabel5.Size = new System.Drawing.Size(318, 16);
+            this.bunifuCustomLabel5.TabIndex = 7;
+            this.bunifuCustomLabel5.Text = "Las Inagenes deben tener el formato JPG o PNG";
+            // 
             // FormHelpEmpleado
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(707, 382);
+            this.ClientSize = new System.Drawing.Size(707, 274);
+            this.Controls.Add(this.bunifuCustomLabel5);
+            this.Controls.Add(this.bunifuCustomLabel4);
             this.Controls.Add(this.bunifuImageButton2);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.bunifuCustomLabel3);
@@ -146,5 +171,7 @@
         private System.Windows.Forms.Panel panel1;
         private Bunifu.Framework.UI.BunifuImageButton bunifuImageButton1;
         private Bunifu.Framework.UI.BunifuImageButton bunifuImageButton2;
+        private Bunifu.Framework.UI.BunifuCustomLabel bunifuCustomLabel5;
+        private Bunifu.Framework.UI.BunifuCustomLabel bunifuCustomLabel4;
     }
 }

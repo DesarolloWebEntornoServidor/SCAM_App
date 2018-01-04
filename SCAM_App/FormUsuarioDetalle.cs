@@ -5,6 +5,7 @@ using System.Data;
 using System.Drawing;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using DatosNegocios;
@@ -17,6 +18,7 @@ namespace SCAM_App
         private Empleado empV = null;
         List<Empleado> listaEmps;
         bool esNuevo = true;
+        bool hayError = false;
 
         public FormUsuarioDetalle()
         {
@@ -32,7 +34,16 @@ namespace SCAM_App
 
             this.usu = usu;
             esNuevo = false;
-            
+
+            if(FormLogin.usuNivelAcceso == 2)
+            {
+                radioZero.Enabled = false;
+                radioUno.Enabled = false;
+                radioDos.Enabled = false;
+
+                cbEmpleado.Enabled = false;
+            }
+
         }
 
         private void FormUsuarioDetalle_Load(object sender, EventArgs e)
@@ -43,12 +54,14 @@ namespace SCAM_App
 
            if(esNuevo == false)
             {
+                tbPassword.UseSystemPasswordChar = true;
+
                 tbIdUsuario.Text = usu.IdUsuario.ToString();
 
                 tbNombre.Text = usu.Nombre;
                 tbAlias.Text = usu.Alias;
                 tbLogin.Text = usu.Login;
-                tbPassword.Text = Util.Desencriptar(usu.Password);
+                tbPassword.Text = usu.Password;
 
                 if (usu.Acceso == 0)
                     radioZero.Checked = true;
@@ -83,23 +96,27 @@ namespace SCAM_App
         }
         private void btnVolver_Click(object sender, EventArgs e)
         {
-            this.Hide();
+            Volver();
 
-            FormUsuarios fa = new FormUsuarios();
-            fa.Width = 579;
-            fa.Height = 435;
-            fa.Location = new Point(280, 160);
-            fa.ShowDialog();
         }
 
         private void btnAnadirEmpleado_Click(object sender, EventArgs e) // añadir Usuario //
         {
+            hayError = HayErrorEnFormulario();
+
+            if (hayError)
+            {
+                MessageBox.Show("Existe Error en el Formulario, Presione F1 si necesitas Ayuda !!!");
+                return;
+            }
+
             Usuario usuAd = new Usuario();
 
             usuAd.Nombre = tbNombre.Text.Trim();
             usuAd.Alias = tbAlias.Text.Trim();
             usuAd.Login = tbLogin.Text.Trim();
             usuAd.Password = tbPassword.Text.Trim();
+
             usuAd.Acceso = 0;
 
             if (radioUno.Checked)
@@ -112,7 +129,7 @@ namespace SCAM_App
                 resultado = UsuarioDAO.Insertar(usuAd); // recibe el resultado positivo al insertar el usuario
             else
             {
-                usuAd.IdUsuario = Convert.ToInt32( tbIdUsuario.Text);
+                usuAd.IdUsuario = Convert.ToInt32(tbIdUsuario.Text);
                 resultado = UsuarioDAO.ModificarUsuario(usuAd);
             }
 
@@ -124,23 +141,103 @@ namespace SCAM_App
                 {
                     Usuario usus = UsuarioDAO.ObtenerUsuario(usuAd.Login); // busca el codigo del usuario
 
-                    int retorno = EmpleadoDAO.VincularUsuario(idEmp, usus); // vincula el usuario en el empleado ///
+                    int retorno = EmpleadoDAO.VincularUsuario(Convert.ToInt32( cbEmpleado.SelectedValue), usus); // vincula el usuario en el empleado ///
 
                 }
 
                 MessageBox.Show("Usuario Guardado Con Exito!!", "Guardado", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
-                this.Hide();
+                Volver();
+            }
+            else
+            {
+                MessageBox.Show("No se pudo guardar el Usuario", "Fallo!!", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+            }
+        }
+
+        private void Volver()
+        {
+            if(FormLogin.usuNivelAcceso == 2)
+            {
+                this.Close();
+                this.Dispose();
+
+                FormInicio fa1 = new FormInicio();
+
+                fa1.StartPosition = FormStartPosition.CenterScreen;
+                fa1.ShowDialog();
+               // fa1.Dispose();
+            }
+            else
+            {
+                this.Close();
+                this.Dispose();
+
                 FormUsuarios fa = new FormUsuarios();
                 fa.Width = 579;
                 fa.Height = 435;
                 fa.Location = new Point(280, 160);
                 fa.ShowDialog();
             }
-            else
+
+
+        }
+
+
+        private bool HayErrorEnFormulario()
+        {
+            hayError = false;
+            string pathString = @"[A-Z]{1}[a-zA-ZàáâäãåąčćęèéêëėįìíîïłńòóôöõøùúûüųūÿýżźñçčšžÀÁÂÄÃÅĄĆČĖĘÈÉÊËÌÍÎÏĮŁŃÒÓÔÖÕØÙÚÛÜŲŪŸÝŻŹÑßÇŒÆČŠŽ∂ð,.'-]{2,49}";
+            string pathAlias = @"[A-Z]{4}";
+            string patherlogin = @"[a-zA-ZàáâäãåąčćęèéêëėįìíîïłńòóôöõøùúûüųūÿýżźñçčšžÀÁÂÄÃÅĄĆČĖĘÈÉÊËÌÍÎÏĮŁŃÒÓÔÖÕØÙÚÛÜŲŪŸÝŻŹÑßÇŒÆČŠŽ∂ð,.'-]";
+            string patherPass = @"[a-zA-Z0-9àáâäãåąčćęèéêëėįìíîïłńòóôöõøùúûüųūÿýżźñçčšžÀÁÂÄÃÅĄĆČĖĘÈÉÊËÌÍÎÏĮŁŃÒÓÔÖÕØÙÚÛÜŲŪŸÝŻŹÑßÇŒÆČŠŽ∂ð,.'-]{1,45}";
+
+            if (!Regex.IsMatch(tbNombre.Text, pathString) || tbNombre.Text.Trim().Length > 50)
             {
-                MessageBox.Show("No se pudo guardar el Usuario", "Fallo!!", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                errorProvider1.SetError(tbNombre, "Error en el Formato del Nombre ");
+
+                hayError = true;
             }
+            else
+                errorProvider1.SetError(tbNombre, "");
+
+            if (!Regex.IsMatch(tbAlias.Text, pathAlias) || tbAlias.Text.Trim().Length > 4)
+            {
+                errorProvider1.SetError(tbAlias, "Error en el Formato del Alias ");
+
+                hayError = true;
+            }
+            else
+                errorProvider1.SetError(tbAlias, "");
+
+            if (!Regex.IsMatch(tbLogin.Text, patherlogin) || tbLogin.Text.Trim().Length > 10)
+            {
+                errorProvider1.SetError(tbLogin, "Error en el Formato del Login ");
+
+                hayError = true;
+            }
+            else
+                errorProvider1.SetError(tbLogin, "");
+
+            if (!Regex.IsMatch(tbPassword.Text, patherPass) || tbAlias.Text.Trim().Length > 45)
+            {
+                errorProvider1.SetError(tbPassword, "Error en el Formato de la Password ");
+
+                hayError = true;
+            }
+            else
+                errorProvider1.SetError(tbPassword, "");
+
+            if (radioZero.Checked == false && radioUno.Checked == false && radioDos.Checked == false)
+            {
+                errorProvider1.SetError(radioDos, "Error, Tienes que seleccionar algun Nivel de Acceso ");
+                hayError = true;
+
+            }
+            else
+                errorProvider1.SetError(radioDos, "");
+
+            return hayError;
         }
 
         protected override bool ProcessCmdKey(ref Message msg, Keys keyData)
@@ -150,17 +247,14 @@ namespace SCAM_App
                 case Keys.F1:
                     // Llamamos al Formulario de Ayuda
                     //
-                    Help.FormHelpCodigoAcceso frm = new Help.FormHelpCodigoAcceso();
+                    Help.FormHelpUsuarios frm = new Help.FormHelpUsuarios();
                     frm.ShowDialog();
                     frm.Dispose();
                     break;
                 case Keys.Escape:
-                    this.Hide();
-                    FormUsuarios fa = new FormUsuarios();
-                    fa.Width = 579;
-                    fa.Height = 435;
-                    fa.Location = new Point(280, 160);
-                    fa.ShowDialog();
+
+                    Volver();
+
                     break;
 
             }

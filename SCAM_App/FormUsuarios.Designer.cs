@@ -34,12 +34,12 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             this.bunifuElipse1 = new Bunifu.Framework.UI.BunifuElipse(this.components);
             this.bunifuGradientPanel1 = new Bunifu.Framework.UI.BunifuGradientPanel();
+            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.btnInserir = new Bunifu.Framework.UI.BunifuImageButton();
             this.btnVolver = new Bunifu.Framework.UI.BunifuImageButton();
             this.bunifuImageButton1 = new Bunifu.Framework.UI.BunifuImageButton();
             this.dgvUsuarios = new Bunifu.Framework.UI.BunifuCustomDataGrid();
-            this.textBox1 = new System.Windows.Forms.TextBox();
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.codigo = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.nombre = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.alias = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -47,12 +47,16 @@
             this.acceso = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.borrar = new System.Windows.Forms.DataGridViewButtonColumn();
             this.modificar = new System.Windows.Forms.DataGridViewButtonColumn();
+            this.btnPdf = new Bunifu.Framework.UI.BunifuImageButton();
+            this.bunifuImageButton2 = new Bunifu.Framework.UI.BunifuImageButton();
             this.bunifuGradientPanel1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.btnInserir)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.btnVolver)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.bunifuImageButton1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvUsuarios)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.btnPdf)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.bunifuImageButton2)).BeginInit();
             this.SuspendLayout();
             // 
             // bunifuElipse1
@@ -64,6 +68,8 @@
             // 
             this.bunifuGradientPanel1.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("bunifuGradientPanel1.BackgroundImage")));
             this.bunifuGradientPanel1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.bunifuGradientPanel1.Controls.Add(this.bunifuImageButton2);
+            this.bunifuGradientPanel1.Controls.Add(this.btnPdf);
             this.bunifuGradientPanel1.Controls.Add(this.textBox1);
             this.bunifuGradientPanel1.Controls.Add(this.pictureBox1);
             this.bunifuGradientPanel1.Controls.Add(this.btnInserir);
@@ -79,6 +85,25 @@
             this.bunifuGradientPanel1.Quality = 10;
             this.bunifuGradientPanel1.Size = new System.Drawing.Size(771, 74);
             this.bunifuGradientPanel1.TabIndex = 1;
+            // 
+            // textBox1
+            // 
+            this.textBox1.Location = new System.Drawing.Point(22, 32);
+            this.textBox1.Name = "textBox1";
+            this.textBox1.Size = new System.Drawing.Size(142, 20);
+            this.textBox1.TabIndex = 16;
+            this.textBox1.TextChanged += new System.EventHandler(this.textBox1_TextChanged);
+            // 
+            // pictureBox1
+            // 
+            this.pictureBox1.BackColor = System.Drawing.Color.RoyalBlue;
+            this.pictureBox1.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox1.Image")));
+            this.pictureBox1.Location = new System.Drawing.Point(170, 32);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(25, 20);
+            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pictureBox1.TabIndex = 15;
+            this.pictureBox1.TabStop = false;
             // 
             // btnInserir
             // 
@@ -140,7 +165,6 @@
             dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
             dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
             this.dgvUsuarios.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle2;
-            this.dgvUsuarios.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvUsuarios.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.codigo,
             this.nombre,
@@ -157,6 +181,7 @@
             this.dgvUsuarios.Location = new System.Drawing.Point(1, 74);
             this.dgvUsuarios.MultiSelect = false;
             this.dgvUsuarios.Name = "dgvUsuarios";
+            this.dgvUsuarios.ReadOnly = true;
             this.dgvUsuarios.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
             this.dgvUsuarios.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvUsuarios.Size = new System.Drawing.Size(719, 284);
@@ -164,68 +189,84 @@
             this.dgvUsuarios.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvUsuarios_CellClick);
             this.dgvUsuarios.CellPainting += new System.Windows.Forms.DataGridViewCellPaintingEventHandler(this.dgvUsuarios_CellPainting);
             // 
-            // textBox1
-            // 
-            this.textBox1.Location = new System.Drawing.Point(22, 32);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(142, 20);
-            this.textBox1.TabIndex = 16;
-            this.textBox1.TextChanged += new System.EventHandler(this.textBox1_TextChanged);
-            // 
-            // pictureBox1
-            // 
-            this.pictureBox1.BackColor = System.Drawing.Color.RoyalBlue;
-            this.pictureBox1.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox1.Image")));
-            this.pictureBox1.Location = new System.Drawing.Point(170, 32);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(25, 20);
-            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.pictureBox1.TabIndex = 15;
-            this.pictureBox1.TabStop = false;
-            // 
             // codigo
             // 
-            this.codigo.HeaderText = "Cödigo";
+            this.codigo.HeaderText = "Codigo";
             this.codigo.Name = "codigo";
+            this.codigo.ReadOnly = true;
             this.codigo.Width = 75;
             // 
             // nombre
             // 
             this.nombre.HeaderText = "Nombre";
             this.nombre.Name = "nombre";
+            this.nombre.ReadOnly = true;
             this.nombre.Width = 79;
             // 
             // alias
             // 
             this.alias.HeaderText = "Alias";
             this.alias.Name = "alias";
+            this.alias.ReadOnly = true;
             this.alias.Width = 59;
             // 
             // login
             // 
             this.login.HeaderText = "Login";
             this.login.Name = "login";
+            this.login.ReadOnly = true;
             this.login.Width = 63;
             // 
             // acceso
             // 
             this.acceso.HeaderText = "Acceso";
             this.acceso.Name = "acceso";
+            this.acceso.ReadOnly = true;
             this.acceso.Width = 77;
             // 
             // borrar
             // 
             this.borrar.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
-            this.borrar.HeaderText = "Borrar";
+            this.borrar.HeaderText = "Borra";
             this.borrar.Name = "borrar";
+            this.borrar.ReadOnly = true;
             this.borrar.Width = 53;
             // 
             // modificar
             // 
             this.modificar.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
-            this.modificar.HeaderText = "Modificar";
+            this.modificar.HeaderText = "Edita";
             this.modificar.Name = "modificar";
+            this.modificar.ReadOnly = true;
             this.modificar.Width = 60;
+            // 
+            // btnPdf
+            // 
+            this.btnPdf.BackColor = System.Drawing.Color.RoyalBlue;
+            this.btnPdf.Image = ((System.Drawing.Image)(resources.GetObject("btnPdf.Image")));
+            this.btnPdf.ImageActive = null;
+            this.btnPdf.Location = new System.Drawing.Point(248, 12);
+            this.btnPdf.Name = "btnPdf";
+            this.btnPdf.Size = new System.Drawing.Size(45, 51);
+            this.btnPdf.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.btnPdf.TabIndex = 17;
+            this.btnPdf.TabStop = false;
+            this.btnPdf.Zoom = 10;
+            this.btnPdf.Click += new System.EventHandler(this.btnPdf_Click);
+            // 
+            // bunifuImageButton2
+            // 
+            this.bunifuImageButton2.BackColor = System.Drawing.Color.RoyalBlue;
+            this.bunifuImageButton2.Image = ((System.Drawing.Image)(resources.GetObject("bunifuImageButton2.Image")));
+            this.bunifuImageButton2.ImageActive = null;
+            this.bunifuImageButton2.Location = new System.Drawing.Point(425, 14);
+            this.bunifuImageButton2.Name = "bunifuImageButton2";
+            this.bunifuImageButton2.Size = new System.Drawing.Size(45, 51);
+            this.bunifuImageButton2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.bunifuImageButton2.TabIndex = 18;
+            this.bunifuImageButton2.TabStop = false;
+            this.bunifuImageButton2.Zoom = 10;
+            this.bunifuImageButton2.Click += new System.EventHandler(this.bunifuImageButton2_Click);
             // 
             // FormUsuarios
             // 
@@ -241,11 +282,13 @@
             this.Load += new System.EventHandler(this.FormUsuarios_Load);
             this.bunifuGradientPanel1.ResumeLayout(false);
             this.bunifuGradientPanel1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.btnInserir)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.btnVolver)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.bunifuImageButton1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvUsuarios)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.btnPdf)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.bunifuImageButton2)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -267,5 +310,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn acceso;
         private System.Windows.Forms.DataGridViewButtonColumn borrar;
         private System.Windows.Forms.DataGridViewButtonColumn modificar;
+        private Bunifu.Framework.UI.BunifuImageButton btnPdf;
+        private Bunifu.Framework.UI.BunifuImageButton bunifuImageButton2;
     }
 }

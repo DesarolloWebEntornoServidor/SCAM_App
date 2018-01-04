@@ -20,6 +20,7 @@ namespace SCAM_App
         MySqlCommand cmd = new MySqlCommand();
 
         List<Empleado> listaEmpleados;
+        private int v;
 
         public FormEmpleados()
         {
@@ -32,6 +33,19 @@ namespace SCAM_App
             btnCerrarTarjeta.Visible = false;
             btnPrinter.Visible = false;
 
+        }
+
+        public FormEmpleados(int v)
+        {
+            this.v = v;
+
+            InitializeComponent();
+
+            if (v == 2)
+            {
+                Modificar(FormLogin.usuId);
+
+            }
         }
 
         private void FormEmpleados_Load(object sender, EventArgs e)
@@ -83,11 +97,15 @@ namespace SCAM_App
         private void bunifuImageButton1_Click(object sender, EventArgs e)
         {
             this.Close();
+            this.Dispose();
+
         }
 
         private void btnInserir_Click(object sender, EventArgs e)
         {
             this.Close();
+            this.Dispose();
+
             FormEmpDetalles fa = new FormEmpDetalles();
             fa.Width = 800;
             fa.Height = 450;
@@ -116,7 +134,7 @@ namespace SCAM_App
                 e.Graphics.DrawIcon(icoAtomico, e.CellBounds.Left + 3, e.CellBounds.Top + 3);
 
                 this.dgvEmpleados.Rows[e.RowIndex].Height = icoAtomico.Height + 3;
-                this.dgvEmpleados.Columns[e.ColumnIndex].Width = icoAtomico.Width + 3;
+                this.dgvEmpleados.Columns[e.ColumnIndex].Width = icoAtomico.Width + 7;
 
                 e.Handled = true;
             }
@@ -131,7 +149,7 @@ namespace SCAM_App
                 e.Graphics.DrawIcon(icoAtomico1, e.CellBounds.Left + 3, e.CellBounds.Top + 3);
 
                 this.dgvEmpleados.Rows[e.RowIndex].Height = icoAtomico1.Height + 3;
-                this.dgvEmpleados.Columns[e.ColumnIndex].Width = icoAtomico1.Width + 3;
+                this.dgvEmpleados.Columns[e.ColumnIndex].Width = icoAtomico1.Width + 7;
 
                 e.Handled = true;
             }
@@ -142,10 +160,10 @@ namespace SCAM_App
                 // diseña el boton de modificar //
                 DataGridViewButtonCell celBoton1 = this.dgvEmpleados.Rows[e.RowIndex].Cells["tarjeta"] as DataGridViewButtonCell;
                 Icon icoAtomico1 = new Icon(Environment.CurrentDirectory + @"..\..\..\..\img\credit-card.ico");
-                e.Graphics.DrawIcon(icoAtomico1, e.CellBounds.Left + 3, e.CellBounds.Top + 3);
+                e.Graphics.DrawIcon(icoAtomico1, e.CellBounds.Left + 10, e.CellBounds.Top + 3);
 
                 this.dgvEmpleados.Rows[e.RowIndex].Height = icoAtomico1.Height + 3;
-                this.dgvEmpleados.Columns[e.ColumnIndex].Width = icoAtomico1.Width + 3;
+                this.dgvEmpleados.Columns[e.ColumnIndex].Width = icoAtomico1.Width + 20;
 
                 e.Handled = true;
             }
@@ -159,7 +177,7 @@ namespace SCAM_App
             if (colum < 0)
                 return;
 
-            if (dgvEmpleados.Columns[colum].HeaderText == "Borrar")// <-- he pulsado el botón Borrar
+            if (dgvEmpleados.Columns[colum].HeaderText == "Borra")// <-- he pulsado el botón Borrar
             {
                 int id = Convert.ToInt32(dgvEmpleados.Rows[fila].Cells[0].Value);
 
@@ -176,7 +194,7 @@ namespace SCAM_App
                 dgvEmpleados.Rows.Clear();
                 CargaDGV();
             }
-            else if (dgvEmpleados.Columns[colum].HeaderText == "Modificar")// <-- he pulsado el botón Modificar
+            else if (dgvEmpleados.Columns[colum].HeaderText == "Edita")// <-- he pulsado el botón Modificar
             {
                 colum = e.ColumnIndex;
                 fila = e.RowIndex;
@@ -190,6 +208,7 @@ namespace SCAM_App
                 Empleado emp = EmpleadoDAO.ObtenerEmpleado(id);
 
                 this.Close();
+                this.Dispose();
                 FormEmpDetalles fa = new FormEmpDetalles(emp);
 
                 fa.Width = 800;
@@ -198,7 +217,7 @@ namespace SCAM_App
                 fa.ShowDialog();
                 fa.Dispose();
             }
-            else if (dgvEmpleados.Columns[colum].HeaderText == "Tarjeta")// <-- he pulsado el botón Modificar
+            else if (dgvEmpleados.Columns[colum].HeaderText == "Genera")// <-- he pulsado el botón Modificar
             {
                 colum = e.ColumnIndex;
                 fila = e.RowIndex;
@@ -245,16 +264,46 @@ namespace SCAM_App
 
                 btnCerrarTarjeta.Visible = true;
                 btnPrinter.Visible = true;
+                try
+                {
+                    BarcodeLib.Barcode codigo = new BarcodeLib.Barcode();
 
-                BarcodeLib.Barcode codigo = new BarcodeLib.Barcode();
 
-                codigo.IncludeLabel = true;
-                panelResultado.BackgroundImage = codigo.Encode(BarcodeLib.TYPE.CODE128, emp.Nombre + " " + emp.Apellidos, Color.Black, Color.White, 400, 100);
+                    string nombreCodBarras = emp.Nombre;
+
+                    if(nombreCodBarras.Length > 15)
+                        nombreCodBarras = emp.Nombre.Substring(0,15);
+
+                    codigo.IncludeLabel = true;
+                    panelResultado.BackgroundImage = codigo.Encode(BarcodeLib.TYPE.CODE128, nombreCodBarras, Color.Black, Color.White, 400, 100);
+                }
+                catch (Exception)
+                {
+
+                    throw;
+                }
+
             }
             else
                 return; // <-- No he pulsado ninguno de los botones que me iteresan
         }
 
+        private void Modificar(int idUsu)
+        {
+            Empleado emp = EmpleadoDAO.BuscarEmpleadoVinculado(idUsu);
+
+            this.Close();
+            this.Dispose();
+
+            FormEmpDetalles fa = new FormEmpDetalles(emp);
+
+            fa.Width = 800;
+            fa.Height = 450;
+            fa.Location = new Point(280, 160);
+            fa.ShowDialog();
+            fa.Dispose();
+
+        }
         protected override bool ProcessCmdKey(ref Message msg, Keys keyData)
         {
             switch (keyData)
@@ -268,19 +317,14 @@ namespace SCAM_App
                     break;
                 case Keys.Escape:
                     this.Close();
+                    this.Dispose();
 
-                    //FormEmpleados fa = new FormEmpleados();
-                    //fa.Width = 860;
-                    //fa.Height = 450;
-                    //fa.Location = new Point(280, 160);
-                    //fa.ShowDialog();
                     break;
-
             }
             return base.ProcessCmdKey(ref msg, keyData);
         }
 
-        private void btnCerrarTarjeta_Click(object sender, EventArgs e)
+        private void btnCerrarTarjeta_Click(object sender, EventArgs e)  //  Gebera las TArjeta del Empleado
         {
             panelTarjeta.Visible = false;
 

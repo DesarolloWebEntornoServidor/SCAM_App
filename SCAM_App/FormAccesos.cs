@@ -24,6 +24,8 @@ namespace SCAM_App
             InitializeComponent();
 
             dgvAccesos.AllowUserToAddRows = false;
+
+            dgvAccesos.Columns["Codigo"].Visible = false;
         }
 
         private void FormAccesos_Load(object sender, EventArgs e)
@@ -65,7 +67,9 @@ namespace SCAM_App
 
         private void btnInserir_Click(object sender, EventArgs e)
         {
-            this.Close(); 
+            this.Close();
+            this.Dispose();
+
             FormAccesoDetalles fa = new FormAccesoDetalles();
             fa.Width = 579;
             fa.Height = 435;
@@ -88,6 +92,8 @@ namespace SCAM_App
                     break;
                 case Keys.Escape:
                     this.Close();
+                    this.Dispose();
+
 
                     break;
 
@@ -116,7 +122,7 @@ namespace SCAM_App
                 e.Graphics.DrawIcon(icoAtomico, e.CellBounds.Left + 3, e.CellBounds.Top + 3);
 
                 this.dgvAccesos.Rows[e.RowIndex].Height = icoAtomico.Height + 3;
-                this.dgvAccesos.Columns[e.ColumnIndex].Width = icoAtomico.Width + 3;
+                this.dgvAccesos.Columns[e.ColumnIndex].Width = icoAtomico.Width + 7;
 
                 e.Handled = true;
             }
@@ -131,7 +137,7 @@ namespace SCAM_App
                 e.Graphics.DrawIcon(icoAtomico1, e.CellBounds.Left + 3, e.CellBounds.Top + 3);
 
                 this.dgvAccesos.Rows[e.RowIndex].Height = icoAtomico1.Height + 3;
-                this.dgvAccesos.Columns[e.ColumnIndex].Width = icoAtomico1.Width + 3;
+                this.dgvAccesos.Columns[e.ColumnIndex].Width = icoAtomico1.Width + 7;
 
                 e.Handled = true;
             }
@@ -145,7 +151,7 @@ namespace SCAM_App
             if (colum < 0)
                 return;
 
-            if (dgvAccesos.Columns[colum].HeaderText == "Borrar")// <-- he pulsado el botón Borrar
+            if (dgvAccesos.Columns[colum].HeaderText == "Borra")// <-- he pulsado el botón Borrar
             {
                 int id = Convert.ToInt32(dgvAccesos.Rows[fila].Cells[0].Value); 
 
@@ -162,7 +168,7 @@ namespace SCAM_App
                 dgvAccesos.Rows.Clear();
                 CargaDGV();
             }
-            else if (dgvAccesos.Columns[colum].HeaderText == "Modificar")// <-- he pulsado el botón Borrar
+            else if (dgvAccesos.Columns[colum].HeaderText == "Edita")// <-- he pulsado el botón Borrar
             {
                 colum = e.ColumnIndex;
                 fila = e.RowIndex;

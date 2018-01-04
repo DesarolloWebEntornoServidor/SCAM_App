@@ -27,13 +27,8 @@ namespace SCAM_App.Help
             switch (keyData)
             {
                 case Keys.Escape:
-                    this.Hide();
+                    this.Close();
 
-                    //FormEmpleados fa = new FormEmpleados();
-                    //fa.Width = 860;
-                    //fa.Height = 450;
-                    //fa.Location = new Point(280, 160);
-                    //fa.ShowDialog();
                     break;
 
             }

@@ -10,11 +10,24 @@ using System.Windows.Forms;
 
 namespace SCAM_App.Help
 {
-    public partial class FormHelpCodigoAcceso : Form
+    public partial class FormHelpUsuarios : Form
     {
-        public FormHelpCodigoAcceso()
+        private int v;
+
+        public FormHelpUsuarios()
         {
             InitializeComponent();
+        }
+
+        public FormHelpUsuarios(int v)
+        {
+            InitializeComponent();
+
+            this.v = v;
+
+            if (v == 1)
+                groupBoxUsuario.Visible = false;
+
         }
 
         private void btnVolver_Click(object sender, EventArgs e)

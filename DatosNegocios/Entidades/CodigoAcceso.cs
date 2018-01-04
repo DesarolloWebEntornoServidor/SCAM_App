@@ -34,9 +34,59 @@ namespace DatosNegocios
             this.descripcionAcceso = descripcionAcceso;
         }
 
-        public int IdCodigoAcceso { get => idCodigoAcceso; set => idCodigoAcceso = value; }
-        public string CodigoDeAcceso { get => codigoDeAcceso; set => codigoDeAcceso = value; }
-        public string DescripcionAcceso { get => descripcionAcceso; set => descripcionAcceso = value; }
-        public int PTodos { get => pTodos; set => pTodos = value; }
+        #region Propiedades
+
+        public int IdCodigoAcceso
+        {
+            get
+            {
+                return idCodigoAcceso;
+            }
+
+            set
+            {
+                idCodigoAcceso = value;
+            }
+        }
+
+        public string CodigoDeAcceso
+        {
+            get
+            {
+                return codigoDeAcceso;
+            }
+
+            set
+            {
+                codigoDeAcceso = value;
+            }
+        }
+
+        public string DescripcionAcceso
+        {
+            get
+            {
+                return descripcionAcceso;
+            }
+
+            set
+            {
+                descripcionAcceso = value;
+            }
+        }
+
+        public int PTodos
+        {
+            get
+            {
+                return pTodos;
+            }
+
+            set
+            {
+                pTodos = value;
+            }
+        }
+        #endregion
     }
 }

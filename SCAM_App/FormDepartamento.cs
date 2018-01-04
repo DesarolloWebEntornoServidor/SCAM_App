@@ -23,6 +23,8 @@ namespace SCAM_App
 
             dgvDepartamento.AllowUserToAddRows = false;
 
+            dgvDepartamento.Columns["Codigo"].Visible = false;
+
         }
 
         private void FormDepartamento_Load(object sender, EventArgs e)
@@ -65,7 +67,14 @@ namespace SCAM_App
 
         private void btnInserir_Click(object sender, EventArgs e)
         {
+            LlamaDetalles();
+        }
+
+        private void LlamaDetalles()
+        {
             this.Close();
+            this.Dispose();
+
             FormDeptoDetalles fa = new FormDeptoDetalles();
 
             fa.Width = 579;
@@ -73,6 +82,7 @@ namespace SCAM_App
             fa.Location = new Point(280, 160);
             fa.ShowDialog();
         }
+
         protected override bool ProcessCmdKey(ref Message msg, Keys keyData)
         {
             switch (keyData)
@@ -86,6 +96,8 @@ namespace SCAM_App
                     break;
                 case Keys.Escape:
                     this.Close();
+                    this.Dispose();
+
 
                     break;
 
@@ -114,7 +126,7 @@ namespace SCAM_App
                 e.Graphics.DrawIcon(icoAtomico, e.CellBounds.Left + 3, e.CellBounds.Top + 3);
 
                 this.dgvDepartamento.Rows[e.RowIndex].Height = icoAtomico.Height + 3;
-                this.dgvDepartamento.Columns[e.ColumnIndex].Width = icoAtomico.Width + 3;
+                this.dgvDepartamento.Columns[e.ColumnIndex].Width = icoAtomico.Width + 7;
 
                 e.Handled = true;
             }
@@ -129,7 +141,7 @@ namespace SCAM_App
                 e.Graphics.DrawIcon(icoAtomico1, e.CellBounds.Left + 3, e.CellBounds.Top + 3);
 
                 this.dgvDepartamento.Rows[e.RowIndex].Height = icoAtomico1.Height + 3;
-                this.dgvDepartamento.Columns[e.ColumnIndex].Width = icoAtomico1.Width + 3;
+                this.dgvDepartamento.Columns[e.ColumnIndex].Width = icoAtomico1.Width + 7;
 
                 e.Handled = true;
             }
@@ -143,7 +155,7 @@ namespace SCAM_App
             if (colum < 0)
                 return;
 
-            if (dgvDepartamento.Columns[colum].HeaderText == "Borrar")// <-- he pulsado el botón Borrar
+            if (dgvDepartamento.Columns[colum].HeaderText == "Borra")// <-- he pulsado el botón Borrar
             {
                 int id = Convert.ToInt32(dgvDepartamento.Rows[fila].Cells[0].Value);
 
@@ -161,7 +173,7 @@ namespace SCAM_App
                 dgvDepartamento.Rows.Clear();
                 CargaDGV();
             }
-            else if (dgvDepartamento.Columns[colum].HeaderText == "Modificar")// <-- he pulsado el botón Modificar
+            else if (dgvDepartamento.Columns[colum].HeaderText == "Edita")// <-- he pulsado el botón Modificar
             {
                 colum = e.ColumnIndex;
                 fila = e.RowIndex;
@@ -174,6 +186,8 @@ namespace SCAM_App
                     return;
 
                 this.Close();
+                this.Dispose();
+
                 FormDeptoDetalles fa = new FormDeptoDetalles(dep);
 
                 fa.Width = 579;

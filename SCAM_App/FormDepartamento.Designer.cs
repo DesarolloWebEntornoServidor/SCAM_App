@@ -147,7 +147,9 @@
             this.dgvDepartamento.HeaderBgColor = System.Drawing.Color.SteelBlue;
             this.dgvDepartamento.HeaderForeColor = System.Drawing.Color.Silver;
             this.dgvDepartamento.Location = new System.Drawing.Point(8, 73);
+            this.dgvDepartamento.MultiSelect = false;
             this.dgvDepartamento.Name = "dgvDepartamento";
+            this.dgvDepartamento.ReadOnly = true;
             this.dgvDepartamento.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
             this.dgvDepartamento.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvDepartamento.Size = new System.Drawing.Size(678, 311);
@@ -157,27 +159,31 @@
             // 
             // codigo
             // 
-            this.codigo.HeaderText = "Cödigo";
+            this.codigo.HeaderText = "Codigo";
             this.codigo.Name = "codigo";
+            this.codigo.ReadOnly = true;
             this.codigo.Width = 75;
             // 
             // departamento
             // 
             this.departamento.HeaderText = "Departamento";
             this.departamento.Name = "departamento";
+            this.departamento.ReadOnly = true;
             this.departamento.Width = 120;
             // 
             // codigoAcceso
             // 
             this.codigoAcceso.HeaderText = "Nível de Acceso";
             this.codigoAcceso.Name = "codigoAcceso";
+            this.codigoAcceso.ReadOnly = true;
             this.codigoAcceso.Width = 130;
             // 
             // borrar
             // 
             this.borrar.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
-            this.borrar.HeaderText = "Borrar";
+            this.borrar.HeaderText = "Borra";
             this.borrar.Name = "borrar";
+            this.borrar.ReadOnly = true;
             this.borrar.Resizable = System.Windows.Forms.DataGridViewTriState.True;
             this.borrar.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
             this.borrar.Width = 53;
@@ -185,8 +191,9 @@
             // modificar
             // 
             this.modificar.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
-            this.modificar.HeaderText = "Modificar";
+            this.modificar.HeaderText = "Edita";
             this.modificar.Name = "modificar";
+            this.modificar.ReadOnly = true;
             this.modificar.Resizable = System.Windows.Forms.DataGridViewTriState.True;
             this.modificar.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
             this.modificar.Width = 60;
@@ -219,13 +226,13 @@
         private System.Windows.Forms.Panel panel1;
         private Bunifu.Framework.UI.BunifuImageButton bunifuImageButton1;
         private Bunifu.Framework.UI.BunifuCustomDataGrid dgvDepartamento;
+        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.PictureBox pictureBox1;
+        private Bunifu.Framework.UI.BunifuImageButton btnInserir;
         private System.Windows.Forms.DataGridViewTextBoxColumn codigo;
         private System.Windows.Forms.DataGridViewTextBoxColumn departamento;
         private System.Windows.Forms.DataGridViewTextBoxColumn codigoAcceso;
         private System.Windows.Forms.DataGridViewButtonColumn borrar;
         private System.Windows.Forms.DataGridViewButtonColumn modificar;
-        private System.Windows.Forms.TextBox textBox1;
-        private System.Windows.Forms.PictureBox pictureBox1;
-        private Bunifu.Framework.UI.BunifuImageButton btnInserir;
     }
 }

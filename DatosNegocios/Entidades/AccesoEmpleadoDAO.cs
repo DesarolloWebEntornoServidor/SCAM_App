@@ -119,20 +119,26 @@ namespace DatosNegocios
 
             ace = CodigoAccesoDAO.ObtenerCodigoAccesoPorNombre(nombreCodigosChecados);
 
-            BorarVariosRegistros(idEmp);
 
-            for (int i = 0; i < ace.Count; i++)
-            {
-                MySqlCommand comando = new MySqlCommand(string.Format("Insert into accesosempleados (idEmpleado, idCodigoAcceso) values ('{0}','{1}')", idEmp, ace[i]), Conexion.ObtenerConexion());
+                BorarVariosRegistros(idEmp);
+                
+    
+                   if (tamanyo > 0)
+                    {     
 
-                retorno = comando.ExecuteNonQuery();
+                        for (int i = 0; i < ace.Count; i++)
+                        {
+                            MySqlCommand comando = new MySqlCommand(string.Format("Insert into accesosempleados (idEmpleado, idCodigoAcceso) values ('{0}','{1}')", idEmp, ace[i]), Conexion.ObtenerConexion());
 
-            }
+                            retorno = comando.ExecuteNonQuery();
 
+                        }
+                        
+                    }
+                    else
+                        retorno = 2;
 
-            // tengo que borrar todos los codigos asignados antes de insertar estos //////////////////////////////////////////
-
-            Conexion.CerrarConexion();
+                Conexion.CerrarConexion();
 
 
             return retorno;

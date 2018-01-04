@@ -1,11 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using DatosNegocios;
 
@@ -13,11 +8,30 @@ namespace SCAM_App
 {
     public partial class FormUsuarios : Form
     {
+        List<Usuario> listaUsuarios;
+        private int v;
+
         public FormUsuarios()
         {
             InitializeComponent();
 
             dgvUsuarios.AllowUserToAddRows = false;
+
+            dgvUsuarios.Columns["Codigo"].Visible = false;
+
+        }
+
+        public FormUsuarios(int v)
+        {
+            InitializeComponent();
+
+            this.v = v;
+
+            if(v == 2)
+            {
+                Modificar(FormLogin.usuId);
+
+            }
 
         }
 
@@ -32,7 +46,7 @@ namespace SCAM_App
         }
         public void CargaDGV() // carga el data grid cdo inicia la rutina
         {
-            List<Usuario> listaUsuarios = UsuarioDAO.ListarUsuarios();
+            listaUsuarios = UsuarioDAO.ListarUsuarios();
 
             int n = 0;
             for (int i = 0; i < listaUsuarios.Count; i++)
@@ -66,6 +80,8 @@ namespace SCAM_App
         private void btnInserir_Click(object sender, EventArgs e) // boton inserir nuevo Usuario /////
         {
             this.Close();
+            this.Dispose();
+
             FormUsuarioDetalle fa = new FormUsuarioDetalle();
 
             fa.Width = 579;
@@ -87,6 +103,8 @@ namespace SCAM_App
                     break;
                 case Keys.Escape:
                     this.Close();
+                    this.Dispose();
+
 
                     break;
 
@@ -102,9 +120,15 @@ namespace SCAM_App
             if (colum < 0)
                 return;
 
-            if (dgvUsuarios.Columns[colum].HeaderText == "Borrar")// <-- he pulsado el botón Borrar
+            if (dgvUsuarios.Columns[colum].HeaderText == "Borra")// <-- he pulsado el botón Borrar
             {
                 int valor = Convert.ToInt32(dgvUsuarios.Rows[fila].Cells[0].Value);
+
+                if(valor == FormLogin.usuId)
+                {
+                    MessageBox.Show("No Puedes Borrar el Usuario que está Logado !!!");
+                    return;
+                }
 
                 if (DialogResult.No == MessageBox.Show("¿está seguro de eliminar a\n" + dgvUsuarios.Rows[fila].Cells[1].Value + "?", "Confirmar", MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2))
                     return;
@@ -119,7 +143,7 @@ namespace SCAM_App
                 dgvUsuarios.Rows.Clear();
                 CargaDGV();
             }
-            else if (dgvUsuarios.Columns[colum].HeaderText == "Modificar")// <-- he pulsado el botón Borrar
+            else if (dgvUsuarios.Columns[colum].HeaderText == "Edita")// <-- he pulsado el botón Borrar
             {
                 colum = e.ColumnIndex;
                 fila = e.RowIndex;
@@ -132,6 +156,8 @@ namespace SCAM_App
                     return;
                 //// modificar usuario ////////////////////////////
                 this.Close();
+                this.Dispose();
+
                 FormUsuarioDetalle fa = new FormUsuarioDetalle(usu); 
 
                 fa.Width = 579;
@@ -156,7 +182,7 @@ namespace SCAM_App
                 e.Graphics.DrawIcon(icoAtomico, e.CellBounds.Left + 3, e.CellBounds.Top + 3);
 
                 this.dgvUsuarios.Rows[e.RowIndex].Height = icoAtomico.Height + 3;
-                this.dgvUsuarios.Columns[e.ColumnIndex].Width = icoAtomico.Width + 3;
+                this.dgvUsuarios.Columns[e.ColumnIndex].Width = icoAtomico.Width + 7;
 
                 e.Handled = true;
             }
@@ -171,7 +197,7 @@ namespace SCAM_App
                 e.Graphics.DrawIcon(icoAtomico1, e.CellBounds.Left + 3, e.CellBounds.Top + 3);
 
                 this.dgvUsuarios.Rows[e.RowIndex].Height = icoAtomico1.Height + 3;
-                this.dgvUsuarios.Columns[e.ColumnIndex].Width = icoAtomico1.Width + 3;
+                this.dgvUsuarios.Columns[e.ColumnIndex].Width = icoAtomico1.Width + 7;
 
                 e.Handled = true;
             }
@@ -186,6 +212,62 @@ namespace SCAM_App
             CargaDGV(localizados);
         }
 
-  
+        private void btnPdf_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void bunifuImageButton2_Click(object sender, EventArgs e)
+        {
+            //Util.ExportarDataGridViewExcel(listaUsuarios);
+        }
+
+        //private void ExportarDataGridViewExcel()
+        //{
+        //    SaveFileDialog fichero = new SaveFileDialog();
+        //    fichero.Filter = "Excel (*.xls)|*.xls";
+        //    if (fichero.ShowDialog() == DialogResult.OK)
+        //    {
+        //        Microsoft.Office.Interop.Excel.Application aplicacion;
+        //        Microsoft.Office.Interop.Excel.Workbook libros_trabajo;
+        //        Microsoft.Office.Interop.Excel.Worksheet hoja_trabajo;
+        //        aplicacion = new Microsoft.Office.Interop.Excel.Application();
+        //        libros_trabajo = aplicacion.Workbooks.Add();
+        //        hoja_trabajo = (Microsoft.Office.Interop.Excel.Worksheet)libros_trabajo.Worksheets.get_Item(1);
+        //        //Recorremos el DataGridView rellenando la hoja de trabajo
+        //        for (int i = 0; i < dgvUsuarios.Rows.Count - 1; i++)
+        //        {
+        //            for (int j = 0; j < dgvUsuarios.Columns.Count; j++)
+        //            {
+        //                hoja_trabajo.Cells[i + 1, j + 1] = dgvUsuarios.Rows[i].Cells[j].Value.ToString();
+        //            }
+        //        }
+        //        libros_trabajo.SaveAs(fichero.FileName, Microsoft.Office.Interop.Excel.XlFileFormat.xlWorkbookNormal);
+        //        libros_trabajo.Close(true);
+        //        aplicacion.Quit();
+        //    }
+        //}
+
+            private void Modificar(int idUsu)
+            {
+                Usuario usu = UsuarioDAO.ObtenerUsuario(idUsu);
+
+               
+                //// modificar usuario ////////////////////////////
+                this.Close();
+                this.Dispose();
+
+                FormUsuarioDetalle fa = new FormUsuarioDetalle(usu);
+
+                fa.Width = 579;
+                fa.Height = 435;
+                fa.Location = new Point(280, 160);
+                fa.ShowDialog();
+
+        }
+
+
+
+
     }
 }

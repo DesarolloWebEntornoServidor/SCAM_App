@@ -32,11 +32,84 @@ namespace DatosNegocios
         {
             this.login = login;
         }
-        public int IdUsuario { get => idUsuario; set => idUsuario = value; }
-        public string Nombre { get => nombre; set => nombre = value; }
-        public string Alias { get => alias; set => alias = value; }
-        public string Login { get => login; set => login = value; }
-        public string Password { get => password; set => password = value; }
-        public int Acceso { get => acceso; set => acceso = value; }
+        #region Propiedades
+        public int IdUsuario
+        {
+            get
+            {
+                return idUsuario;
+            }
+
+            set
+            {
+                idUsuario = value;
+            }
+        }
+
+        public string Nombre
+        {
+            get
+            {
+                return nombre;
+            }
+
+            set
+            {
+                nombre = value;
+            }
+        }
+
+        public string Alias
+        {
+            get
+            {
+                return alias;
+            }
+
+            set
+            {
+                alias = value;
+            }
+        }
+
+        public string Login
+        {
+            get
+            {
+                return login;
+            }
+
+            set
+            {
+                login = value;
+            }
+        }
+
+        public string Password
+        {
+            get
+            {
+                return password;
+            }
+
+            set
+            {
+                password = value;
+            }
+        }
+
+        public int Acceso
+        {
+            get
+            {
+                return acceso;
+            }
+
+            set
+            {
+                acceso = value;
+            }
+        }
+        #endregion
     }
 }

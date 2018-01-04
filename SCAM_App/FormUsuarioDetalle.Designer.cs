@@ -52,9 +52,11 @@
             this.tbPassword = new System.Windows.Forms.TextBox();
             this.label7 = new System.Windows.Forms.Label();
             this.cbEmpleado = new System.Windows.Forms.ComboBox();
+            this.errorProvider1 = new System.Windows.Forms.ErrorProvider(this.components);
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.btnVolver)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.bunifuImageButton1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).BeginInit();
             this.SuspendLayout();
             // 
             // bunifuElipse1
@@ -283,6 +285,10 @@
             this.cbEmpleado.Size = new System.Drawing.Size(199, 21);
             this.cbEmpleado.TabIndex = 58;
             // 
+            // errorProvider1
+            // 
+            this.errorProvider1.ContainerControl = this;
+            // 
             // FormUsuarioDetalle
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -315,6 +321,7 @@
             this.panel1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.btnVolver)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.bunifuImageButton1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -344,5 +351,6 @@
         private System.Windows.Forms.Label label12;
         private System.Windows.Forms.ComboBox cbEmpleado;
         private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.ErrorProvider errorProvider1;
     }
 }

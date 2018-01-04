@@ -24,9 +24,55 @@ namespace DatosNegocios
             this.fechaEntrada = fechaEntrada;
         }
 
-        public int IdAccesoEmpleado { get => idAccesoEmpleado; set => idAccesoEmpleado = value; }
-        public int IdEmpleado { get => idEmpleado; set => idEmpleado = value; }
-        public int IdCodAcceso { get => idCodAcceso; set => idCodAcceso = value; }
-        public DateTime FechaEntrada { get => fechaEntrada; set => fechaEntrada = value; }
+        public int IdAccesoEmpleado        {
+            get
+            {
+                return idAccesoEmpleado;
+            }
+
+            set
+            {
+                idAccesoEmpleado = value;
+            }
+        }
+
+        public int IdEmpleado
+        {
+            get
+            {
+                return idEmpleado;
+            }
+
+            set
+            {
+                idEmpleado = value;
+            }
+        }
+
+        public int IdCodAcceso 
+        {
+            get
+            {
+                return idCodAcceso;
+            }
+
+            set
+            {
+                idCodAcceso = value;
+            }
+        }
+
+        public DateTime FechaEntrada
+        {
+            get
+            {
+                return fechaEntrada;
+            }
+
+            set
+            {
+                fechaEntrada = value;
+            }
+        }
     }
 }

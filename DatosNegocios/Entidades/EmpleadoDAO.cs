@@ -27,23 +27,22 @@ namespace DatosNegocios
             List<Empleado> lista = new List<Empleado>();
 
             MySqlCommand comando = new MySqlCommand(String.Format("select idEmpleado, Nombre, Apellidos, FechaNacto, Dni, Funcion, Telefono, Email, FechaEntrada, " +
-                "Salario, sexo, Foto, IdDepartamento, idUsuario, activo from empleados order by nombre"), Conexion.ObtenerConexion());
+                "Salario, sexo, Foto, IdDepartamento, idUsuario, activo from empleados where activo > 0 order by nombre"), Conexion.ObtenerConexion());
 
             MySqlDataReader codigos = comando.ExecuteReader();
             while (codigos.Read())
             {
-                DateTime data = new DateTime();
                 Empleado emps = new Empleado();
 
                 emps.IdEmpleado = codigos.GetInt32(0);
                 emps.Nombre = codigos.GetString(1);
                 emps.Apellidos = codigos.GetString(2);
-                emps.FechaNacto = Convert.ToDateTime(data.Year + "/" + data.Month + "/" + data.Day);
+                emps.FechaNacto = codigos.GetDateTime(3);
                 emps.Dni = codigos.GetString(4);
                 emps.Funcion = codigos.GetString(5);
                 emps.Telefono = codigos.GetString(6);
                 emps.Email = codigos.GetString(7);
-                emps.FechaEntrada = Convert.ToDateTime(data.Year + "/" + data.Month + "/" + data.Day);
+                emps.FechaEntrada = codigos.GetDateTime(8);
                 emps.Salario = codigos.GetDouble(9);
                 emps.Sexo = codigos.GetString(10);
                 if (codigos.GetString(11) != null)
@@ -66,12 +65,29 @@ namespace DatosNegocios
 
             MySqlConnection cmd = Conexion.ObtenerConexion();
 
-            MySqlCommand comando = new MySqlCommand(String.Format("select idEmpleado, Nombre from empleados where idUsuario={0}", idUsuario), cmd);
-            MySqlDataReader empleados = comando.ExecuteReader();
-            while (empleados.Read())
+            MySqlCommand comando = new MySqlCommand(String.Format("select idEmpleado, Nombre, Apellidos, FechaNacto, Dni, Funcion, Telefono, Email, FechaEntrada, " +
+                "Salario, sexo, Foto, IdDepartamento, idUsuario, activo from empleados where idUsuario={0}  and activo > 0 ", idUsuario), cmd);
+            MySqlDataReader codigos = comando.ExecuteReader();
+            while (codigos.Read())
             {
-                emps.IdEmpleado = empleados.GetInt32(0);
-                emps.Nombre = empleados.GetString(1);
+                emps.IdEmpleado = codigos.GetInt32(0);
+                emps.Nombre = codigos.GetString(1);
+                emps.Apellidos = codigos.GetString(2);
+                emps.FechaNacto = codigos.GetDateTime(3);
+                emps.Dni = codigos.GetString(4);
+                emps.Funcion = codigos.GetString(5);
+                emps.Telefono = codigos.GetString(6);
+                emps.Email = codigos.GetString(7);
+                emps.FechaEntrada = codigos.GetDateTime(8);
+                emps.Salario = codigos.GetDouble(9);
+                emps.Sexo = codigos.GetString(10);
+                if (codigos.GetString(11) != null)
+                    emps.Foto = codigos.GetString(11);
+                else
+                    emps.Foto = "";
+                emps.IdDepartamento = codigos.GetInt32(12);
+                emps.IdUsuario = codigos.GetInt32(13);
+                emps.Activo = Convert.ToInt32(codigos.GetBoolean(14));
             }
 
             cmd.Close();

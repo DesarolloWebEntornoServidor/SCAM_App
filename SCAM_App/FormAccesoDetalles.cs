@@ -5,6 +5,7 @@ using System.Data;
 using System.Drawing;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using DatosNegocios;
@@ -15,6 +16,7 @@ namespace SCAM_App
     {
         private CodigoAcceso cod;
         bool esNuevo = true;
+        bool hayError = false;
 
         public FormAccesoDetalles()
         {
@@ -47,7 +49,9 @@ namespace SCAM_App
 
         private void bunifuImageButton1_Click(object sender, EventArgs e)
         {
-            this.Hide();
+            this.Close();
+            this.Dispose();
+
 
             FormAccesos fa = new FormAccesos();
             fa.Width = 579;
@@ -57,8 +61,15 @@ namespace SCAM_App
         }
         private void btnAnadirAcceso_Click(object sender, EventArgs e)
         {
+            hayError = HayErrorEnFormulario();
 
-             CodigoAcceso cod = new CodigoAcceso();
+            if (hayError)
+            {
+                MessageBox.Show("Existe Error en el Formulario, Presione F1 si necesitas Ayuda !!!");
+                return;
+            }
+
+            CodigoAcceso cod = new CodigoAcceso();
 
             cod.CodigoDeAcceso = txtCodigoAceso.Text.Trim();
             cod.DescripcionAcceso = txtDescripcion.Text.Trim();
@@ -83,7 +94,9 @@ namespace SCAM_App
             if (resultado > 0)
             {
                 MessageBox.Show("Código de Acceso Guardado Con Exito!!", "Guardado", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                this.Hide();
+                this.Close();
+                this.Dispose();
+
 
                 FormAccesos fa = new FormAccesos();
                 fa.Width = 579;
@@ -95,10 +108,35 @@ namespace SCAM_App
             {
                 MessageBox.Show("No se pudo guardar el Código de Acceso", "Fallo!!", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
             }
-
-
         }
 
+        private bool HayErrorEnFormulario()
+        {
+            hayError = false;
+
+            string pathString = @"[A-Z]{1}[a-zA-ZàáâäãåąčćęèéêëėįìíîïłńòóôöõøùúûüųūÿýżźñçčšžÀÁÂÄÃÅĄĆČĖĘÈÉÊËÌÍÎÏĮŁŃÒÓÔÖÕØÙÚÛÜŲŪŸÝŻŹÑßÇŒÆČŠŽ∂ð,.'-]{2,29}";
+            string pathCodigo = @"[a-zA-Z]";
+
+            if (!Regex.IsMatch(txtDescripcion.Text, pathString) || txtDescripcion.Text.Trim().Length > 30)
+            {
+                errorProvider1.SetError(txtDescripcion, "Error en el Formato en la Descripción del Código de Acceso ");
+
+                hayError = true;
+            }
+            else
+                errorProvider1.SetError(txtDescripcion, "");
+
+            if (!Regex.IsMatch(txtCodigoAceso.Text, pathCodigo) || txtCodigoAceso.Text.Trim().Length > 30)
+            {
+                errorProvider1.SetError(txtCodigoAceso, "Error, el Código no Puede Empezar por Número ");
+
+                hayError = true;
+            }
+            else
+                errorProvider1.SetError(txtCodigoAceso, "");
+
+            return hayError;
+        }
         protected override bool ProcessCmdKey(ref Message msg, Keys keyData)
         {
             switch (keyData)
@@ -111,7 +149,9 @@ namespace SCAM_App
                     frm.Dispose();
                     break;
                 case Keys.Escape:
-                    this.Hide();
+                    this.Close();
+                    this.Dispose();
+
 
                     break;
 

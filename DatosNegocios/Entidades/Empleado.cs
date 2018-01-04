@@ -10,10 +10,6 @@ namespace DatosNegocios
     public class Empleado
     {
 
-        // txtFecha.Text = Convert.ToDateTime(row("campofecha")).ToString("dd/MM/yyyy");
-        // pCliente.Fecha_Nac = dtpFechaNacimiento.Value.Year + "/" + dtpFechaNacimiento.Value.Month + "/" + dtpFechaNacimiento.Value.Day;
-
-
         int idEmpleado;
         int idDepartamento;
         string nombre;
@@ -75,20 +71,201 @@ namespace DatosNegocios
             this.nombre = nombre;
         }
 
-        public int IdEmpleado { get => idEmpleado; set => idEmpleado = value; }
-        public int IdDepartamento { get => idDepartamento; set => idDepartamento = value; }
-        public string Nombre { get => nombre; set => nombre = value; }
-        public string Apellidos { get => apellidos; set => apellidos = value; }
-        public DateTime FechaNacto { get => fechaNacto; set => fechaNacto = value; }
-        public string Funcion { get => funcion; set => funcion = value; }
-        public string Dni { get => dni; set => dni = value; }
-        public string Telefono { get => telefono; set => telefono = value; }
-        public string Email { get => email; set => email = value; }
-        public DateTime FechaEntrada { get => fechaEntrada; set => fechaEntrada = value; }
-        public double Salario { get => salario; set => salario = value; }
-        public string Sexo { get => sexo; set => sexo = value; }
-        public int IdUsuario { get => idUsuario; set => idUsuario = value; }
-        public int Activo { get => activo; set => activo = value; }
-        public string Foto { get => foto; set => foto = value; }
+        #region Propiedades
+        public int IdEmpleado
+        {
+            get
+            {
+                return idEmpleado;
+            }
+
+            set
+            {
+                idEmpleado = value;
+            }
+        }
+
+        public int IdDepartamento
+        {
+            get
+            {
+                return idDepartamento;
+            }
+
+            set
+            {
+                idDepartamento = value;
+            }
+        }
+
+        public string Nombre
+        {
+            get
+            {
+                return nombre;
+            }
+
+            set
+            {
+                nombre = value;
+            }
+        }
+
+        public string Apellidos
+        {
+            get
+            {
+                return apellidos;
+            }
+
+            set
+            {
+                apellidos = value;
+            }
+        }
+
+        public DateTime FechaNacto
+        {
+            get
+            {
+                return fechaNacto;
+            }
+
+            set
+            {
+                fechaNacto = value;
+            }
+        }
+
+        public string Funcion
+        {
+            get
+            {
+                return funcion;
+            }
+
+            set
+            {
+                funcion = value;
+            }
+        }
+
+        public string Dni
+        {
+            get
+            {
+                return dni;
+            }
+
+            set
+            {
+                dni = value;
+            }
+        }
+
+        public string Telefono
+        {
+            get
+            {
+                return telefono;
+            }
+
+            set
+            {
+                telefono = value;
+            }
+        }
+
+        public string Email
+        {
+            get
+            {
+                return email;
+            }
+
+            set
+            {
+                email = value;
+            }
+        }
+
+        public DateTime FechaEntrada
+        {
+            get
+            {
+                return fechaEntrada;
+            }
+
+            set
+            {
+                fechaEntrada = value;
+            }
+        }
+
+        public double Salario
+        {
+            get
+            {
+                return salario;
+            }
+
+            set
+            {
+                salario = value;
+            }
+        }
+
+        public string Sexo
+        {
+            get
+            {
+                return sexo;
+            }
+
+            set
+            {
+                sexo = value;
+            }
+        }
+
+        public string Foto
+        {
+            get
+            {
+                return foto;
+            }
+
+            set
+            {
+                foto = value;
+            }
+        }
+
+        public int IdUsuario
+        {
+            get
+            {
+                return idUsuario;
+            }
+
+            set
+            {
+                idUsuario = value;
+            }
+        }
+
+        public int Activo
+        {
+            get
+            {
+                return activo;
+            }
+
+            set
+            {
+                activo = value;
+            }
+        }
+        #endregion
     }
 }

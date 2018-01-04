@@ -5,6 +5,7 @@ using System.Data;
 using System.Drawing;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using DatosNegocios;
@@ -17,6 +18,7 @@ namespace SCAM_App
         private CodigoAcceso codV = null;
         List<CodigoAcceso> listaCodigos;
         bool esNuevo = true;
+        bool hayError = false;
 
         public FormDeptoDetalles()
         {
@@ -56,7 +58,7 @@ namespace SCAM_App
         {
             listaCodigos = CodigoAccesoDAO.ListarCodigosAcceso();
             if(esNuevo)
-                listaCodigos.Insert(0, new CodigoAcceso(0, "Mensagen", "Seleccione el Nivel de Acceso")); 
+                listaCodigos.Insert(0, new CodigoAcceso(0, "Mensagen", "Seleccione un Nivel de Acceso")); 
 
 
             cbCodigosAcceso.DataSource = listaCodigos;
@@ -66,17 +68,19 @@ namespace SCAM_App
 
         private void bunifuImageButton1_Click(object sender, EventArgs e)
         {
-            this.Hide();
-
-            FormDepartamento fa = new FormDepartamento();
-            fa.Width = 579;
-            fa.Height = 435;
-            fa.Location = new Point(280, 160);
-            fa.ShowDialog();
+            Volver();
         }
 
         private void btnAnadirAcceso_Click(object sender, EventArgs e)
         {
+            hayError = HayErrorEnFormulario();
+
+            if (hayError)
+            {
+                MessageBox.Show("Existe Error en el Formulario, Presione F1 si necesitas Ayuda !!!");
+                return;
+            }
+
             Departamento dep = new Departamento();
 
             dep.Descripcion = txtDescripcion.Text.Trim();
@@ -96,18 +100,52 @@ namespace SCAM_App
             {
                 MessageBox.Show("Departamento Guardado Con Exito!!", "Guardado", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
-                this.Hide();
+                Volver();
 
-                FormDepartamento fa = new FormDepartamento();
-                fa.Width = 579;
-                fa.Height = 435;
-                fa.Location = new Point(280, 160);
-                fa.ShowDialog();
             }
             else
             {
                 MessageBox.Show("No se pudo guardar el Departamento", "Fallo!!", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
             }
+        }
+
+        private void Volver()
+        {
+            this.Close();
+            this.Dispose();
+
+            FormDepartamento fa = new FormDepartamento();
+            fa.Width = 579;
+            fa.Height = 435;
+            fa.Location = new Point(280, 160);
+            fa.ShowDialog();
+        }
+
+        private bool HayErrorEnFormulario()
+        {
+            hayError = false;
+            string pathString = @"[A-Z]{1}[a-zA-ZàáâäãåąčćęèéêëėįìíîïłńòóôöõøùúûüųūÿýżźñçčšžÀÁÂÄÃÅĄĆČĖĘÈÉÊËÌÍÎÏĮŁŃÒÓÔÖÕØÙÚÛÜŲŪŸÝŻŹÑßÇŒÆČŠŽ∂ð,.'-]{2,44}";
+
+            if (!Regex.IsMatch(txtDescripcion.Text, pathString) || txtDescripcion.Text.Trim().Length > 45)
+            {
+                errorProvider1.SetError(txtDescripcion, "Error en el Formato del Nombre del Departamento ");
+
+                hayError = true;
+            }
+            else
+                errorProvider1.SetError(txtDescripcion, "");
+
+            if (cbCodigosAcceso.Text == "Seleccione un Nivel de Acceso")
+            {
+                errorProvider1.SetError(cbCodigosAcceso, "Error, Tieenes que seleccionar algun Codigo de Acceso ");
+                hayError = true;
+
+            }
+            else
+                errorProvider1.SetError(cbCodigosAcceso, "");
+
+
+            return hayError;
         }
 
         protected override bool ProcessCmdKey(ref Message msg, Keys keyData)
@@ -117,17 +155,13 @@ namespace SCAM_App
                 case Keys.F1:
                     // Llamamos al Formulario de Ayuda
                     //
-                    Help.FormHelpEmpleado frm = new Help.FormHelpEmpleado();
+                    Help.FormHelpDepartamento frm = new Help.FormHelpDepartamento();
                     frm.ShowDialog();
                     frm.Dispose();
                     break;
                 case Keys.Escape:
-                    this.Hide();
-                    FormDepartamento fa = new FormDepartamento();
-                    fa.Width = 579;
-                    fa.Height = 435;
-                    fa.Location = new Point(280, 160);
-                    fa.ShowDialog();
+                    Volver();
+
                     break;
 
             }

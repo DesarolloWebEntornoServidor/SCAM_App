@@ -45,8 +45,10 @@
             this.PanelAnimator = new BunifuAnimatorNS.BunifuTransition(this.components);
             this.chkBoxParaTodos = new Bunifu.Framework.UI.BunifuCheckbox();
             this.label4 = new System.Windows.Forms.Label();
+            this.errorProvider1 = new System.Windows.Forms.ErrorProvider(this.components);
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.bunifuImageButton1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).BeginInit();
             this.SuspendLayout();
             // 
             // bunifuElipse1
@@ -221,6 +223,10 @@
             this.label4.TabIndex = 9;
             this.label4.Text = "Comun a Todos los Empleados";
             // 
+            // errorProvider1
+            // 
+            this.errorProvider1.ContainerControl = this;
+            // 
             // FormAccesoDetalles
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -245,6 +251,7 @@
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.bunifuImageButton1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -266,5 +273,6 @@
         private BunifuAnimatorNS.BunifuTransition PanelAnimator;
         private System.Windows.Forms.Label label4;
         private Bunifu.Framework.UI.BunifuCheckbox chkBoxParaTodos;
+        private System.Windows.Forms.ErrorProvider errorProvider1;
     }
 }

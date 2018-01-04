@@ -29,9 +29,9 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
-            BunifuAnimatorNS.Animation animation3 = new BunifuAnimatorNS.Animation();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            BunifuAnimatorNS.Animation animation1 = new BunifuAnimatorNS.Animation();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormEmpleados));
             this.bunifuElipse1 = new Bunifu.Framework.UI.BunifuElipse(this.components);
             this.bunifuGradientPanel1 = new Bunifu.Framework.UI.BunifuGradientPanel();
@@ -151,23 +151,22 @@
             // 
             // dgvEmpleados
             // 
-            dataGridViewCellStyle5.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
-            this.dgvEmpleados.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle5;
+            dataGridViewCellStyle1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
+            this.dgvEmpleados.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
             this.dgvEmpleados.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.dgvEmpleados.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.ColumnHeader;
             this.dgvEmpleados.BackgroundColor = System.Drawing.Color.GhostWhite;
             this.dgvEmpleados.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.dgvEmpleados.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
-            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle6.BackColor = System.Drawing.Color.SteelBlue;
-            dataGridViewCellStyle6.Font = new System.Drawing.Font("Century Gothic", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle6.ForeColor = System.Drawing.Color.Silver;
-            dataGridViewCellStyle6.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle6.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgvEmpleados.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle6;
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle2.BackColor = System.Drawing.Color.SteelBlue;
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Century Gothic", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle2.ForeColor = System.Drawing.Color.Silver;
+            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgvEmpleados.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle2;
             this.dgvEmpleados.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvEmpleados.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.codigo,
@@ -188,7 +187,9 @@
             this.dgvEmpleados.HeaderBgColor = System.Drawing.Color.SteelBlue;
             this.dgvEmpleados.HeaderForeColor = System.Drawing.Color.Silver;
             this.dgvEmpleados.Location = new System.Drawing.Point(0, 71);
+            this.dgvEmpleados.MultiSelect = false;
             this.dgvEmpleados.Name = "dgvEmpleados";
+            this.dgvEmpleados.ReadOnly = true;
             this.dgvEmpleados.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
             this.dgvEmpleados.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvEmpleados.Size = new System.Drawing.Size(930, 383);
@@ -200,6 +201,7 @@
             // 
             this.codigo.HeaderText = "Cödigo";
             this.codigo.Name = "codigo";
+            this.codigo.ReadOnly = true;
             this.codigo.Visible = false;
             this.codigo.Width = 75;
             // 
@@ -207,69 +209,79 @@
             // 
             this.nombre.HeaderText = "Nombre";
             this.nombre.Name = "nombre";
-            this.nombre.Width = 79;
+            this.nombre.ReadOnly = true;
+            this.nombre.Width = 106;
             // 
             // apellidos
             // 
             this.apellidos.HeaderText = "Apellidos";
             this.apellidos.Name = "apellidos";
-            this.apellidos.Width = 86;
+            this.apellidos.ReadOnly = true;
+            this.apellidos.Width = 106;
             // 
             // dni
             // 
             this.dni.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
             this.dni.HeaderText = "DNI";
             this.dni.Name = "dni";
+            this.dni.ReadOnly = true;
             this.dni.Width = 70;
             // 
             // funcion
             // 
             this.funcion.HeaderText = "Función";
             this.funcion.Name = "funcion";
-            this.funcion.Width = 77;
+            this.funcion.ReadOnly = true;
+            this.funcion.Width = 106;
             // 
             // Ttelefono
             // 
             this.Ttelefono.HeaderText = "Teléfono";
             this.Ttelefono.Name = "Ttelefono";
-            this.Ttelefono.Width = 82;
+            this.Ttelefono.ReadOnly = true;
+            this.Ttelefono.Width = 105;
             // 
             // email
             // 
             this.email.HeaderText = "Email";
             this.email.Name = "email";
-            this.email.Width = 62;
+            this.email.ReadOnly = true;
+            this.email.Width = 106;
             // 
             // departamento
             // 
             this.departamento.HeaderText = "Departamento";
             this.departamento.Name = "departamento";
-            this.departamento.Width = 120;
+            this.departamento.ReadOnly = true;
+            this.departamento.Width = 106;
             // 
             // borrar
             // 
             this.borrar.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
-            this.borrar.HeaderText = "Borrar";
+            this.borrar.HeaderText = "Borra";
             this.borrar.Name = "borrar";
+            this.borrar.ReadOnly = true;
             this.borrar.Resizable = System.Windows.Forms.DataGridViewTriState.True;
             this.borrar.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
-            this.borrar.Width = 53;
+            this.borrar.Width = 56;
             // 
             // modificar
             // 
             this.modificar.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
-            this.modificar.HeaderText = "Modificar";
+            this.modificar.HeaderText = "Edita";
             this.modificar.Name = "modificar";
+            this.modificar.ReadOnly = true;
             this.modificar.Resizable = System.Windows.Forms.DataGridViewTriState.True;
             this.modificar.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
-            this.modificar.Width = 60;
+            this.modificar.Width = 63;
             // 
             // tarjeta
             // 
             this.tarjeta.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
-            this.tarjeta.HeaderText = "Tarjeta";
+            this.tarjeta.HeaderText = "Genera";
             this.tarjeta.Name = "tarjeta";
-            this.tarjeta.Width = 60;
+            this.tarjeta.ReadOnly = true;
+            this.tarjeta.Width = 65;
             // 
             // panelTarjeta
             // 
@@ -352,22 +364,22 @@
             // 
             this.panelTarjetaTransition.AnimationType = BunifuAnimatorNS.AnimationType.HorizSlide;
             this.panelTarjetaTransition.Cursor = null;
-            animation3.AnimateOnlyDifferences = true;
-            animation3.BlindCoeff = ((System.Drawing.PointF)(resources.GetObject("animation3.BlindCoeff")));
-            animation3.LeafCoeff = 0F;
-            animation3.MaxTime = 1F;
-            animation3.MinTime = 0F;
-            animation3.MosaicCoeff = ((System.Drawing.PointF)(resources.GetObject("animation3.MosaicCoeff")));
-            animation3.MosaicShift = ((System.Drawing.PointF)(resources.GetObject("animation3.MosaicShift")));
-            animation3.MosaicSize = 0;
-            animation3.Padding = new System.Windows.Forms.Padding(0);
-            animation3.RotateCoeff = 0F;
-            animation3.RotateLimit = 0F;
-            animation3.ScaleCoeff = ((System.Drawing.PointF)(resources.GetObject("animation3.ScaleCoeff")));
-            animation3.SlideCoeff = ((System.Drawing.PointF)(resources.GetObject("animation3.SlideCoeff")));
-            animation3.TimeCoeff = 0F;
-            animation3.TransparencyCoeff = 0F;
-            this.panelTarjetaTransition.DefaultAnimation = animation3;
+            animation1.AnimateOnlyDifferences = true;
+            animation1.BlindCoeff = ((System.Drawing.PointF)(resources.GetObject("animation1.BlindCoeff")));
+            animation1.LeafCoeff = 0F;
+            animation1.MaxTime = 1F;
+            animation1.MinTime = 0F;
+            animation1.MosaicCoeff = ((System.Drawing.PointF)(resources.GetObject("animation1.MosaicCoeff")));
+            animation1.MosaicShift = ((System.Drawing.PointF)(resources.GetObject("animation1.MosaicShift")));
+            animation1.MosaicSize = 0;
+            animation1.Padding = new System.Windows.Forms.Padding(0);
+            animation1.RotateCoeff = 0F;
+            animation1.RotateLimit = 0F;
+            animation1.ScaleCoeff = ((System.Drawing.PointF)(resources.GetObject("animation1.ScaleCoeff")));
+            animation1.SlideCoeff = ((System.Drawing.PointF)(resources.GetObject("animation1.SlideCoeff")));
+            animation1.TimeCoeff = 0F;
+            animation1.TransparencyCoeff = 0F;
+            this.panelTarjetaTransition.DefaultAnimation = animation1;
             // 
             // btnPrinter
             // 
@@ -440,6 +452,16 @@
         private System.Windows.Forms.TextBox textBox1;
         private System.Windows.Forms.PictureBox pictureBox1;
         private Bunifu.Framework.UI.BunifuImageButton btnInserir;
+        private System.Windows.Forms.Panel panelTarjeta;
+        private System.Windows.Forms.Panel panelResultado;
+        private System.Windows.Forms.PictureBox pictureBox2;
+        private Bunifu.Framework.UI.BunifuCustomLabel lbDepartamento;
+        private Bunifu.Framework.UI.BunifuCustomLabel lbNombre;
+        private System.Windows.Forms.PictureBox pictFotoTarjeta;
+        private BunifuAnimatorNS.BunifuTransition panelTarjetaTransition;
+        private Bunifu.Framework.UI.BunifuCustomLabel lbFuncion;
+        private Bunifu.Framework.UI.BunifuImageButton btnCerrarTarjeta;
+        private Bunifu.Framework.UI.BunifuImageButton btnPrinter;
         private System.Windows.Forms.DataGridViewTextBoxColumn codigo;
         private System.Windows.Forms.DataGridViewTextBoxColumn nombre;
         private System.Windows.Forms.DataGridViewTextBoxColumn apellidos;
@@ -451,15 +473,5 @@
         private System.Windows.Forms.DataGridViewButtonColumn borrar;
         private System.Windows.Forms.DataGridViewButtonColumn modificar;
         private System.Windows.Forms.DataGridViewButtonColumn tarjeta;
-        private System.Windows.Forms.Panel panelTarjeta;
-        private System.Windows.Forms.Panel panelResultado;
-        private System.Windows.Forms.PictureBox pictureBox2;
-        private Bunifu.Framework.UI.BunifuCustomLabel lbDepartamento;
-        private Bunifu.Framework.UI.BunifuCustomLabel lbNombre;
-        private System.Windows.Forms.PictureBox pictFotoTarjeta;
-        private BunifuAnimatorNS.BunifuTransition panelTarjetaTransition;
-        private Bunifu.Framework.UI.BunifuCustomLabel lbFuncion;
-        private Bunifu.Framework.UI.BunifuImageButton btnCerrarTarjeta;
-        private Bunifu.Framework.UI.BunifuImageButton btnPrinter;
     }
 }

@@ -27,6 +27,8 @@ namespace SCAM_App
             CargaDGV();
 
             dgvAccesoEmpleado.AllowUserToAddRows = false;
+
+            dgvAccesoEmpleado.Columns["Codigo"].Visible = false;
         }
 
         private void CargaDGV()
@@ -72,7 +74,7 @@ namespace SCAM_App
             if (colum < 0)
                 return;
 
-            if (dgvAccesoEmpleado.Columns[colum].HeaderText == "Borrar")// <-- he pulsado el botón Borrar
+            if (dgvAccesoEmpleado.Columns[colum].HeaderText == "Borra")// <-- he pulsado el botón Borrar
             {
                 int valor =Convert.ToInt32(dgvAccesoEmpleado.Rows[fila].Cells[0].Value);
 
@@ -111,7 +113,7 @@ namespace SCAM_App
                 e.Graphics.DrawIcon(icoAtomico, e.CellBounds.Left + 3, e.CellBounds.Top + 3);
 
                 this.dgvAccesoEmpleado.Rows[e.RowIndex].Height = icoAtomico.Height + 3;
-                this.dgvAccesoEmpleado.Columns[e.ColumnIndex].Width = icoAtomico.Width + 3;
+                this.dgvAccesoEmpleado.Columns[e.ColumnIndex].Width = icoAtomico.Width + 7;
 
                 e.Handled = true;
             }
@@ -121,6 +123,8 @@ namespace SCAM_App
         private void btnInserir_Click(object sender, EventArgs e)
         {
             this.Close();
+            this.Dispose();
+
             FormAccesoEmpDetalles fa = new FormAccesoEmpDetalles();
            // bunifuFormFadeTransition1.ShowAsyc( fa);
             
@@ -142,7 +146,9 @@ namespace SCAM_App
                     frm.Dispose();
                     break;
                 case Keys.Escape:
-                    this.Hide();
+                    this.Close();
+                    this.Dispose();
+
 
                     break;
 

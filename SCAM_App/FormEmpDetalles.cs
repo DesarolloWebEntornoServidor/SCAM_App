@@ -44,17 +44,45 @@ namespace SCAM_App
             this.emp = emp;
             esNuevo = false;
 
+            if (FormLogin.usuNivelAcceso == 2)
+            {
+                fechaEntrada.Enabled = false;
+                cbDepartamento.Enabled = false;
+                cbUsuario.Enabled = false;
+
+                chkActivo.Enabled = false;
+            }
+
         }
 
         private void btnVolver_Click(object sender, EventArgs e)
         {
-            this.Hide();
+            Volver();
+        }
 
-            FormEmpleados fa = new FormEmpleados();
-            fa.Width = 860;
-            fa.Height = 450;
-            fa.Location = new Point(280, 160);
-            fa.ShowDialog();
+        private void Volver()
+        {
+            if (FormLogin.usuNivelAcceso == 2)
+            {
+                this.Close();
+                this.Dispose();
+                FormInicio fa1 = new FormInicio();
+
+                fa1.StartPosition = FormStartPosition.CenterScreen;
+                fa1.ShowDialog();
+                fa1.Dispose();
+            }
+            else
+            {
+                this.Close();
+                this.Dispose();
+
+                FormEmpleados fa = new FormEmpleados();
+                fa.Width = 880;
+                fa.Height = 450;
+                fa.Location = new Point(265, 160);
+                fa.ShowDialog();
+            }
         }
 
         private void FormEmpDetalles_Load(object sender, EventArgs e)
@@ -78,6 +106,8 @@ namespace SCAM_App
                 fechaEntrada.Value = emp.FechaEntrada;
 
                 tbSalario.Text = emp.Salario.ToString("N2");
+
+                NombreRuta = emp.Foto.Replace("--", "\\"); // cambio las -- por barras para guardar en la variable la ruta existente en la base  //
 
                 // Busca imagen en la carpeta por la ruta y mostra en la ficha del empleado
                 if (emp.Foto == "")
@@ -139,7 +169,7 @@ namespace SCAM_App
 
             listaUsuarios = UsuarioDAO.ListarUsuarios();
 
-            listaUsuarios.Insert(0, new Usuario("Seleccione el Usuario"));
+            listaUsuarios.Insert(0, new Usuario("Seleccione un Usuario"));
 
             cbUsuario.DataSource = listaUsuarios;
             cbUsuario.DisplayMember = "login";
@@ -153,7 +183,7 @@ namespace SCAM_App
 
             if (hayError)
             {
-                MessageBox.Show("Presione F1 si necesitas ayuda !!!");
+                MessageBox.Show("Existe Error en el Formulario, Presione F1 si necesitas Ayuda !!!");
                 return;
             }
 
@@ -181,10 +211,10 @@ namespace SCAM_App
             emp.IdDepartamento = Convert.ToInt32(cbDepartamento.SelectedValue);
             emp.IdUsuario = Convert.ToInt32(cbUsuario.SelectedValue);
 
-            if (chkActivo.Checked)
-                emp.Activo = 1;
-            else
-                emp.Activo = 0;
+                if (chkActivo.Checked)
+                    emp.Activo = 1;
+                else
+                    emp.Activo = 0;
 
             // guardo la imagen en la carpeta y en el atributo Foto
             if(NombreRuta != "")
@@ -209,19 +239,27 @@ namespace SCAM_App
             {
                 emp.IdEmpleado = Convert.ToInt32(tbIdEmpleado.Text);
 
+                emp.Foto = NombreRuta.Replace("\\", "--");
+
                 resultado = EmpleadoDAO.ModificarEmpleado(emp);
             }
 
             if (resultado > 0)
             {
-                MessageBox.Show("Empleado Guardado Con Exito!!", "Guardado", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                this.Hide();
 
-                FormEmpleados fa = new FormEmpleados();
-                fa.Width = 860;
-                fa.Height = 450;
-                fa.Location = new Point(280, 160);
-                fa.ShowDialog();
+                if(emp.Activo == 0)  // si el empleado ha sido desactivado, deberá automaticamente desactivar el Usuario a él correspondiente  //
+                {
+                    Usuario usu = UsuarioDAO.ObtenerUsuario(emp.IdUsuario);
+
+                    usu.Acceso = 0;
+
+                    UsuarioDAO.ModificarUsuario(usu);
+                }
+
+
+                MessageBox.Show("Empleado Guardado Con Exito!!", "Guardado", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+                Volver();
             }
             else
             {
@@ -248,7 +286,7 @@ namespace SCAM_App
                 }
                 catch (IOException)
                 {
-                    MessageBox.Show("Ya existe un archivo con ese nombre !!!");
+                    MessageBox.Show("Ya existe una Foto con ese nombre !!!");
                 }
             }
             else
@@ -272,13 +310,8 @@ namespace SCAM_App
                     frm.Dispose();
                     break;
                 case Keys.Escape:
-                    this.Hide();
+                    Volver();
 
-                    FormEmpleados fa = new FormEmpleados();
-                    fa.Width = 860;
-                    fa.Height = 450;
-                    fa.Location = new Point(280, 160);
-                    fa.ShowDialog();
                     break;
 
             }
@@ -286,13 +319,14 @@ namespace SCAM_App
         }
         private bool HayErrorEnFormulario()
         {
-            string pathernNombre = @"[a-zA-ZñÑ]{3,40}";
-            string paternTelefono = @"^([95]{2})[4-5]{1}[0-9]{6}$";
-           // string paternMovil = @"^([6-7]{1})[0-9]{8}$";
+            hayError = false;
+            string pathString = @"[A-Z]{1}[a-zA-ZàáâäãåąčćęèéêëėįìíîïłńòóôöõøùúûüųūÿýżźñçčšžÀÁÂÄÃÅĄĆČĖĘÈÉÊËÌÍÎÏĮŁŃÒÓÔÖÕØÙÚÛÜŲŪŸÝŻŹÑßÇŒÆČŠŽ∂ð,.'-]{2,29}";
+            string paternTelefono = @"[0-9]{9}$";
             string pathernDni = @"^(([A-Z]\d{8})|(\d{8}-[A-Z]))$";
             string patherMail = @"\w+([-+.']\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*";
+            string pathernSalario = @"[^\\d,\\d]";
 
-            if (!Regex.IsMatch(tbNombre.Text, pathernNombre))
+            if (!Regex.IsMatch(tbNombre.Text, pathString) || tbNombre.Text.Trim().Length > 30)
             {
                 errorProvider1.SetError(tbNombre, "Error en el Formato del Nombre ");
 
@@ -301,7 +335,7 @@ namespace SCAM_App
             else
                 errorProvider1.SetError(tbNombre, "");
 
-            if (!Regex.IsMatch(tbApellidos.Text, pathernNombre))
+            if (!Regex.IsMatch(tbApellidos.Text, pathString) || tbApellidos.Text.Trim().Length > 40)
             {
                 errorProvider1.SetError(tbApellidos, "Error en el Formato del Apellido ");
 
@@ -319,7 +353,16 @@ namespace SCAM_App
             else
                 errorProvider1.SetError(tbDni, "");
 
-            if (!Regex.IsMatch(tbTelefono.Text, paternTelefono))
+            if (!Regex.IsMatch(tbFuncion.Text, pathString))
+            {
+                errorProvider1.SetError(tbFuncion, "Error en el Formato de la Función ");
+
+                hayError = true;
+            }
+            else
+                errorProvider1.SetError(tbFuncion, "");
+
+            if (!Regex.IsMatch(tbTelefono.Text, paternTelefono) || tbTelefono.Text.Trim().Length > 9)
             {
                 errorProvider1.SetError(tbTelefono, "Error en el Formato de telefono ");
                 hayError = true;
@@ -336,22 +379,51 @@ namespace SCAM_App
             else
                 errorProvider1.SetError(tbEmail, "");
 
+            if (!Regex.IsMatch(tbSalario.Text, pathernSalario))
+            {
+                tbSalario.Text = tbSalario.Text.Replace(".", ",");
+                errorProvider1.SetError(tbSalario, "Tienes que Informar el Salário");
+                hayError = true;
+            }
+            else
+                errorProvider1.SetError(tbSalario, "");
 
             if (cbDepartamento.Text == "Seleccione un Departamento")
             {
-                errorProvider1.SetError(cbDepartamento, "Error, Tieenes que seleccionar algun Departamento ");
+                errorProvider1.SetError(cbDepartamento, "Error, Tienes que seleccionar algun Departamento ");
                 hayError = true;
 
             }
-            // Ese tambien funciona
-            //Regex regex = new Regex(@"^([\w\.\-]+)@([\w\-]+)((\.(\w){2,3})+)$");
-            //Match match = regex.Match(txbMail.Text);
-            //if (!match.Success)
-            //{
-            //    errorProvider1.SetError(txbMail, "Email incorreto");
-            //    return true;
-            //} else
-            //    errorProvider1.SetError(txbMail, "");
+            else
+                errorProvider1.SetError(cbDepartamento, "");
+
+            if (radioHombre.Checked == false && radioMujer.Checked == false)
+            {
+                errorProvider1.SetError(radioMujer, "Error, Tienes que seleccionar algun Sexo ");
+                hayError = true;
+
+            }
+            else
+                errorProvider1.SetError(radioMujer, "");
+
+            if (cbUsuario.Text == "Seleccione un Usuario")
+            {
+                errorProvider1.SetError(cbUsuario, "Error, Tienes que seleccionar un Usuario ");
+                hayError = true;
+
+            }
+            else
+                errorProvider1.SetError(cbUsuario, "");
+
+            Empleado UsuExiste = EmpleadoDAO.BuscarEmpleadoVinculado(Convert.ToInt32(cbUsuario.SelectedValue));
+            if (UsuExiste != null)
+            {
+                errorProvider1.SetError(cbUsuario, "Error, No puedes Vincular el mismo Usuario a dos Empleados ");
+                hayError = true;
+
+            }
+            else
+                errorProvider1.SetError(cbUsuario, "");
 
             return hayError;
         }

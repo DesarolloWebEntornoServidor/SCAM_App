@@ -39,11 +39,11 @@
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.bunifuImageButton1 = new Bunifu.Framework.UI.BunifuImageButton();
             this.dgvAccesoEmpleado = new Bunifu.Framework.UI.BunifuCustomDataGrid();
-            this.bunifuFormFadeTransition1 = new Bunifu.Framework.UI.BunifuFormFadeTransition(this.components);
             this.codigo = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.empleado = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.codigoAcceso = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.borrar = new System.Windows.Forms.DataGridViewButtonColumn();
+            this.bunifuFormFadeTransition1 = new Bunifu.Framework.UI.BunifuFormFadeTransition(this.components);
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.btnInserir)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
@@ -148,6 +148,7 @@
             this.dgvAccesoEmpleado.Location = new System.Drawing.Point(0, 74);
             this.dgvAccesoEmpleado.MultiSelect = false;
             this.dgvAccesoEmpleado.Name = "dgvAccesoEmpleado";
+            this.dgvAccesoEmpleado.ReadOnly = true;
             this.dgvAccesoEmpleado.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
             this.dgvAccesoEmpleado.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvAccesoEmpleado.Size = new System.Drawing.Size(567, 355);
@@ -155,15 +156,12 @@
             this.dgvAccesoEmpleado.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvAccesoEmpleado_CellClick);
             this.dgvAccesoEmpleado.CellPainting += new System.Windows.Forms.DataGridViewCellPaintingEventHandler(this.dgvAccesoEmpleado_CellPainting_1);
             // 
-            // bunifuFormFadeTransition1
-            // 
-            this.bunifuFormFadeTransition1.Delay = 20;
-            // 
             // codigo
             // 
             this.codigo.FillWeight = 50F;
-            this.codigo.HeaderText = "Código";
+            this.codigo.HeaderText = "Codigo";
             this.codigo.Name = "codigo";
+            this.codigo.ReadOnly = true;
             this.codigo.Width = 69;
             // 
             // empleado
@@ -171,6 +169,7 @@
             this.empleado.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.ColumnHeader;
             this.empleado.HeaderText = "Empleado";
             this.empleado.Name = "empleado";
+            this.empleado.ReadOnly = true;
             this.empleado.Width = 87;
             // 
             // codigoAcceso
@@ -178,18 +177,24 @@
             this.codigoAcceso.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.ColumnHeader;
             this.codigoAcceso.HeaderText = "Nivel de Acceso";
             this.codigoAcceso.Name = "codigoAcceso";
+            this.codigoAcceso.ReadOnly = true;
             this.codigoAcceso.Width = 116;
             // 
             // borrar
             // 
             this.borrar.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
             this.borrar.FillWeight = 50F;
-            this.borrar.HeaderText = "Borrar";
+            this.borrar.HeaderText = "Borra";
             this.borrar.Name = "borrar";
+            this.borrar.ReadOnly = true;
             this.borrar.Resizable = System.Windows.Forms.DataGridViewTriState.True;
             this.borrar.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
             this.borrar.Text = "";
             this.borrar.Width = 53;
+            // 
+            // bunifuFormFadeTransition1
+            // 
+            this.bunifuFormFadeTransition1.Delay = 20;
             // 
             // FormAccesosEmpleados
             // 

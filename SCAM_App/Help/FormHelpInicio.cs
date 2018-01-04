@@ -10,9 +10,9 @@ using System.Windows.Forms;
 
 namespace SCAM_App.Help
 {
-    public partial class FormHelpCodigoAcceso : Form
+    public partial class FormHelpInicio : Form
     {
-        public FormHelpCodigoAcceso()
+        public FormHelpInicio()
         {
             InitializeComponent();
         }
@@ -34,5 +34,6 @@ namespace SCAM_App.Help
             }
             return base.ProcessCmdKey(ref msg, keyData);
         }
+
     }
 }

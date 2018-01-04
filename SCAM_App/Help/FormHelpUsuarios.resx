@@ -121,24 +121,6 @@
     <value>17, 17</value>
   </metadata>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
-  <data name="btnAnadirEmpleado.BackgroundImage" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
-    <value>
-        iVBORw0KGgoAAAANSUhEUgAAAJcAAAAqCAYAAAC+y8nSAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
-        YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAALBSURBVHhe7dzfS1NhHMfx/qLATPNHvwgiCLoKHJPUWSZE
-        VDcFRSDRRWCyeeZciVIyKOyiIrEfiBILygvJMLzILgZFIfTjYv/BNz7PdnTb+a7tnLPnZn4uXlcez4Tz
-        5jnPeZ4z9+TzeSGygXGRNYyLrGFcZA3jImsYF1njO64PXz/J+NtHEs3ckNMPr8qh1DnZOxahJoRri2sM
-        uOaLG+/VJqqpK66fv7fk5sKkdCZj0jUxWPzwnrI/hJofrv2+eFQuPx2VzR85tZVSNeMaXZotnrRX/UDa
-        nbqTg2bA+fX3j9oNVI0Lo1Ukc132J86oJyfCgHNy+pLktr6rDalxYcg7NXNFWhMcrai2o+lh+Zjb8HTk
-        iQsjFsLSTkJUzeHUkGce5okLt0KOWBTEiamLZnByWyqL69brKWnjHIsCwqA0NHfbGxcmZR3JAfWXiOqF
-        5Sp3/rUdFx4rudxAod2NSOzxyE5cWKvocDhqUWO0j/eZO6GJC8v6OyvvROG0O/2SWZkvxDXy6p56EFEg
-        xVujiQub0NwrpEY6lh4uxIX1Ce0AoqDaEn2FuPD4qB1AFIaJC0OY9kOioPBqjokLL4NpBxAFhRcNTVzX
-        5h0zw9cOIvKvxzwkmrjmVt/IAadfOYjIv5Z4r4wtZwpxYSe7Nc4Na2oMd3/RxAVY9OKtkRoBS1toajsu
-        lMYlCQqrayImC+vZ8riAoxeF5Y5anriwk338/gX1l4hqOZI+L5+/bepxAW6P/KIr+XUwdVaery2XteSJ
-        C16uv2NgVDeENbvywtORGhdgBMNXhrSTEblwK6wcsVxV4wLMwbA11M2nSKrQ6QyYyXvpHKvSf+NyZb+s
-        mhPhhC3xqPphtDvgjWVMmZ6tLamtlKorLhcqTWefmNEMu97ah1NzwjW/s/jA/JcjrQ2Nr7iI/GBcZA3j
-        ImsYF1nDuMiSvPwDYJ4NiaiivdYAAAAASUVORK5CYII=
-</value>
-  </data>
   <data name="btnVolver.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAADAAAAAwCAYAAABXAvmHAAAABGdBTUEAALGPC/xhBQAAAgVJREFUaEPt
@@ -153,13 +135,4 @@
         KUUqI8unHtk5OZopRf7Lm/fuf4uslpaWlpGi0/kDK640vkg/GOoAAAAASUVORK5CYII=
 </value>
   </data>
-  <metadata name="openFileDialog1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>141, 17</value>
-  </metadata>
-  <metadata name="saveFileDialog1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>281, 17</value>
-  </metadata>
-  <metadata name="errorProvider1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>417, 17</value>
-  </metadata>
 </root>

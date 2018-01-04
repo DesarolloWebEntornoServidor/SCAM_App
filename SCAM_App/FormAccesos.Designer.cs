@@ -153,7 +153,9 @@
             this.dgvAccesos.HeaderBgColor = System.Drawing.Color.SteelBlue;
             this.dgvAccesos.HeaderForeColor = System.Drawing.Color.Silver;
             this.dgvAccesos.Location = new System.Drawing.Point(3, 70);
+            this.dgvAccesos.MultiSelect = false;
             this.dgvAccesos.Name = "dgvAccesos";
+            this.dgvAccesos.ReadOnly = true;
             this.dgvAccesos.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
             this.dgvAccesos.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvAccesos.Size = new System.Drawing.Size(620, 360);
@@ -163,21 +165,24 @@
             // 
             // codigo
             // 
-            this.codigo.HeaderText = "Cödigo";
+            this.codigo.HeaderText = "Codigo";
             this.codigo.Name = "codigo";
+            this.codigo.ReadOnly = true;
             this.codigo.Width = 75;
             // 
             // descripcion
             // 
             this.descripcion.HeaderText = "Descripción";
             this.descripcion.Name = "descripcion";
+            this.descripcion.ReadOnly = true;
             this.descripcion.Width = 102;
             // 
             // borrar
             // 
             this.borrar.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
-            this.borrar.HeaderText = "Borrar";
+            this.borrar.HeaderText = "Borra";
             this.borrar.Name = "borrar";
+            this.borrar.ReadOnly = true;
             this.borrar.Resizable = System.Windows.Forms.DataGridViewTriState.True;
             this.borrar.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
             this.borrar.Width = 53;
@@ -185,8 +190,9 @@
             // modificar
             // 
             this.modificar.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
-            this.modificar.HeaderText = "Modificar";
+            this.modificar.HeaderText = "Edita";
             this.modificar.Name = "modificar";
+            this.modificar.ReadOnly = true;
             this.modificar.Resizable = System.Windows.Forms.DataGridViewTriState.True;
             this.modificar.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
             this.modificar.Width = 60;
@@ -224,12 +230,12 @@
         private Bunifu.Framework.UI.BunifuGradientPanel bunifuGradientPanel1;
         private Bunifu.Framework.UI.BunifuImageButton bunifuImageButton1;
         private DatosNegocios.DataSetSCATableAdapters.codigosaccesoTableAdapter codigosaccesoTableAdapter1;
+        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.PictureBox pictureBox1;
+        private Bunifu.Framework.UI.BunifuImageButton btnInserir;
         private System.Windows.Forms.DataGridViewTextBoxColumn codigo;
         private System.Windows.Forms.DataGridViewTextBoxColumn descripcion;
         private System.Windows.Forms.DataGridViewButtonColumn borrar;
         private System.Windows.Forms.DataGridViewButtonColumn modificar;
-        private System.Windows.Forms.TextBox textBox1;
-        private System.Windows.Forms.PictureBox pictureBox1;
-        private Bunifu.Framework.UI.BunifuImageButton btnInserir;
     }
 }

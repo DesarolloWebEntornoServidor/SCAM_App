@@ -325,13 +325,13 @@
             this.fechaNacimiento.Font = new System.Drawing.Font("Century Gothic", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.fechaNacimiento.ForeColor = System.Drawing.Color.White;
             this.fechaNacimiento.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.fechaNacimiento.FormatCustom = "yyyy/MM/dd";
+            this.fechaNacimiento.FormatCustom = "";
             this.fechaNacimiento.Location = new System.Drawing.Point(165, 152);
             this.fechaNacimiento.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.fechaNacimiento.Name = "fechaNacimiento";
             this.fechaNacimiento.Size = new System.Drawing.Size(157, 20);
             this.fechaNacimiento.TabIndex = 35;
-            this.fechaNacimiento.Value = new System.DateTime(2017, 12, 27, 9, 42, 10, 429);
+            this.fechaNacimiento.Value = new System.DateTime(2018, 1, 2, 12, 48, 14, 0);
             // 
             // tbDni
             // 
@@ -427,7 +427,7 @@
             this.fechaEntrada.Name = "fechaEntrada";
             this.fechaEntrada.Size = new System.Drawing.Size(157, 20);
             this.fechaEntrada.TabIndex = 47;
-            this.fechaEntrada.Value = new System.DateTime(2017, 12, 27, 9, 42, 10, 429);
+            this.fechaEntrada.Value = new System.DateTime(2018, 1, 2, 0, 0, 0, 0);
             // 
             // btnCargaImagen
             // 

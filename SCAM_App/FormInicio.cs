@@ -18,27 +18,29 @@ namespace SCAM_App
                 MessageBox.Show("Usuario no está Activado Aún, Contacte el Administrador");
                 return;
             }
+            else if (FormLogin.usuNivelAcceso == 2)
+            {
+                btnAccesos.Enabled = false;
+                btnDepart.Enabled = false;
+                btnGenerarAcceso.Enabled = false;
+            }
         }
 
         private void FormInicio_Load(object sender, EventArgs e)
         {
             if(FormLogin.usuNivelAcceso == 0)
             {
-                MessageBox.Show("Usuario no está Activado Aún, Contacte el Administrador");
+                MessageBox.Show("Usuario no está Activado, Contacte el Administrador");
                 this.Close();
                 FormLogin fl = new FormLogin();
                 fl.Show();
             }
 
-
-
         }
 
         private void bunifuImageButton2_Click(object sender, EventArgs e)
         {
-            this.Close();
-            FormLogin fl = new FormLogin();
-            fl.Show();
+            Volver();
         }
 
         private void btnMenu_Click(object sender, EventArgs e)
@@ -54,24 +56,13 @@ namespace SCAM_App
             }
             else
             {
-                LogoTransition.HideSync(logo);
-                sideMenu.Visible = false;
-                sideMenu.Width = 50;
-                PanelAnimator.ShowSync(sideMenu);
-                btnMenuBarra.Visible = true;
-                logoMini.Visible = true;
+                Transicion();
             }
         }
 
         private void btnAccesos_Click(object sender, EventArgs e)
         {
-            LogoTransition.HideSync(logo);
-            sideMenu.Visible = false;
-            sideMenu.Width = 50;
-            PanelAnimator.ShowSync(sideMenu);
-            btnMenuBarra.Visible = true;
-            logoMini.Visible = true;
-
+            Transicion();
 
             FormAccesos fa = new FormAccesos();
             //  fa.StartPosition = FormStartPosition.CenterScreen;
@@ -81,22 +72,13 @@ namespace SCAM_App
             fa.Location = new Point(280, 160);
             fa.ShowDialog();
 
-
-
         }
 
         private void btnDepart_Click(object sender, EventArgs e)
         {
-            LogoTransition.HideSync(logo);
-            sideMenu.Visible = false;
-            sideMenu.Width = 50;
-            PanelAnimator.ShowSync(sideMenu);
-            btnMenuBarra.Visible = true;
-            logoMini.Visible = true;
-
+            Transicion();
 
             FormDepartamento fd = new FormDepartamento();
-            //  fa.StartPosition = FormStartPosition.CenterScreen;
 
             fd.Width = 579;
             fd.Height = 435;
@@ -107,31 +89,24 @@ namespace SCAM_App
 
         private void btnEmpleados_Click(object sender, EventArgs e)
         {
-            LogoTransition.HideSync(logo);
-            sideMenu.Visible = false;
-            sideMenu.Width = 50;
-            PanelAnimator.ShowSync(sideMenu);
-            btnMenuBarra.Visible = true;
-            logoMini.Visible = true;
+            Transicion();
 
+            FormEmpleados fe;
 
-            FormEmpleados fe = new FormEmpleados();
-            //  fa.StartPosition = FormStartPosition.CenterScreen;
+            if (FormLogin.usuNivelAcceso == 2)
+                fe = new FormEmpleados(2);
+            else
+                fe = new FormEmpleados();
 
-            fe.Width = 860;
+            fe.Width = 880;
             fe.Height = 450;
-            fe.Location = new Point(280, 160);
+            fe.Location = new Point(265, 160);
             fe.ShowDialog();
         }
 
         private void btnGenerarAcceso_Click(object sender, EventArgs e)
         {
-            LogoTransition.HideSync(logo);
-            sideMenu.Visible = false;
-            sideMenu.Width = 50;
-            PanelAnimator.ShowSync(sideMenu);
-            btnMenuBarra.Visible = true;
-            logoMini.Visible = true;
+            Transicion();
 
             FormAccesosEmpleados fae = new FormAccesosEmpleados();
 
@@ -143,16 +118,15 @@ namespace SCAM_App
 
         private void btnUsuarios_Click(object sender, EventArgs e)
         {
-            LogoTransition.HideSync(logo);
-            sideMenu.Visible = false;
-            sideMenu.Width = 50;
-            PanelAnimator.ShowSync(sideMenu);
-            btnMenuBarra.Visible = true;
-            logoMini.Visible = true;
+            Transicion();
 
-          //  this.Close();
+            FormUsuarios fa;
 
-            FormUsuarios fa = new FormUsuarios();
+            if(FormLogin.usuNivelAcceso == 2)
+                fa = new FormUsuarios(2);
+            else
+                fa = new FormUsuarios();
+
             fa.Width = 579;
             fa.Height = 435;
             fa.Location = new Point(280, 160);
@@ -161,14 +135,7 @@ namespace SCAM_App
 
         private void btnGenerarTarjeta_Click(object sender, EventArgs e)
         {
-
-            LogoTransition.HideSync(logo);
-            sideMenu.Visible = false;
-            sideMenu.Width = 50;
-            PanelAnimator.ShowSync(sideMenu);
-            btnMenuBarra.Visible = true;
-            logoMini.Visible = true;
-
+            Transicion();
 
             FormEmpleados fe = new FormEmpleados();
 
@@ -176,7 +143,43 @@ namespace SCAM_App
             fe.Height = 450;
             fe.Location = new Point(280, 160);
             fe.ShowDialog();
+        }
 
+        private void Transicion()
+        {
+            LogoTransition.HideSync(logo);
+            sideMenu.Visible = false;
+            sideMenu.Width = 50;
+            PanelAnimator.ShowSync(sideMenu);
+            btnMenuBarra.Visible = true;
+            logoMini.Visible = true;
+        }
+
+        private void Volver()
+        {
+            this.Close();
+            FormLogin fl = new FormLogin();
+            fl.Show();
+        }
+
+        protected override bool ProcessCmdKey(ref Message msg, Keys keyData)
+        {
+            switch (keyData)
+            {
+                case Keys.F1:
+                    // Llamamos al Formulario de Ayuda
+                    //
+                    Help.FormHelpInicio frm = new Help.FormHelpInicio();
+                    frm.ShowDialog();
+                    frm.Dispose();
+                    break;
+                case Keys.Escape:
+                    Volver();
+
+                    break;
+
+            }
+            return base.ProcessCmdKey(ref msg, keyData);
         }
 
     }

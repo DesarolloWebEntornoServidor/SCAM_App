@@ -13,7 +13,7 @@ namespace SCAM_App
 {
     public partial class FormAccesoEmpDetalles : Form
     {
-        
+        Empleado empBusca = new Empleado();
 
         public FormAccesoEmpDetalles()
         {
@@ -21,8 +21,8 @@ namespace SCAM_App
         }
         private void FormAccesoEmpDetalles_Load(object sender, EventArgs e)
         {
-            txtIdDepto.Enabled = false;
 
+            empBusca.IdEmpleado = 0;
             cargaComboEmpleado();
         }
 
@@ -83,31 +83,35 @@ namespace SCAM_App
                 nombreCodigosChecados.Add(items);
             }
 
-            int idEmp = Convert.ToInt32(cbEmpleado.SelectedValue);        
+            int idEmp = Convert.ToInt32(cbEmpleado.SelectedValue);
+            ///////////////////////////////////////////// meter aqui la verificacion de la lista de checkbox esta vacia no entrar aqui ///
+
 
             int resultado = AccesoEmpleadoDAO.InsertarGrupoAccesos(idEmp, nombreCodigosChecados);
 
-            if (resultado > 0)
+            if (resultado == 1)
             {
                 MessageBox.Show("Acceso Asignado con Exito!!", "Guardado", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
-                this.Hide();
-
-                FormAccesosEmpleados fa = new FormAccesosEmpleados();
-                fa.Width = 579;
-                fa.Height = 435;
-                fa.Location = new Point(280, 160);
-                fa.ShowDialog();
+                Volver();
+            }
+            else if (resultado == 2)
+            {
+                MessageBox.Show("Accesos Borrados con Exito", "", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                Volver();
             }
             else
             {
                 MessageBox.Show("No se pudo Asignar el Acceso", "Fallo!!", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
             }
+
+
         }
 
-        private void bunifuImageButton1_Click(object sender, EventArgs e)
+        private void Volver()  // Método para Volver a la pantalla anterior //
         {
-            this.Hide();
+            this.Close();
+            this.Dispose();
 
             FormAccesosEmpleados fa = new FormAccesosEmpleados();
             fa.Width = 579;
@@ -116,13 +120,23 @@ namespace SCAM_App
             fa.ShowDialog();
         }
 
+        private void bunifuImageButton1_Click(object sender, EventArgs e)
+        {
+            Volver();
+
+        }
+
         private void cbEmpleado_SelectedIndexChanged(object sender, EventArgs e)
         {
+
             int identificaEmp = cbEmpleado.SelectedIndex;
 
             if(identificaEmp > 0)
-               rellenaChkListBox(identificaEmp);
+            {
+                empBusca.IdEmpleado = Convert.ToInt32(cbEmpleado.SelectedValue);
+                rellenaChkListBox(empBusca.IdEmpleado);
 
+            }
 
         }
 
@@ -138,12 +152,8 @@ namespace SCAM_App
                     frm.Dispose();
                     break;
                 case Keys.Escape:
-                    this.Close();
-                    FormAccesosEmpleados fa = new FormAccesosEmpleados();
-                    fa.Width = 579;
-                    fa.Height = 435;
-                    fa.Location = new Point(280, 160);
-                    fa.ShowDialog();
+                    Volver();
+
 
                     break;
 
