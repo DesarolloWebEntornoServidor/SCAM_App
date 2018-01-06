@@ -36,7 +36,7 @@
             this.bunifuCustomLabel1 = new Bunifu.Framework.UI.BunifuCustomLabel();
             this.btnAnadirEmpleado = new Bunifu.Framework.UI.BunifuThinButton2();
             this.tbIdEmpleado = new System.Windows.Forms.TextBox();
-            this.label1 = new System.Windows.Forms.Label();
+            this.lbCodigo = new System.Windows.Forms.Label();
             this.cbDepartamento = new System.Windows.Forms.ComboBox();
             this.label2 = new System.Windows.Forms.Label();
             this.cbUsuario = new System.Windows.Forms.ComboBox();
@@ -148,15 +148,15 @@
             this.tbIdEmpleado.Size = new System.Drawing.Size(67, 20);
             this.tbIdEmpleado.TabIndex = 17;
             // 
-            // label1
+            // lbCodigo
             // 
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Century Gothic", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(103, 70);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(56, 16);
-            this.label1.TabIndex = 16;
-            this.label1.Text = "Código";
+            this.lbCodigo.AutoSize = true;
+            this.lbCodigo.Font = new System.Drawing.Font("Century Gothic", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbCodigo.Location = new System.Drawing.Point(103, 70);
+            this.lbCodigo.Name = "lbCodigo";
+            this.lbCodigo.Size = new System.Drawing.Size(56, 16);
+            this.lbCodigo.TabIndex = 16;
+            this.lbCodigo.Text = "Código";
             // 
             // cbDepartamento
             // 
@@ -507,7 +507,7 @@
             this.Controls.Add(this.cbDepartamento);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.tbIdEmpleado);
-            this.Controls.Add(this.label1);
+            this.Controls.Add(this.lbCodigo);
             this.Controls.Add(this.btnAnadirEmpleado);
             this.Controls.Add(this.panel1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
@@ -532,7 +532,7 @@
         private Bunifu.Framework.UI.BunifuCustomLabel bunifuCustomLabel1;
         private Bunifu.Framework.UI.BunifuThinButton2 btnAnadirEmpleado;
         private System.Windows.Forms.TextBox tbIdEmpleado;
-        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label lbCodigo;
         private System.Windows.Forms.ComboBox cbUsuario;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.ComboBox cbDepartamento;

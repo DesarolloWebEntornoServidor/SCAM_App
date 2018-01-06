@@ -29,7 +29,17 @@ namespace SCAM_App
 
         private void FormLogin_Load(object sender, EventArgs e)
         {
-            slideB.Focus();
+            slideA.Visible = false;
+            slideA.Left = 494;
+
+            slideB.Visible = false;
+            slideB.Left = 53;
+            slideB.Visible = true;
+
+            bunifuSeparator1.Left = btnLoginL.Left;
+            bunifuSeparator1.Width = btnLoginL.Width;
+
+            tbUsuario.Focus();
         }
 
         private void bunifuThinButton22_Click(object sender, EventArgs e)
@@ -43,8 +53,8 @@ namespace SCAM_App
                 slideB.Left = 53;
                 slideB.Visible = true;
 
-                bunifuSeparator1.Left = bunifuThinButton22.Left;
-                bunifuSeparator1.Width = bunifuThinButton22.Width;
+                bunifuSeparator1.Left = btnLoginL.Left;
+                bunifuSeparator1.Width = btnLoginL.Width;
 
                 tbUsuario.Focus();
 
@@ -77,8 +87,6 @@ namespace SCAM_App
 
             try
             {
-                
-
                 usuExiste = UsuarioDAO.verificaUsuario(tbUsuario.Text, tbPass.Text);
 
                 if (usuExiste)
@@ -139,6 +147,23 @@ namespace SCAM_App
             if (resultado > 0)
             {
                 MessageBox.Show("Usuario Guardado Con Exito!!", "Guardado", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+                tbNombre.Text = "";
+                tbAlias.Text = "";
+                tbUsuarioReg.Text = "";
+                tbPassReg.Text = "";
+
+                slideA.Visible = false;
+                slideA.Left = 494;
+
+                slideB.Visible = false;
+                slideB.Left = 53;
+                slideB.Visible = true;
+
+                bunifuSeparator1.Left = btnLoginL.Left;
+                bunifuSeparator1.Width = btnLoginL.Width;
+
+                tbUsuario.Focus();
             }
             else
             {
@@ -161,7 +186,7 @@ namespace SCAM_App
             string pathString = @"[A-Z]{1}[a-zA-ZàáâäãåąčćęèéêëėįìíîïłńòóôöõøùúûüųūÿýżźñçčšžÀÁÂÄÃÅĄĆČĖĘÈÉÊËÌÍÎÏĮŁŃÒÓÔÖÕØÙÚÛÜŲŪŸÝŻŹÑßÇŒÆČŠŽ∂ð,.'-]{2,49}";
             string pathAlias = @"[A-Z]{4}";
             string patherlogin = @"[a-zA-ZàáâäãåąčćęèéêëėįìíîïłńòóôöõøùúûüųūÿýżźñçčšžÀÁÂÄÃÅĄĆČĖĘÈÉÊËÌÍÎÏĮŁŃÒÓÔÖÕØÙÚÛÜŲŪŸÝŻŹÑßÇŒÆČŠŽ∂ð,.'-]";
-            string patherPass = @"[a-zA-Z0-9àáâäãåąčćęèéêëėįìíîïłńòóôöõøùúûüųūÿýżźñçčšžÀÁÂÄÃÅĄĆČĖĘÈÉÊËÌÍÎÏĮŁŃÒÓÔÖÕØÙÚÛÜŲŪŸÝŻŹÑßÇŒÆČŠŽ∂ð,.'-]{";
+         //   string patherPass = @"[a-zA-Z0-9àáâäãåąčćęèéêëėįìíîïłńòóôöõøùúûüųūÿýżźñçčšžÀÁÂÄÃÅĄĆČĖĘÈÉÊËÌÍÎÏĮŁŃÒÓÔÖÕØÙÚÛÜŲŪŸÝŻŹÑßÇŒÆČŠŽ∂ð,.'-]{";
 
             if (!Regex.IsMatch(tbNombre.Text, pathString) || tbNombre.Text.Trim().Length > 50)
             {
@@ -171,6 +196,17 @@ namespace SCAM_App
             }
             else
                 errorProvider1.SetError(tbNombre, "");
+
+
+            List<Usuario> yaExiste = UsuarioDAO.YaExiste(tbUsuarioReg.Text, tbAlias.Text); // Verifica si el Empleado o DNI ya exuste  //
+
+            if (yaExiste.Count > 0)
+            {
+                MessageBox.Show("El Alias u el Usuario ya Existen !!!");
+                hayError = true;
+            }
+
+
 
             if (!Regex.IsMatch(tbAlias.Text, pathAlias) || tbAlias.Text.Trim().Length > 4)
             {
@@ -190,9 +226,9 @@ namespace SCAM_App
             else
                 errorProvider1.SetError(tbUsuarioReg, "");
 
-            if (!Regex.IsMatch(tbPassReg.Text, patherPass) || tbPassReg.Text.Trim().Length > 45)
+            if (tbPassReg.Text.Trim().Length > 20)
             {
-                errorProvider1.SetError(tbPassReg, "Error en el Formato de la Password ");
+                errorProvider1.SetError(tbPassReg, "Error en el Tamaño de la Password ");
 
                 hayError = true;
             }

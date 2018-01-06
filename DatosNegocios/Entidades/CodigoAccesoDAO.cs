@@ -136,5 +136,27 @@ namespace DatosNegocios
 
             return retorno;
         }
+
+        public static List<CodigoAcceso> YaExiste(string codAcceso, string codDesc)
+        {
+            List<CodigoAcceso> lista = new List<CodigoAcceso>();
+
+            MySqlCommand comando = new MySqlCommand(String.Format("select idCodigoAcceso, codigoDeAcceso, descripcionAcceso from codigosacceso where descripcionAcceso = '{0}' ", codDesc), Conexion.ObtenerConexion());
+
+            MySqlDataReader codigos = comando.ExecuteReader();
+            while (codigos.Read())
+            {
+                CodigoAcceso cods = new CodigoAcceso();
+                cods.IdCodigoAcceso = codigos.GetInt32(0);
+                cods.CodigoDeAcceso = codigos.GetString(1);
+                cods.DescripcionAcceso = codigos.GetString(2);
+
+                lista.Add(cods);
+            }
+
+            Conexion.CerrarConexion();
+            return lista;
+        }
+
     }
 }

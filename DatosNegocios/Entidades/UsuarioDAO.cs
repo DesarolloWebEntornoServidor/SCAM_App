@@ -42,11 +42,11 @@ namespace DatosNegocios
             return lista;
         }
 
-        public static Usuario ObtenerUsuario(string nombre)
+        public static Usuario ObtenerUsuario(string login)
         {
                 Usuario usus = new Usuario();
 
-                MySqlCommand comando = new MySqlCommand(String.Format("select idUsuario, nombre, alias, login, password, acceso from usuarios where login='" + nombre + "'"), Conexion.ObtenerConexion());
+                MySqlCommand comando = new MySqlCommand(String.Format("select idUsuario, nombre, alias, login, password, acceso from usuarios where login='" + login + "'"), Conexion.ObtenerConexion());
                 MySqlDataReader codigos = comando.ExecuteReader();
             while (codigos.Read())
             {
@@ -78,7 +78,7 @@ namespace DatosNegocios
                 if (valor == 1)
                     return true;
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 return false;
             }
@@ -88,6 +88,28 @@ namespace DatosNegocios
             return false;
         }
 
+        public static List<Usuario> YaExiste(string usuario, string alias)
+        {
+            List<Usuario> lista = new List<Usuario>();
+
+            MySqlCommand comando = new MySqlCommand(String.Format("select idUsuario, nombre from usuarios where login = '{0}' or alias = '{1}'", usuario, alias), Conexion.ObtenerConexion());
+            MySqlDataReader codigos = comando.ExecuteReader();
+
+            Usuario usus = new Usuario();
+
+            while (codigos.Read())
+                {
+                    usus.IdUsuario = codigos.GetInt32(0);
+                    usus.Nombre = codigos.GetString(1);
+
+
+                    lista.Add(usus);
+                }
+
+                return lista;
+            }
+
+   
         public static int BorarRegistro(int codUsuario)
         {
             int retorno = 0;

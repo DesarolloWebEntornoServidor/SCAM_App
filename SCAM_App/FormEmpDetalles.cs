@@ -35,6 +35,9 @@ namespace SCAM_App
         public FormEmpDetalles()
         {
             InitializeComponent();
+
+            lbCodigo.Visible = false;
+            tbIdEmpleado.Visible = false;
         }
 
         public FormEmpDetalles(Empleado emp)
@@ -43,6 +46,8 @@ namespace SCAM_App
 
             this.emp = emp;
             esNuevo = false;
+
+
 
             if (FormLogin.usuNivelAcceso == 2)
             {
@@ -415,8 +420,9 @@ namespace SCAM_App
             else
                 errorProvider1.SetError(cbUsuario, "");
 
-            Empleado UsuExiste = EmpleadoDAO.BuscarEmpleadoVinculado(Convert.ToInt32(cbUsuario.SelectedValue));
-            if (UsuExiste != null)
+         
+            List<Empleado> UsuExiste = EmpleadoDAO.BuscarEmpleadoVinculadoLista(Convert.ToInt32(cbUsuario.SelectedValue));  // Verifica si ya existe un empleqado vinculado a ese Usuario
+            if (UsuExiste.Count > 0 && UsuExiste[0].IdEmpleado != Convert.ToInt32(tbIdEmpleado.Text))
             {
                 errorProvider1.SetError(cbUsuario, "Error, No puedes Vincular el mismo Usuario a dos Empleados ");
                 hayError = true;
@@ -424,6 +430,25 @@ namespace SCAM_App
             }
             else
                 errorProvider1.SetError(cbUsuario, "");
+            
+
+            List<Empleado> yaExiste = EmpleadoDAO.yaExiste(tbNombre.Text, tbApellidos.Text, tbDni.Text); // Verifica si el Empleado o DNI ya exuste  //
+            if (yaExiste.Count > 0 && tbIdEmpleado.Text == "")
+                tbIdEmpleado.Text = "0";
+
+            if(yaExiste.Count > 0 && yaExiste[0].IdEmpleado != Convert.ToInt32(tbIdEmpleado.Text))
+            {
+                MessageBox.Show("Error, El Empleado o El DNI ya Están Registrados !!!");
+                hayError = true;
+            }
+
+            string vExt = emp.Foto.Substring(emp.Foto.Length - 3);
+            if ( vExt != "JPG" || vExt != "jpg" || vExt != "PNG" || vExt != "png")
+            {
+                MessageBox.Show("Error, El Formato de Imagen Tiene que ser jpg o png");
+                hayError = true;
+            }
+
 
             return hayError;
         }

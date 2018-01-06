@@ -219,9 +219,9 @@ namespace SCAM_App
             else
                 errorProvider1.SetError(tbLogin, "");
 
-            if (!Regex.IsMatch(tbPassword.Text, patherPass) || tbAlias.Text.Trim().Length > 45)
+            if (tbPassword.Text.Trim().Length > 20)
             {
-                errorProvider1.SetError(tbPassword, "Error en el Formato de la Password ");
+                errorProvider1.SetError(tbPassword, "Error en el Tamaño de la Password ");
 
                 hayError = true;
             }
@@ -236,6 +236,18 @@ namespace SCAM_App
             }
             else
                 errorProvider1.SetError(radioDos, "");
+
+
+            List<Usuario> yaExiste = UsuarioDAO.YaExiste(tbLogin.Text, tbAlias.Text); // Verifica si el Empleado o DNI ya exuste  //
+            if (yaExiste.Count > 0 && tbIdUsuario.Text == "")
+                tbIdUsuario.Text = "0";
+
+            if (yaExiste.Count > 0 && yaExiste[0].IdUsuario != Convert.ToInt32(tbIdUsuario.Text))
+            {
+                    MessageBox.Show("El Alias u el Usuario ya Existen !!!");
+                hayError = true;
+            }
+
 
             return hayError;
         }

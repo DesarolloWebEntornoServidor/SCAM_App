@@ -34,11 +34,9 @@
             this.lbMensaje = new System.Windows.Forms.Label();
             this.bunifuElipse1 = new Bunifu.Framework.UI.BunifuElipse(this.components);
             this.bunifuThinButton21 = new Bunifu.Framework.UI.BunifuThinButton2();
-            this.bunifuThinButton22 = new Bunifu.Framework.UI.BunifuThinButton2();
+            this.btnLoginL = new Bunifu.Framework.UI.BunifuThinButton2();
             this.btnRegistrar = new Bunifu.Framework.UI.BunifuThinButton2();
             this.slideA = new System.Windows.Forms.Panel();
-            this.bunifuCheckbox1 = new Bunifu.Framework.UI.BunifuCheckbox();
-            this.label1 = new System.Windows.Forms.Label();
             this.bunifuCustomLabel5 = new Bunifu.Framework.UI.BunifuCustomLabel();
             this.tbPassReg = new Bunifu.Framework.UI.BunifuMetroTextbox();
             this.bunifuCustomLabel4 = new Bunifu.Framework.UI.BunifuCustomLabel();
@@ -108,32 +106,32 @@
             this.bunifuThinButton21.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.bunifuThinButton21.Click += new System.EventHandler(this.bunifuThinButton21_Click);
             // 
-            // bunifuThinButton22
+            // btnLoginL
             // 
-            this.bunifuThinButton22.ActiveBorderThickness = 1;
-            this.bunifuThinButton22.ActiveCornerRadius = 1;
-            this.bunifuThinButton22.ActiveFillColor = System.Drawing.Color.SlateGray;
-            this.bunifuThinButton22.ActiveForecolor = System.Drawing.Color.White;
-            this.bunifuThinButton22.ActiveLineColor = System.Drawing.Color.SlateGray;
-            this.bunifuThinButton22.BackColor = System.Drawing.Color.SteelBlue;
-            this.bunifuThinButton22.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("bunifuThinButton22.BackgroundImage")));
-            this.bunifuThinButton22.ButtonText = "Login";
-            this.bunifuThinButton22.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.bunifuTransition1.SetDecoration(this.bunifuThinButton22, BunifuAnimatorNS.DecorationType.None);
-            this.bunifuThinButton22.Font = new System.Drawing.Font("Century Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.bunifuThinButton22.ForeColor = System.Drawing.Color.SeaGreen;
-            this.bunifuThinButton22.IdleBorderThickness = 1;
-            this.bunifuThinButton22.IdleCornerRadius = 1;
-            this.bunifuThinButton22.IdleFillColor = System.Drawing.Color.SteelBlue;
-            this.bunifuThinButton22.IdleForecolor = System.Drawing.Color.White;
-            this.bunifuThinButton22.IdleLineColor = System.Drawing.Color.SteelBlue;
-            this.bunifuThinButton22.Location = new System.Drawing.Point(238, 40);
-            this.bunifuThinButton22.Margin = new System.Windows.Forms.Padding(5);
-            this.bunifuThinButton22.Name = "bunifuThinButton22";
-            this.bunifuThinButton22.Size = new System.Drawing.Size(132, 53);
-            this.bunifuThinButton22.TabIndex = 8;
-            this.bunifuThinButton22.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.bunifuThinButton22.Click += new System.EventHandler(this.bunifuThinButton22_Click);
+            this.btnLoginL.ActiveBorderThickness = 1;
+            this.btnLoginL.ActiveCornerRadius = 1;
+            this.btnLoginL.ActiveFillColor = System.Drawing.Color.SlateGray;
+            this.btnLoginL.ActiveForecolor = System.Drawing.Color.White;
+            this.btnLoginL.ActiveLineColor = System.Drawing.Color.SlateGray;
+            this.btnLoginL.BackColor = System.Drawing.Color.SteelBlue;
+            this.btnLoginL.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("btnLoginL.BackgroundImage")));
+            this.btnLoginL.ButtonText = "Login";
+            this.btnLoginL.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.bunifuTransition1.SetDecoration(this.btnLoginL, BunifuAnimatorNS.DecorationType.None);
+            this.btnLoginL.Font = new System.Drawing.Font("Century Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnLoginL.ForeColor = System.Drawing.Color.SeaGreen;
+            this.btnLoginL.IdleBorderThickness = 1;
+            this.btnLoginL.IdleCornerRadius = 1;
+            this.btnLoginL.IdleFillColor = System.Drawing.Color.SteelBlue;
+            this.btnLoginL.IdleForecolor = System.Drawing.Color.White;
+            this.btnLoginL.IdleLineColor = System.Drawing.Color.SteelBlue;
+            this.btnLoginL.Location = new System.Drawing.Point(238, 40);
+            this.btnLoginL.Margin = new System.Windows.Forms.Padding(5);
+            this.btnLoginL.Name = "btnLoginL";
+            this.btnLoginL.Size = new System.Drawing.Size(132, 53);
+            this.btnLoginL.TabIndex = 8;
+            this.btnLoginL.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.btnLoginL.Click += new System.EventHandler(this.bunifuThinButton22_Click);
             // 
             // btnRegistrar
             // 
@@ -164,8 +162,6 @@
             // 
             // slideA
             // 
-            this.slideA.Controls.Add(this.bunifuCheckbox1);
-            this.slideA.Controls.Add(this.label1);
             this.slideA.Controls.Add(this.bunifuCustomLabel5);
             this.slideA.Controls.Add(this.btnRegistrar);
             this.slideA.Controls.Add(this.tbPassReg);
@@ -181,31 +177,6 @@
             this.slideA.Name = "slideA";
             this.slideA.Size = new System.Drawing.Size(401, 388);
             this.slideA.TabIndex = 10;
-            // 
-            // bunifuCheckbox1
-            // 
-            this.bunifuCheckbox1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(51)))), ((int)(((byte)(205)))), ((int)(((byte)(117)))));
-            this.bunifuCheckbox1.ChechedOffColor = System.Drawing.Color.FromArgb(((int)(((byte)(132)))), ((int)(((byte)(135)))), ((int)(((byte)(140)))));
-            this.bunifuCheckbox1.Checked = true;
-            this.bunifuCheckbox1.CheckedOnColor = System.Drawing.Color.FromArgb(((int)(((byte)(51)))), ((int)(((byte)(205)))), ((int)(((byte)(117)))));
-            this.bunifuTransition1.SetDecoration(this.bunifuCheckbox1, BunifuAnimatorNS.DecorationType.None);
-            this.bunifuCheckbox1.ForeColor = System.Drawing.Color.White;
-            this.bunifuCheckbox1.Location = new System.Drawing.Point(189, 262);
-            this.bunifuCheckbox1.Name = "bunifuCheckbox1";
-            this.bunifuCheckbox1.Size = new System.Drawing.Size(20, 20);
-            this.bunifuCheckbox1.TabIndex = 17;
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.bunifuTransition1.SetDecoration(this.label1, BunifuAnimatorNS.DecorationType.None);
-            this.label1.Font = new System.Drawing.Font("Century Gothic", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.ForeColor = System.Drawing.SystemColors.ButtonFace;
-            this.label1.Location = new System.Drawing.Point(212, 265);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(167, 15);
-            this.label1.TabIndex = 16;
-            this.label1.Text = "Enviar Solicitud de Activación";
             // 
             // bunifuCustomLabel5
             // 
@@ -535,7 +506,7 @@
             this.Controls.Add(this.bunifuSeparator1);
             this.Controls.Add(this.slideB);
             this.Controls.Add(this.slideA);
-            this.Controls.Add(this.bunifuThinButton22);
+            this.Controls.Add(this.btnLoginL);
             this.Controls.Add(this.bunifuThinButton21);
             this.Controls.Add(this.lbMensaje);
             this.bunifuTransition1.SetDecoration(this, BunifuAnimatorNS.DecorationType.None);
@@ -563,7 +534,7 @@
         private Bunifu.Framework.UI.BunifuMetroTextbox tbNombre;
         private Bunifu.Framework.UI.BunifuCustomLabel bunifuCustomLabel1;
         private Bunifu.Framework.UI.BunifuThinButton2 btnRegistrar;
-        private Bunifu.Framework.UI.BunifuThinButton2 bunifuThinButton22;
+        private Bunifu.Framework.UI.BunifuThinButton2 btnLoginL;
         private Bunifu.Framework.UI.BunifuCustomLabel bunifuCustomLabel5;
         private Bunifu.Framework.UI.BunifuMetroTextbox tbPassReg;
         private Bunifu.Framework.UI.BunifuCustomLabel bunifuCustomLabel4;
@@ -583,8 +554,6 @@
         private Bunifu.Framework.UI.BunifuDragControl bunifuDragControl1;
         private Bunifu.Framework.UI.BunifuImageButton bunifuImageButton1;
         private System.Windows.Forms.Label label2;
-        private Bunifu.Framework.UI.BunifuCheckbox bunifuCheckbox1;
-        private System.Windows.Forms.Label label1;
         private System.Windows.Forms.ErrorProvider errorProvider1;
     }
 }

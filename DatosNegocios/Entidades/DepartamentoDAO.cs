@@ -46,7 +46,7 @@ namespace DatosNegocios
 
             MySqlConnection cmd = Conexion.ObtenerConexion();
 
-            MySqlCommand comando = new MySqlCommand(String.Format("SELECT idDepartamento, descripcion, idCodigoAcceso FROM departamentos where idDepartamento={0}", id), cmd);
+            MySqlCommand comando = new MySqlCommand(String.Format("select idDepartamento, descripcion, idCodigoAcceso FROM departamentos where idDepartamento={0}", id), cmd);
             MySqlDataReader cods = comando.ExecuteReader();
             while (cods.Read())
             {
@@ -103,7 +103,7 @@ namespace DatosNegocios
             int retorno = 0;
             try
             {
-                MySqlCommand comando = new MySqlCommand(string.Format("delete FROM departamentos where idDepartamento={0}", id), Conexion.ObtenerConexion());
+                MySqlCommand comando = new MySqlCommand(string.Format("delete from departamentos where idDepartamento={0}", id), Conexion.ObtenerConexion());
 
                 retorno = comando.ExecuteNonQuery();
             }
@@ -116,5 +116,28 @@ namespace DatosNegocios
             return retorno;
             
         }
+
+        public static List<Departamento> yaExiste(string dep)
+        {
+            List<Departamento> lista = new List<Departamento>();
+
+            MySqlCommand comando = new MySqlCommand(String.Format("select idDepartamento, descripcion from departamentos where descripcion = '{0}'", dep), Conexion.ObtenerConexion());
+
+            MySqlDataReader cods = comando.ExecuteReader();
+
+            while (cods.Read())
+            {
+                Departamento depart = new Departamento();
+
+                depart.IdDepartamento = cods.GetInt32(0);
+                depart.Descripcion = cods.GetString(1);
+
+                lista.Add(depart);
+            }
+
+            return lista;
+        }
+
+
     }
 }

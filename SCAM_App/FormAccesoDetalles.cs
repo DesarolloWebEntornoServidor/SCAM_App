@@ -29,6 +29,8 @@ namespace SCAM_App
 
             this.cod = cod;
             esNuevo = false;
+
+            txtCodigoAceso.Enabled = false;
         }
 
         private void FormAccesoDetalles_Load(object sender, EventArgs e)
@@ -39,7 +41,7 @@ namespace SCAM_App
             if (esNuevo == false)
             {
                 txtIdCodigo.Text = cod.IdCodigoAcceso.ToString();
-                txtCodigoAceso.Text = Util.Desencriptar(cod.CodigoDeAcceso);
+                txtCodigoAceso.Text = cod.CodigoDeAcceso;
                 txtDescripcion.Text = cod.DescripcionAcceso;
 
                 chkBoxParaTodos.Checked = (cod.PTodos == 1);
@@ -134,6 +136,20 @@ namespace SCAM_App
             }
             else
                 errorProvider1.SetError(txtCodigoAceso, "");
+
+            List<CodigoAcceso> yaExiste = CodigoAccesoDAO.YaExiste(Util.Encriptar(txtCodigoAceso.Text), txtDescripcion.Text); // Verifica si el Codigo ya existe   //
+            if (yaExiste.Count > 0 && txtIdCodigo.Text == "")
+                txtIdCodigo.Text = "0";
+
+            if (yaExiste.Count > 0 && yaExiste[0].IdCodigoAcceso != Convert.ToInt32(txtIdCodigo.Text))
+            {
+                MessageBox.Show("Error, Esta Descripción de Codigo de Acceso ya Está Registrada !!!");
+                hayError = true;
+            }
+
+
+
+
 
             return hayError;
         }

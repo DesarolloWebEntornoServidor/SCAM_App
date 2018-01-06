@@ -59,42 +59,6 @@ namespace DatosNegocios
             return lista;
         }
 
-        public static Empleado BuscarEmpleadoVinculado(int idUsuario) // Retorna el empleado que esta vinculado al usuario para ser modificado //
-        {
-            Empleado emps = new Empleado();
-
-            MySqlConnection cmd = Conexion.ObtenerConexion();
-
-            MySqlCommand comando = new MySqlCommand(String.Format("select idEmpleado, Nombre, Apellidos, FechaNacto, Dni, Funcion, Telefono, Email, FechaEntrada, " +
-                "Salario, sexo, Foto, IdDepartamento, idUsuario, activo from empleados where idUsuario={0}  and activo > 0 ", idUsuario), cmd);
-            MySqlDataReader codigos = comando.ExecuteReader();
-            while (codigos.Read())
-            {
-                emps.IdEmpleado = codigos.GetInt32(0);
-                emps.Nombre = codigos.GetString(1);
-                emps.Apellidos = codigos.GetString(2);
-                emps.FechaNacto = codigos.GetDateTime(3);
-                emps.Dni = codigos.GetString(4);
-                emps.Funcion = codigos.GetString(5);
-                emps.Telefono = codigos.GetString(6);
-                emps.Email = codigos.GetString(7);
-                emps.FechaEntrada = codigos.GetDateTime(8);
-                emps.Salario = codigos.GetDouble(9);
-                emps.Sexo = codigos.GetString(10);
-                if (codigos.GetString(11) != null)
-                    emps.Foto = codigos.GetString(11);
-                else
-                    emps.Foto = "";
-                emps.IdDepartamento = codigos.GetInt32(12);
-                emps.IdUsuario = codigos.GetInt32(13);
-                emps.Activo = Convert.ToInt32(codigos.GetBoolean(14));
-            }
-
-            cmd.Close();
-
-            return emps;
-        }
-
         public static List<Empleado> Localizar(string buscar)
         {
             List<Empleado> lista = new List<Empleado>();
@@ -215,6 +179,107 @@ namespace DatosNegocios
             }
 
             return retorno;
+        }
+
+        public static bool YaExiste(string empleado, string apellidos, string dni)
+        {
+            MySqlCommand cmd = new MySqlCommand();
+
+            cmd.Connection = Conexion.ObtenerConexion();
+            try
+            {
+                cmd.CommandText = string.Format("select count(*) from empleados where nombre = '{0}' and apellidos = '{1}' or dni = '{2}'", empleado, apellidos, dni);
+
+                int valor = int.Parse(cmd.ExecuteScalar().ToString());
+
+                if (valor == 1)
+                    return true;
+            }
+            catch (Exception)
+            {
+                return false;
+            }
+
+            Conexion.CerrarConexion();
+
+            return false;
+        }
+
+        public static List<Empleado> yaExiste(string empleado, string apellidos, string dni)
+        {
+            List<Empleado> lista = new List<Empleado>();
+
+            MySqlCommand comando = new MySqlCommand(String.Format("select idEmpleado, Nombre from empleados where activo > 0 and nombre = '{0}' and apellidos = '{1}' or dni = '{2}'", empleado, apellidos, dni), Conexion.ObtenerConexion());
+
+            MySqlDataReader codigos = comando.ExecuteReader();
+            while (codigos.Read())
+            {
+                Empleado emps = new Empleado();
+
+                emps.IdEmpleado = codigos.GetInt32(0);
+                emps.Nombre = codigos.GetString(1);
+
+                lista.Add(emps);
+            }
+
+            return lista;
+        }
+
+        public static Empleado BuscarEmpleadoVinculado(int idUsuario) // Retorna el empleado que esta vinculado al usuario para ser modificado //
+        {
+                Empleado emps = new Empleado();
+
+                MySqlConnection cmd = Conexion.ObtenerConexion();
+
+                MySqlCommand comando = new MySqlCommand(String.Format("select idEmpleado, Nombre, Apellidos, FechaNacto, Dni, Funcion, Telefono, Email, FechaEntrada, " +
+                    "Salario, sexo, Foto, IdDepartamento, idUsuario, activo from empleados where idUsuario={0}  and activo > 0 ", idUsuario), cmd);
+                MySqlDataReader codigos = comando.ExecuteReader();
+                while (codigos.Read())
+                {
+                    emps.IdEmpleado = codigos.GetInt32(0);
+                    emps.Nombre = codigos.GetString(1);
+                    emps.Apellidos = codigos.GetString(2);
+                    emps.FechaNacto = codigos.GetDateTime(3);
+                    emps.Dni = codigos.GetString(4);
+                    emps.Funcion = codigos.GetString(5);
+                    emps.Telefono = codigos.GetString(6);
+                    emps.Email = codigos.GetString(7);
+                    emps.FechaEntrada = codigos.GetDateTime(8);
+                    emps.Salario = codigos.GetDouble(9);
+                    emps.Sexo = codigos.GetString(10);
+                    if (codigos.GetString(11) != null)
+                        emps.Foto = codigos.GetString(11);
+                    else
+                        emps.Foto = "";
+                    emps.IdDepartamento = codigos.GetInt32(12);
+                    emps.IdUsuario = codigos.GetInt32(13);
+                    emps.Activo = Convert.ToInt32(codigos.GetBoolean(14));
+                }
+
+                cmd.Close();
+
+            return emps;
+        }
+
+        public static List<Empleado> BuscarEmpleadoVinculadoLista(int idUsuario) // Retorna el empleado que esta vinculado al usuario para ser modificado //
+        {
+            List<Empleado> lista = new List<Empleado>();
+
+            MySqlConnection cmd = Conexion.ObtenerConexion();
+
+            MySqlCommand comando = new MySqlCommand(String.Format("select idEmpleado, nombre from empleados where idUsuario={0}  and activo > 0 ", idUsuario), cmd);
+            MySqlDataReader codigos = comando.ExecuteReader();
+            while (codigos.Read())
+            {
+                Empleado emps = new Empleado();
+
+                emps.IdEmpleado = codigos.GetInt32(0);
+                emps.Nombre = codigos.GetString(1);
+
+                lista.Add(emps);
+            }
+
+            return lista;
         }
     }
 }

@@ -144,6 +144,16 @@ namespace SCAM_App
             else
                 errorProvider1.SetError(cbCodigosAcceso, "");
 
+            List<Departamento> yaExiste = DepartamentoDAO.yaExiste(txtDescripcion.Text); // Verifica si el Empleado o DNI ya exuste  //
+            if (yaExiste.Count > 0 && txtIdDepto.Text == "")
+                txtIdDepto.Text = "0";
+
+            if (yaExiste.Count > 0 && yaExiste[0].IdDepartamento != Convert.ToInt32(txtIdDepto.Text))
+            {
+                MessageBox.Show("Error, Ese Departamento ya Está Registrado !!!");
+                hayError = true;
+            }
+
 
             return hayError;
         }
