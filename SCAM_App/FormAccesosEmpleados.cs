@@ -24,6 +24,11 @@ namespace SCAM_App
         public FormAccesosEmpleados()
         {
             InitializeComponent();
+
+            panelLista.Visible = false;
+
+            btnCerrarCod.Visible = false;
+            btnPrinterLista.Visible = false;
         }
 
         private void FormAccesosEmpleados_Load(object sender, EventArgs e)
@@ -247,6 +252,56 @@ namespace SCAM_App
 
                 MessageBox.Show("Error, El Archivo Actual está Abierto !!");
             }
+        }
+
+        private void btnCerrarCod_Click(object sender, EventArgs e)
+        {
+            panelLista.Visible = false;
+
+            btnCerrarCod.Visible = false;
+            btnPrinterLista.Visible = false;
+        }
+
+        private void btnPrinterCodLista_Click(object sender, EventArgs e)
+        {
+            string resultado = "";
+            int contador = 0;
+
+            resultado += "\t\t" + "Lista de Accesos por Empleado" + "\r\n" + "\r\n";
+            resultado += "\t" + EmpleadoDAO.ObtenerEmpleado(listaAccesos[0].IdEmpleado).Nombre.PadRight(50, ' ') + "\r\n";
+
+            int verCod = listaAccesos[0].IdEmpleado;
+
+            for (int i = 0; i < listaAccesos.Count; i++)
+            {
+                if(verCod != listaAccesos[i].IdEmpleado)
+                {
+                    verCod = listaAccesos[i].IdEmpleado;
+                    resultado += "\t" + "_________________________________________________" + "\r\n";
+                    resultado += "\t" + EmpleadoDAO.ObtenerEmpleado(listaAccesos[i].IdEmpleado).Nombre.PadRight(50, ' ') + "\r\n";
+
+                    tbLista.Text = resultado;
+
+                }
+                resultado += "\t   " + CodigoAccesoDAO.ObtenerCodigoAcceso(listaAccesos[i].IdCodAcceso).DescripcionAcceso +  "\r\n";
+                tbLista.Text = resultado;
+
+                contador++;
+                verCod = listaAccesos[i].IdEmpleado;
+
+            }
+
+            resultado += "\r\n\t" + "Existen " + contador + " Accesos Asignados " + "\r\n";
+            tbLista.Text = resultado;
+
+            panelLista.Invalidate();
+
+            panelListaTrans.ShowSync(panelLista);
+
+            panelLista.Visible = true;
+
+            btnCerrarCod.Visible = true;
+            btnPrinterLista.Visible = true;
         }
     }
 }

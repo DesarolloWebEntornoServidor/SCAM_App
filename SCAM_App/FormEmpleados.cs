@@ -35,6 +35,11 @@ namespace SCAM_App
             btnCerrarTarjeta.Visible = false;
             btnPrinter.Visible = false;
 
+            panelLista.Visible = false;
+
+            btnCerraLista.Visible = false;
+            btnPrinterLista.Visible = false;
+
         }
 
         public FormEmpleados(int v)
@@ -423,6 +428,49 @@ namespace SCAM_App
 
                 MessageBox.Show("Error, El Archivo Actual está Abierto !!");
             }
+        }
+
+        private void btnPrinter_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btnCerraLista_Click(object sender, EventArgs e)
+        {
+            panelLista.Visible = false;
+
+            btnCerraLista.Visible = false;
+            btnPrinterLista.Visible = false;
+        }
+
+        private void btnPrinterEmpLista_Click(object sender, EventArgs e)
+        {
+            string resultado = "";
+            int contador = 0;
+
+            resultado += "\t\t" + "Lista de Empleados" + "\r\n" + "\r\n";
+
+            for (int i = 0; i < listaEmpleados.Count; i++)
+            {
+                resultado += "\t" + (listaEmpleados[i].Nombre + " " + listaEmpleados[i].Apellidos).PadRight(50, ' ') + "\tNacimiento: " +  listaEmpleados[i].FechaNacto.ToShortDateString() + "\t" + listaEmpleados[i].Dni.PadRight(12, ' ') + "\t" + listaEmpleados[i].Funcion.PadRight(30, ' ') + "\r\n";
+                resultado += "\tTeléfono: " + listaEmpleados[i].Telefono.PadRight(11, ' ') + "Correo: " + listaEmpleados[i].Email.PadRight(30, ' ') + "\tEntrada: " + listaEmpleados[i].FechaEntrada.ToShortDateString() +"\tSalario: " + "\t" + listaEmpleados[i].Salario.ToString("N2") + "\r\n";
+                resultado += "_______________________________________________________________________________________________________" + "\r\n";
+                tbLista.Text = resultado;
+
+                contador++;
+            }
+
+            resultado += "\r\n\t" + "Existen " + contador + " Empleados Activos " + "\r\n";
+            tbLista.Text = resultado;
+
+            panelLista.Invalidate();
+
+            panelListaTrans.ShowSync(panelLista);
+
+            panelLista.Visible = true;
+
+            btnCerraLista.Visible = true;
+            btnPrinterLista.Visible = true;
         }
     }
 }

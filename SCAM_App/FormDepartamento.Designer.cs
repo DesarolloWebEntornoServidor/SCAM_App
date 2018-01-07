@@ -29,11 +29,13 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormDepartamento));
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            BunifuAnimatorNS.Animation animation1 = new BunifuAnimatorNS.Animation();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormDepartamento));
             this.bunifuElipse1 = new Bunifu.Framework.UI.BunifuElipse(this.components);
             this.panel1 = new System.Windows.Forms.Panel();
+            this.btnPrinterDepLista = new Bunifu.Framework.UI.BunifuImageButton();
             this.btnExcel = new Bunifu.Framework.UI.BunifuImageButton();
             this.btnPdf = new Bunifu.Framework.UI.BunifuImageButton();
             this.textBox1 = new System.Windows.Forms.TextBox();
@@ -46,13 +48,22 @@
             this.codigoAcceso = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.borrar = new System.Windows.Forms.DataGridViewButtonColumn();
             this.modificar = new System.Windows.Forms.DataGridViewButtonColumn();
+            this.panelLista = new System.Windows.Forms.Panel();
+            this.btnCerrarDepto = new Bunifu.Framework.UI.BunifuImageButton();
+            this.tbLista = new System.Windows.Forms.TextBox();
+            this.btnPrinterLista = new Bunifu.Framework.UI.BunifuImageButton();
+            this.panelListaTrans = new BunifuAnimatorNS.BunifuTransition(this.components);
             this.panel1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.btnPrinterDepLista)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.btnExcel)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.btnPdf)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.btnInserir)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.bunifuImageButton1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvDepartamento)).BeginInit();
+            this.panelLista.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.btnCerrarDepto)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.btnPrinterLista)).BeginInit();
             this.SuspendLayout();
             // 
             // bunifuElipse1
@@ -63,21 +74,39 @@
             // panel1
             // 
             this.panel1.BackColor = System.Drawing.Color.RoyalBlue;
+            this.panel1.Controls.Add(this.btnPrinterDepLista);
             this.panel1.Controls.Add(this.btnExcel);
             this.panel1.Controls.Add(this.btnPdf);
             this.panel1.Controls.Add(this.textBox1);
             this.panel1.Controls.Add(this.pictureBox1);
             this.panel1.Controls.Add(this.btnInserir);
             this.panel1.Controls.Add(this.bunifuImageButton1);
+            this.panelListaTrans.SetDecoration(this.panel1, BunifuAnimatorNS.DecorationType.None);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel1.Location = new System.Drawing.Point(0, 0);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(686, 70);
             this.panel1.TabIndex = 0;
             // 
+            // btnPrinterDepLista
+            // 
+            this.btnPrinterDepLista.BackColor = System.Drawing.Color.RoyalBlue;
+            this.panelListaTrans.SetDecoration(this.btnPrinterDepLista, BunifuAnimatorNS.DecorationType.None);
+            this.btnPrinterDepLista.Image = ((System.Drawing.Image)(resources.GetObject("btnPrinterDepLista.Image")));
+            this.btnPrinterDepLista.ImageActive = null;
+            this.btnPrinterDepLista.Location = new System.Drawing.Point(291, 10);
+            this.btnPrinterDepLista.Name = "btnPrinterDepLista";
+            this.btnPrinterDepLista.Size = new System.Drawing.Size(45, 51);
+            this.btnPrinterDepLista.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.btnPrinterDepLista.TabIndex = 27;
+            this.btnPrinterDepLista.TabStop = false;
+            this.btnPrinterDepLista.Zoom = 10;
+            this.btnPrinterDepLista.Click += new System.EventHandler(this.btnPrinterDepLista_Click);
+            // 
             // btnExcel
             // 
             this.btnExcel.BackColor = System.Drawing.Color.RoyalBlue;
+            this.panelListaTrans.SetDecoration(this.btnExcel, BunifuAnimatorNS.DecorationType.None);
             this.btnExcel.Image = ((System.Drawing.Image)(resources.GetObject("btnExcel.Image")));
             this.btnExcel.ImageActive = null;
             this.btnExcel.Location = new System.Drawing.Point(413, 10);
@@ -92,6 +121,7 @@
             // btnPdf
             // 
             this.btnPdf.BackColor = System.Drawing.Color.RoyalBlue;
+            this.panelListaTrans.SetDecoration(this.btnPdf, BunifuAnimatorNS.DecorationType.None);
             this.btnPdf.Image = ((System.Drawing.Image)(resources.GetObject("btnPdf.Image")));
             this.btnPdf.ImageActive = null;
             this.btnPdf.Location = new System.Drawing.Point(350, 10);
@@ -105,6 +135,7 @@
             // 
             // textBox1
             // 
+            this.panelListaTrans.SetDecoration(this.textBox1, BunifuAnimatorNS.DecorationType.None);
             this.textBox1.Location = new System.Drawing.Point(17, 32);
             this.textBox1.Name = "textBox1";
             this.textBox1.Size = new System.Drawing.Size(142, 20);
@@ -114,6 +145,7 @@
             // pictureBox1
             // 
             this.pictureBox1.BackColor = System.Drawing.Color.RoyalBlue;
+            this.panelListaTrans.SetDecoration(this.pictureBox1, BunifuAnimatorNS.DecorationType.None);
             this.pictureBox1.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox1.Image")));
             this.pictureBox1.Location = new System.Drawing.Point(165, 32);
             this.pictureBox1.Name = "pictureBox1";
@@ -125,9 +157,10 @@
             // btnInserir
             // 
             this.btnInserir.BackColor = System.Drawing.Color.RoyalBlue;
+            this.panelListaTrans.SetDecoration(this.btnInserir, BunifuAnimatorNS.DecorationType.None);
             this.btnInserir.Image = ((System.Drawing.Image)(resources.GetObject("btnInserir.Image")));
             this.btnInserir.ImageActive = null;
-            this.btnInserir.Location = new System.Drawing.Point(248, 7);
+            this.btnInserir.Location = new System.Drawing.Point(206, 7);
             this.btnInserir.Name = "btnInserir";
             this.btnInserir.Size = new System.Drawing.Size(53, 56);
             this.btnInserir.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
@@ -139,6 +172,7 @@
             // bunifuImageButton1
             // 
             this.bunifuImageButton1.BackColor = System.Drawing.Color.RoyalBlue;
+            this.panelListaTrans.SetDecoration(this.bunifuImageButton1, BunifuAnimatorNS.DecorationType.None);
             this.bunifuImageButton1.Image = ((System.Drawing.Image)(resources.GetObject("bunifuImageButton1.Image")));
             this.bunifuImageButton1.ImageActive = null;
             this.bunifuImageButton1.Location = new System.Drawing.Point(498, 12);
@@ -175,6 +209,7 @@
             this.codigoAcceso,
             this.borrar,
             this.modificar});
+            this.panelListaTrans.SetDecoration(this.dgvDepartamento, BunifuAnimatorNS.DecorationType.None);
             this.dgvDepartamento.DoubleBuffered = true;
             this.dgvDepartamento.EnableHeadersVisualStyles = false;
             this.dgvDepartamento.GridColor = System.Drawing.SystemColors.GradientInactiveCaption;
@@ -232,13 +267,89 @@
             this.modificar.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
             this.modificar.Width = 60;
             // 
+            // panelLista
+            // 
+            this.panelLista.BackColor = System.Drawing.SystemColors.GradientActiveCaption;
+            this.panelLista.Controls.Add(this.btnCerrarDepto);
+            this.panelLista.Controls.Add(this.tbLista);
+            this.panelLista.Controls.Add(this.btnPrinterLista);
+            this.panelListaTrans.SetDecoration(this.panelLista, BunifuAnimatorNS.DecorationType.None);
+            this.panelLista.Location = new System.Drawing.Point(154, 78);
+            this.panelLista.Name = "panelLista";
+            this.panelLista.Size = new System.Drawing.Size(379, 236);
+            this.panelLista.TabIndex = 5;
+            // 
+            // btnCerrarDepto
+            // 
+            this.btnCerrarDepto.BackColor = System.Drawing.SystemColors.GradientActiveCaption;
+            this.panelListaTrans.SetDecoration(this.btnCerrarDepto, BunifuAnimatorNS.DecorationType.None);
+            this.btnCerrarDepto.Image = ((System.Drawing.Image)(resources.GetObject("btnCerrarDepto.Image")));
+            this.btnCerrarDepto.ImageActive = null;
+            this.btnCerrarDepto.Location = new System.Drawing.Point(242, 202);
+            this.btnCerrarDepto.Name = "btnCerrarDepto";
+            this.btnCerrarDepto.Size = new System.Drawing.Size(34, 23);
+            this.btnCerrarDepto.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.btnCerrarDepto.TabIndex = 8;
+            this.btnCerrarDepto.TabStop = false;
+            this.btnCerrarDepto.Zoom = 10;
+            this.btnCerrarDepto.Click += new System.EventHandler(this.btnCerrarDepto_Click);
+            // 
+            // tbLista
+            // 
+            this.tbLista.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.panelListaTrans.SetDecoration(this.tbLista, BunifuAnimatorNS.DecorationType.None);
+            this.tbLista.Location = new System.Drawing.Point(14, 12);
+            this.tbLista.Multiline = true;
+            this.tbLista.Name = "tbLista";
+            this.tbLista.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
+            this.tbLista.Size = new System.Drawing.Size(345, 184);
+            this.tbLista.TabIndex = 3;
+            // 
+            // btnPrinterLista
+            // 
+            this.btnPrinterLista.BackColor = System.Drawing.SystemColors.GradientActiveCaption;
+            this.panelListaTrans.SetDecoration(this.btnPrinterLista, BunifuAnimatorNS.DecorationType.None);
+            this.btnPrinterLista.Enabled = false;
+            this.btnPrinterLista.Image = ((System.Drawing.Image)(resources.GetObject("btnPrinterLista.Image")));
+            this.btnPrinterLista.ImageActive = null;
+            this.btnPrinterLista.Location = new System.Drawing.Point(202, 202);
+            this.btnPrinterLista.Name = "btnPrinterLista";
+            this.btnPrinterLista.Size = new System.Drawing.Size(34, 23);
+            this.btnPrinterLista.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.btnPrinterLista.TabIndex = 7;
+            this.btnPrinterLista.TabStop = false;
+            this.btnPrinterLista.Zoom = 10;
+            // 
+            // panelListaTrans
+            // 
+            this.panelListaTrans.AnimationType = BunifuAnimatorNS.AnimationType.Leaf;
+            this.panelListaTrans.Cursor = null;
+            animation1.AnimateOnlyDifferences = true;
+            animation1.BlindCoeff = ((System.Drawing.PointF)(resources.GetObject("animation1.BlindCoeff")));
+            animation1.LeafCoeff = 1F;
+            animation1.MaxTime = 1F;
+            animation1.MinTime = 0F;
+            animation1.MosaicCoeff = ((System.Drawing.PointF)(resources.GetObject("animation1.MosaicCoeff")));
+            animation1.MosaicShift = ((System.Drawing.PointF)(resources.GetObject("animation1.MosaicShift")));
+            animation1.MosaicSize = 0;
+            animation1.Padding = new System.Windows.Forms.Padding(0);
+            animation1.RotateCoeff = 0F;
+            animation1.RotateLimit = 0F;
+            animation1.ScaleCoeff = ((System.Drawing.PointF)(resources.GetObject("animation1.ScaleCoeff")));
+            animation1.SlideCoeff = ((System.Drawing.PointF)(resources.GetObject("animation1.SlideCoeff")));
+            animation1.TimeCoeff = 0F;
+            animation1.TransparencyCoeff = 0F;
+            this.panelListaTrans.DefaultAnimation = animation1;
+            // 
             // FormDepartamento
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(686, 392);
+            this.Controls.Add(this.panelLista);
             this.Controls.Add(this.dgvDepartamento);
             this.Controls.Add(this.panel1);
+            this.panelListaTrans.SetDecoration(this, BunifuAnimatorNS.DecorationType.None);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "FormDepartamento";
             this.StartPosition = System.Windows.Forms.FormStartPosition.Manual;
@@ -246,12 +357,17 @@
             this.Load += new System.EventHandler(this.FormDepartamento_Load);
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.btnPrinterDepLista)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.btnExcel)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.btnPdf)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.btnInserir)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.bunifuImageButton1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvDepartamento)).EndInit();
+            this.panelLista.ResumeLayout(false);
+            this.panelLista.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.btnCerrarDepto)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.btnPrinterLista)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -272,5 +388,11 @@
         private System.Windows.Forms.DataGridViewButtonColumn modificar;
         private Bunifu.Framework.UI.BunifuImageButton btnExcel;
         private Bunifu.Framework.UI.BunifuImageButton btnPdf;
+        private Bunifu.Framework.UI.BunifuImageButton btnPrinterDepLista;
+        private System.Windows.Forms.Panel panelLista;
+        private Bunifu.Framework.UI.BunifuImageButton btnCerrarDepto;
+        private System.Windows.Forms.TextBox tbLista;
+        private Bunifu.Framework.UI.BunifuImageButton btnPrinterLista;
+        private BunifuAnimatorNS.BunifuTransition panelListaTrans;
     }
 }

@@ -61,7 +61,7 @@ namespace SCAM_App
                 tbNombre.Text = usu.Nombre;
                 tbAlias.Text = usu.Alias;
                 tbLogin.Text = usu.Login;
-                tbPassword.Text = usu.Password;
+                tbPassword.Text = Util.Desencriptar(usu.Password);
 
                 if (usu.Acceso == 0)
                     radioZero.Checked = true;
@@ -130,6 +130,7 @@ namespace SCAM_App
             else
             {
                 usuAd.IdUsuario = Convert.ToInt32(tbIdUsuario.Text);
+               // usuAd.Password = Util.Desencriptar(tbPassword.Text);
                 resultado = UsuarioDAO.ModificarUsuario(usuAd);
             }
 
@@ -180,7 +181,6 @@ namespace SCAM_App
                 fa.ShowDialog();
             }
 
-
         }
 
 
@@ -219,14 +219,16 @@ namespace SCAM_App
             else
                 errorProvider1.SetError(tbLogin, "");
 
-            if (tbPassword.Text.Trim().Length > 20)
-            {
-                errorProvider1.SetError(tbPassword, "Error en el Tamaño de la Password ");
 
-                hayError = true;
-            }
-            else
-                errorProvider1.SetError(tbPassword, "");
+                if (tbPassword.Text.Trim().Length > 20 || tbPassword.Text.Trim().Length < 1)
+                {
+                    errorProvider1.SetError(tbPassword, "Error en el Tamaño de la Password ");
+
+                    hayError = true;
+                }
+                else
+                    errorProvider1.SetError(tbPassword, "");
+    
 
             if (radioZero.Checked == false && radioUno.Checked == false && radioDos.Checked == false)
             {

@@ -41,7 +41,7 @@ namespace DatosNegocios
             this.fechaEntrada = fechaEntrada;
             this.salario = 0;
             this.sexo = String.Empty;
-            this.foto = null;
+            this.foto = String.Empty;
             this.idUsuario = -1;
             this.activo = 1;
         }

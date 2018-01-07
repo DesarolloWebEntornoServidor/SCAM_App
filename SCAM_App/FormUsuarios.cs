@@ -25,6 +25,11 @@ namespace SCAM_App
 
             dgvUsuarios.Columns["Codigo"].Visible = false;
 
+            panelLista.Visible = false;
+
+            btnCerrarTarjeta.Visible = false;
+            btnPrinterLista.Visible = false;
+
         }
 
         public FormUsuarios(int v)
@@ -327,8 +332,42 @@ namespace SCAM_App
 
         }
 
+        private void btnPrinter_Click(object sender, EventArgs e)
+        {
+            string resultado = "";
+            int contador = 0;
 
+            resultado += "\t\t" + "Lista de Usuarios" + "\r\n" + "\r\n";
 
+            for (int i = 0; i < listaUsuarios.Count; i++)
+            {
+                resultado += "\t" + listaUsuarios[i].Nombre.PadRight(30,' ') + listaUsuarios[i].Alias.PadRight(6, ' ') + listaUsuarios[i].Login.PadRight(10, ' ') + "\t" + listaUsuarios[i].Acceso.ToString("##") + "\r\n";
+                tbLista.Text = resultado;
 
+                contador++;
+            }
+
+            resultado += "\r\n\t" + "Existen " + contador + " Usuarios Registrados" + "\r\n";
+            tbLista.Text = resultado;
+
+            panelLista.Invalidate();
+
+            panelListaTrans.ShowSync(panelLista);
+
+            panelLista.Visible = true;
+
+            btnCerrarTarjeta.Visible = true;
+            btnPrinterLista.Visible = true;
+
+        }
+
+        private void btnCerrarTarjeta_Click(object sender, EventArgs e)
+        {
+            panelLista.Visible = false;
+
+            btnCerrarTarjeta.Visible = false;
+            btnPrinterLista.Visible = false;
+        }
     }
+    
 }

@@ -30,6 +30,11 @@ namespace SCAM_App
             dgvAccesos.AllowUserToAddRows = false;
 
             dgvAccesos.Columns["Codigo"].Visible = false;
+
+            panelLista.Visible = false;
+
+            btnCerrarCod.Visible = false;
+            btnPrinterLista.Visible = false;
         }
 
         private void FormAccesos_Load(object sender, EventArgs e)
@@ -284,6 +289,42 @@ namespace SCAM_App
 
                 MessageBox.Show("Error, El Archivo Actual está Abierto !!");
             }
+        }
+
+        private void btnCerrarCod_Click(object sender, EventArgs e)
+        {
+            panelLista.Visible = false;
+
+            btnCerrarCod.Visible = false;
+            btnPrinterLista.Visible = false;
+        }
+
+        private void btnPrinterCodLista_Click(object sender, EventArgs e)
+        {
+            string resultado = "";
+            int contador = 0;
+
+            resultado += "\t\t" + "Lista de Niveles de Acceso" + "\r\n" + "\r\n";
+
+            for (int i = 0; i < listaCodigos.Count; i++)
+            {
+                resultado += "\t" + listaCodigos[i].DescripcionAcceso + "\r\n";
+                tbLista.Text = resultado;
+
+                contador++;
+            }
+
+            resultado += "\r\n\t" + "Existen " + contador + " Codigos de Acceso Registrados " + "\r\n";
+            tbLista.Text = resultado;
+
+            panelLista.Invalidate();
+
+            panelListaTrans.ShowSync(panelLista);
+
+            panelLista.Visible = true;
+
+            btnCerrarCod.Visible = true;
+            btnPrinterLista.Visible = true;
         }
     }
 }

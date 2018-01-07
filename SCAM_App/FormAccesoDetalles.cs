@@ -117,7 +117,7 @@ namespace SCAM_App
             hayError = false;
 
             string pathString = @"[A-Z]{1}[a-zA-ZàáâäãåąčćęèéêëėįìíîïłńòóôöõøùúûüųūÿýżźñçčšžÀÁÂÄÃÅĄĆČĖĘÈÉÊËÌÍÎÏĮŁŃÒÓÔÖÕØÙÚÛÜŲŪŸÝŻŹÑßÇŒÆČŠŽ∂ð,.'-]{2,29}";
-            string pathCodigo = @"[a-zA-Z]";
+            string pathCodigo = @"[a-zA-ZàáâäãåąčćęèéêëėįìíîïłńòóôöõøùúûüųūÿýżźñçčšžÀÁÂÄÃÅĄĆČĖĘÈÉÊËÌÍÎÏĮŁŃÒÓÔÖÕØÙÚÛÜŲŪŸÝŻŹÑßÇŒÆČŠŽ∂ð,.'-]";
 
             if (!Regex.IsMatch(txtDescripcion.Text, pathString) || txtDescripcion.Text.Trim().Length > 30)
             {
@@ -128,14 +128,17 @@ namespace SCAM_App
             else
                 errorProvider1.SetError(txtDescripcion, "");
 
-            if (!Regex.IsMatch(txtCodigoAceso.Text, pathCodigo) || txtCodigoAceso.Text.Trim().Length > 30)
+            if (esNuevo)
             {
-                errorProvider1.SetError(txtCodigoAceso, "Error, el Código no Puede Empezar por Número ");
+                if (!Regex.IsMatch(txtCodigoAceso.Text, pathCodigo) || txtCodigoAceso.Text.Trim().Length > 30)
+                {
+                    errorProvider1.SetError(txtCodigoAceso, "Error, el Código no Puede Empezar por Número ");
 
-                hayError = true;
+                    hayError = true;
+                }
+                else
+                    errorProvider1.SetError(txtCodigoAceso, "");
             }
-            else
-                errorProvider1.SetError(txtCodigoAceso, "");
 
             List<CodigoAcceso> yaExiste = CodigoAccesoDAO.YaExiste(Util.Encriptar(txtCodigoAceso.Text), txtDescripcion.Text); // Verifica si el Codigo ya existe   //
             if (yaExiste.Count > 0 && txtIdCodigo.Text == "")

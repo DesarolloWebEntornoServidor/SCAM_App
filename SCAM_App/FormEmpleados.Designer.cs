@@ -31,6 +31,7 @@
             this.components = new System.ComponentModel.Container();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            BunifuAnimatorNS.Animation animation2 = new BunifuAnimatorNS.Animation();
             BunifuAnimatorNS.Animation animation1 = new BunifuAnimatorNS.Animation();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormEmpleados));
             this.bunifuElipse1 = new Bunifu.Framework.UI.BunifuElipse(this.components);
@@ -63,6 +64,12 @@
             this.panelTarjetaTransition = new BunifuAnimatorNS.BunifuTransition(this.components);
             this.btnPrinter = new Bunifu.Framework.UI.BunifuImageButton();
             this.btnCerrarTarjeta = new Bunifu.Framework.UI.BunifuImageButton();
+            this.panelLista = new System.Windows.Forms.Panel();
+            this.btnCerraLista = new Bunifu.Framework.UI.BunifuImageButton();
+            this.tbLista = new System.Windows.Forms.TextBox();
+            this.btnPrinterLista = new Bunifu.Framework.UI.BunifuImageButton();
+            this.btnPrinterEmpLista = new Bunifu.Framework.UI.BunifuImageButton();
+            this.panelListaTrans = new BunifuAnimatorNS.BunifuTransition(this.components);
             this.bunifuGradientPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.btnExcel)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.btnPdf)).BeginInit();
@@ -75,6 +82,10 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictFotoTarjeta)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.btnPrinter)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.btnCerrarTarjeta)).BeginInit();
+            this.panelLista.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.btnCerraLista)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.btnPrinterLista)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.btnPrinterEmpLista)).BeginInit();
             this.SuspendLayout();
             // 
             // bunifuElipse1
@@ -86,12 +97,14 @@
             // 
             this.bunifuGradientPanel1.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("bunifuGradientPanel1.BackgroundImage")));
             this.bunifuGradientPanel1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.bunifuGradientPanel1.Controls.Add(this.btnPrinterEmpLista);
             this.bunifuGradientPanel1.Controls.Add(this.btnExcel);
             this.bunifuGradientPanel1.Controls.Add(this.btnPdf);
             this.bunifuGradientPanel1.Controls.Add(this.textBox1);
             this.bunifuGradientPanel1.Controls.Add(this.pictureBox1);
             this.bunifuGradientPanel1.Controls.Add(this.btnInserir);
             this.bunifuGradientPanel1.Controls.Add(this.bunifuImageButton1);
+            this.panelListaTrans.SetDecoration(this.bunifuGradientPanel1, BunifuAnimatorNS.DecorationType.None);
             this.panelTarjetaTransition.SetDecoration(this.bunifuGradientPanel1, BunifuAnimatorNS.DecorationType.None);
             this.bunifuGradientPanel1.Dock = System.Windows.Forms.DockStyle.Top;
             this.bunifuGradientPanel1.GradientBottomLeft = System.Drawing.Color.RoyalBlue;
@@ -107,10 +120,11 @@
             // btnExcel
             // 
             this.btnExcel.BackColor = System.Drawing.Color.RoyalBlue;
+            this.panelListaTrans.SetDecoration(this.btnExcel, BunifuAnimatorNS.DecorationType.None);
             this.panelTarjetaTransition.SetDecoration(this.btnExcel, BunifuAnimatorNS.DecorationType.None);
             this.btnExcel.Image = ((System.Drawing.Image)(resources.GetObject("btnExcel.Image")));
             this.btnExcel.ImageActive = null;
-            this.btnExcel.Location = new System.Drawing.Point(551, 9);
+            this.btnExcel.Location = new System.Drawing.Point(476, 10);
             this.btnExcel.Name = "btnExcel";
             this.btnExcel.Size = new System.Drawing.Size(45, 51);
             this.btnExcel.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
@@ -122,10 +136,11 @@
             // btnPdf
             // 
             this.btnPdf.BackColor = System.Drawing.Color.RoyalBlue;
+            this.panelListaTrans.SetDecoration(this.btnPdf, BunifuAnimatorNS.DecorationType.None);
             this.panelTarjetaTransition.SetDecoration(this.btnPdf, BunifuAnimatorNS.DecorationType.None);
             this.btnPdf.Image = ((System.Drawing.Image)(resources.GetObject("btnPdf.Image")));
             this.btnPdf.ImageActive = null;
-            this.btnPdf.Location = new System.Drawing.Point(488, 9);
+            this.btnPdf.Location = new System.Drawing.Point(536, 10);
             this.btnPdf.Name = "btnPdf";
             this.btnPdf.Size = new System.Drawing.Size(45, 51);
             this.btnPdf.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
@@ -137,6 +152,7 @@
             // textBox1
             // 
             this.panelTarjetaTransition.SetDecoration(this.textBox1, BunifuAnimatorNS.DecorationType.None);
+            this.panelListaTrans.SetDecoration(this.textBox1, BunifuAnimatorNS.DecorationType.None);
             this.textBox1.Location = new System.Drawing.Point(25, 33);
             this.textBox1.Name = "textBox1";
             this.textBox1.Size = new System.Drawing.Size(142, 20);
@@ -147,6 +163,7 @@
             // 
             this.pictureBox1.BackColor = System.Drawing.Color.RoyalBlue;
             this.panelTarjetaTransition.SetDecoration(this.pictureBox1, BunifuAnimatorNS.DecorationType.None);
+            this.panelListaTrans.SetDecoration(this.pictureBox1, BunifuAnimatorNS.DecorationType.None);
             this.pictureBox1.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox1.Image")));
             this.pictureBox1.Location = new System.Drawing.Point(173, 33);
             this.pictureBox1.Name = "pictureBox1";
@@ -158,10 +175,11 @@
             // btnInserir
             // 
             this.btnInserir.BackColor = System.Drawing.Color.RoyalBlue;
+            this.panelListaTrans.SetDecoration(this.btnInserir, BunifuAnimatorNS.DecorationType.None);
             this.panelTarjetaTransition.SetDecoration(this.btnInserir, BunifuAnimatorNS.DecorationType.None);
             this.btnInserir.Image = ((System.Drawing.Image)(resources.GetObject("btnInserir.Image")));
             this.btnInserir.ImageActive = null;
-            this.btnInserir.Location = new System.Drawing.Point(358, 9);
+            this.btnInserir.Location = new System.Drawing.Point(277, 9);
             this.btnInserir.Name = "btnInserir";
             this.btnInserir.Size = new System.Drawing.Size(53, 56);
             this.btnInserir.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
@@ -173,6 +191,7 @@
             // bunifuImageButton1
             // 
             this.bunifuImageButton1.BackColor = System.Drawing.Color.RoyalBlue;
+            this.panelListaTrans.SetDecoration(this.bunifuImageButton1, BunifuAnimatorNS.DecorationType.None);
             this.panelTarjetaTransition.SetDecoration(this.bunifuImageButton1, BunifuAnimatorNS.DecorationType.None);
             this.bunifuImageButton1.Image = ((System.Drawing.Image)(resources.GetObject("bunifuImageButton1.Image")));
             this.bunifuImageButton1.ImageActive = null;
@@ -217,6 +236,7 @@
             this.modificar,
             this.tarjeta});
             this.panelTarjetaTransition.SetDecoration(this.dgvEmpleados, BunifuAnimatorNS.DecorationType.None);
+            this.panelListaTrans.SetDecoration(this.dgvEmpleados, BunifuAnimatorNS.DecorationType.None);
             this.dgvEmpleados.DoubleBuffered = true;
             this.dgvEmpleados.EnableHeadersVisualStyles = false;
             this.dgvEmpleados.GridColor = System.Drawing.SystemColors.GradientInactiveCaption;
@@ -328,6 +348,7 @@
             this.panelTarjeta.Controls.Add(this.lbDepartamento);
             this.panelTarjeta.Controls.Add(this.lbNombre);
             this.panelTarjeta.Controls.Add(this.pictFotoTarjeta);
+            this.panelListaTrans.SetDecoration(this.panelTarjeta, BunifuAnimatorNS.DecorationType.None);
             this.panelTarjetaTransition.SetDecoration(this.panelTarjeta, BunifuAnimatorNS.DecorationType.None);
             this.panelTarjeta.Location = new System.Drawing.Point(229, 119);
             this.panelTarjeta.Name = "panelTarjeta";
@@ -338,6 +359,7 @@
             // 
             this.lbFuncion.AutoSize = true;
             this.panelTarjetaTransition.SetDecoration(this.lbFuncion, BunifuAnimatorNS.DecorationType.None);
+            this.panelListaTrans.SetDecoration(this.lbFuncion, BunifuAnimatorNS.DecorationType.None);
             this.lbFuncion.Font = new System.Drawing.Font("Century Gothic", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lbFuncion.Location = new System.Drawing.Point(23, 116);
             this.lbFuncion.Name = "lbFuncion";
@@ -347,6 +369,7 @@
             // 
             // panelResultado
             // 
+            this.panelListaTrans.SetDecoration(this.panelResultado, BunifuAnimatorNS.DecorationType.None);
             this.panelTarjetaTransition.SetDecoration(this.panelResultado, BunifuAnimatorNS.DecorationType.None);
             this.panelResultado.Location = new System.Drawing.Point(19, 158);
             this.panelResultado.Name = "panelResultado";
@@ -356,6 +379,7 @@
             // pictureBox2
             // 
             this.panelTarjetaTransition.SetDecoration(this.pictureBox2, BunifuAnimatorNS.DecorationType.None);
+            this.panelListaTrans.SetDecoration(this.pictureBox2, BunifuAnimatorNS.DecorationType.None);
             this.pictureBox2.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox2.Image")));
             this.pictureBox2.Location = new System.Drawing.Point(3, 3);
             this.pictureBox2.Name = "pictureBox2";
@@ -368,6 +392,7 @@
             // 
             this.lbDepartamento.AutoSize = true;
             this.panelTarjetaTransition.SetDecoration(this.lbDepartamento, BunifuAnimatorNS.DecorationType.None);
+            this.panelListaTrans.SetDecoration(this.lbDepartamento, BunifuAnimatorNS.DecorationType.None);
             this.lbDepartamento.Font = new System.Drawing.Font("Century Gothic", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lbDepartamento.Location = new System.Drawing.Point(23, 133);
             this.lbDepartamento.Name = "lbDepartamento";
@@ -379,6 +404,7 @@
             // 
             this.lbNombre.AutoSize = true;
             this.panelTarjetaTransition.SetDecoration(this.lbNombre, BunifuAnimatorNS.DecorationType.None);
+            this.panelListaTrans.SetDecoration(this.lbNombre, BunifuAnimatorNS.DecorationType.None);
             this.lbNombre.Font = new System.Drawing.Font("Century Gothic", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lbNombre.ForeColor = System.Drawing.SystemColors.HotTrack;
             this.lbNombre.Location = new System.Drawing.Point(23, 95);
@@ -390,6 +416,7 @@
             // pictFotoTarjeta
             // 
             this.panelTarjetaTransition.SetDecoration(this.pictFotoTarjeta, BunifuAnimatorNS.DecorationType.None);
+            this.panelListaTrans.SetDecoration(this.pictFotoTarjeta, BunifuAnimatorNS.DecorationType.None);
             this.pictFotoTarjeta.Location = new System.Drawing.Point(317, 23);
             this.pictFotoTarjeta.Name = "pictFotoTarjeta";
             this.pictFotoTarjeta.Size = new System.Drawing.Size(100, 122);
@@ -400,26 +427,27 @@
             // 
             this.panelTarjetaTransition.AnimationType = BunifuAnimatorNS.AnimationType.HorizSlide;
             this.panelTarjetaTransition.Cursor = null;
-            animation1.AnimateOnlyDifferences = true;
-            animation1.BlindCoeff = ((System.Drawing.PointF)(resources.GetObject("animation1.BlindCoeff")));
-            animation1.LeafCoeff = 0F;
-            animation1.MaxTime = 1F;
-            animation1.MinTime = 0F;
-            animation1.MosaicCoeff = ((System.Drawing.PointF)(resources.GetObject("animation1.MosaicCoeff")));
-            animation1.MosaicShift = ((System.Drawing.PointF)(resources.GetObject("animation1.MosaicShift")));
-            animation1.MosaicSize = 0;
-            animation1.Padding = new System.Windows.Forms.Padding(0);
-            animation1.RotateCoeff = 0F;
-            animation1.RotateLimit = 0F;
-            animation1.ScaleCoeff = ((System.Drawing.PointF)(resources.GetObject("animation1.ScaleCoeff")));
-            animation1.SlideCoeff = ((System.Drawing.PointF)(resources.GetObject("animation1.SlideCoeff")));
-            animation1.TimeCoeff = 0F;
-            animation1.TransparencyCoeff = 0F;
-            this.panelTarjetaTransition.DefaultAnimation = animation1;
+            animation2.AnimateOnlyDifferences = true;
+            animation2.BlindCoeff = ((System.Drawing.PointF)(resources.GetObject("animation2.BlindCoeff")));
+            animation2.LeafCoeff = 0F;
+            animation2.MaxTime = 1F;
+            animation2.MinTime = 0F;
+            animation2.MosaicCoeff = ((System.Drawing.PointF)(resources.GetObject("animation2.MosaicCoeff")));
+            animation2.MosaicShift = ((System.Drawing.PointF)(resources.GetObject("animation2.MosaicShift")));
+            animation2.MosaicSize = 0;
+            animation2.Padding = new System.Windows.Forms.Padding(0);
+            animation2.RotateCoeff = 0F;
+            animation2.RotateLimit = 0F;
+            animation2.ScaleCoeff = ((System.Drawing.PointF)(resources.GetObject("animation2.ScaleCoeff")));
+            animation2.SlideCoeff = ((System.Drawing.PointF)(resources.GetObject("animation2.SlideCoeff")));
+            animation2.TimeCoeff = 0F;
+            animation2.TransparencyCoeff = 0F;
+            this.panelTarjetaTransition.DefaultAnimation = animation2;
             // 
             // btnPrinter
             // 
             this.btnPrinter.BackColor = System.Drawing.Color.GhostWhite;
+            this.panelListaTrans.SetDecoration(this.btnPrinter, BunifuAnimatorNS.DecorationType.None);
             this.panelTarjetaTransition.SetDecoration(this.btnPrinter, BunifuAnimatorNS.DecorationType.None);
             this.btnPrinter.Enabled = false;
             this.btnPrinter.Image = ((System.Drawing.Image)(resources.GetObject("btnPrinter.Image")));
@@ -431,10 +459,12 @@
             this.btnPrinter.TabIndex = 5;
             this.btnPrinter.TabStop = false;
             this.btnPrinter.Zoom = 10;
+            this.btnPrinter.Click += new System.EventHandler(this.btnPrinter_Click);
             // 
             // btnCerrarTarjeta
             // 
             this.btnCerrarTarjeta.BackColor = System.Drawing.Color.GhostWhite;
+            this.panelListaTrans.SetDecoration(this.btnCerrarTarjeta, BunifuAnimatorNS.DecorationType.None);
             this.panelTarjetaTransition.SetDecoration(this.btnCerrarTarjeta, BunifuAnimatorNS.DecorationType.None);
             this.btnCerrarTarjeta.Image = ((System.Drawing.Image)(resources.GetObject("btnCerrarTarjeta.Image")));
             this.btnCerrarTarjeta.ImageActive = null;
@@ -447,17 +477,113 @@
             this.btnCerrarTarjeta.Zoom = 10;
             this.btnCerrarTarjeta.Click += new System.EventHandler(this.btnCerrarTarjeta_Click);
             // 
+            // panelLista
+            // 
+            this.panelLista.BackColor = System.Drawing.SystemColors.GradientActiveCaption;
+            this.panelLista.Controls.Add(this.btnCerraLista);
+            this.panelLista.Controls.Add(this.tbLista);
+            this.panelLista.Controls.Add(this.btnPrinterLista);
+            this.panelListaTrans.SetDecoration(this.panelLista, BunifuAnimatorNS.DecorationType.None);
+            this.panelTarjetaTransition.SetDecoration(this.panelLista, BunifuAnimatorNS.DecorationType.None);
+            this.panelLista.Location = new System.Drawing.Point(83, 111);
+            this.panelLista.Name = "panelLista";
+            this.panelLista.Size = new System.Drawing.Size(676, 236);
+            this.panelLista.TabIndex = 7;
+            // 
+            // btnCerraLista
+            // 
+            this.btnCerraLista.BackColor = System.Drawing.SystemColors.GradientActiveCaption;
+            this.panelListaTrans.SetDecoration(this.btnCerraLista, BunifuAnimatorNS.DecorationType.None);
+            this.panelTarjetaTransition.SetDecoration(this.btnCerraLista, BunifuAnimatorNS.DecorationType.None);
+            this.btnCerraLista.Image = ((System.Drawing.Image)(resources.GetObject("btnCerraLista.Image")));
+            this.btnCerraLista.ImageActive = null;
+            this.btnCerraLista.Location = new System.Drawing.Point(242, 202);
+            this.btnCerraLista.Name = "btnCerraLista";
+            this.btnCerraLista.Size = new System.Drawing.Size(34, 23);
+            this.btnCerraLista.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.btnCerraLista.TabIndex = 8;
+            this.btnCerraLista.TabStop = false;
+            this.btnCerraLista.Zoom = 10;
+            this.btnCerraLista.Click += new System.EventHandler(this.btnCerraLista_Click);
+            // 
+            // tbLista
+            // 
+            this.tbLista.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.panelTarjetaTransition.SetDecoration(this.tbLista, BunifuAnimatorNS.DecorationType.None);
+            this.panelListaTrans.SetDecoration(this.tbLista, BunifuAnimatorNS.DecorationType.None);
+            this.tbLista.Location = new System.Drawing.Point(14, 12);
+            this.tbLista.Multiline = true;
+            this.tbLista.Name = "tbLista";
+            this.tbLista.ScrollBars = System.Windows.Forms.ScrollBars.Both;
+            this.tbLista.Size = new System.Drawing.Size(646, 184);
+            this.tbLista.TabIndex = 3;
+            // 
+            // btnPrinterLista
+            // 
+            this.btnPrinterLista.BackColor = System.Drawing.SystemColors.GradientActiveCaption;
+            this.panelListaTrans.SetDecoration(this.btnPrinterLista, BunifuAnimatorNS.DecorationType.None);
+            this.panelTarjetaTransition.SetDecoration(this.btnPrinterLista, BunifuAnimatorNS.DecorationType.None);
+            this.btnPrinterLista.Enabled = false;
+            this.btnPrinterLista.Image = ((System.Drawing.Image)(resources.GetObject("btnPrinterLista.Image")));
+            this.btnPrinterLista.ImageActive = null;
+            this.btnPrinterLista.Location = new System.Drawing.Point(202, 202);
+            this.btnPrinterLista.Name = "btnPrinterLista";
+            this.btnPrinterLista.Size = new System.Drawing.Size(34, 23);
+            this.btnPrinterLista.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.btnPrinterLista.TabIndex = 7;
+            this.btnPrinterLista.TabStop = false;
+            this.btnPrinterLista.Zoom = 10;
+            // 
+            // btnPrinterEmpLista
+            // 
+            this.btnPrinterEmpLista.BackColor = System.Drawing.Color.RoyalBlue;
+            this.panelListaTrans.SetDecoration(this.btnPrinterEmpLista, BunifuAnimatorNS.DecorationType.None);
+            this.panelTarjetaTransition.SetDecoration(this.btnPrinterEmpLista, BunifuAnimatorNS.DecorationType.None);
+            this.btnPrinterEmpLista.Image = ((System.Drawing.Image)(resources.GetObject("btnPrinterEmpLista.Image")));
+            this.btnPrinterEmpLista.ImageActive = null;
+            this.btnPrinterEmpLista.Location = new System.Drawing.Point(413, 10);
+            this.btnPrinterEmpLista.Name = "btnPrinterEmpLista";
+            this.btnPrinterEmpLista.Size = new System.Drawing.Size(45, 51);
+            this.btnPrinterEmpLista.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.btnPrinterEmpLista.TabIndex = 25;
+            this.btnPrinterEmpLista.TabStop = false;
+            this.btnPrinterEmpLista.Zoom = 10;
+            this.btnPrinterEmpLista.Click += new System.EventHandler(this.btnPrinterEmpLista_Click);
+            // 
+            // panelListaTrans
+            // 
+            this.panelListaTrans.AnimationType = BunifuAnimatorNS.AnimationType.Leaf;
+            this.panelListaTrans.Cursor = null;
+            animation1.AnimateOnlyDifferences = true;
+            animation1.BlindCoeff = ((System.Drawing.PointF)(resources.GetObject("animation1.BlindCoeff")));
+            animation1.LeafCoeff = 1F;
+            animation1.MaxTime = 1F;
+            animation1.MinTime = 0F;
+            animation1.MosaicCoeff = ((System.Drawing.PointF)(resources.GetObject("animation1.MosaicCoeff")));
+            animation1.MosaicShift = ((System.Drawing.PointF)(resources.GetObject("animation1.MosaicShift")));
+            animation1.MosaicSize = 0;
+            animation1.Padding = new System.Windows.Forms.Padding(0);
+            animation1.RotateCoeff = 0F;
+            animation1.RotateLimit = 0F;
+            animation1.ScaleCoeff = ((System.Drawing.PointF)(resources.GetObject("animation1.ScaleCoeff")));
+            animation1.SlideCoeff = ((System.Drawing.PointF)(resources.GetObject("animation1.SlideCoeff")));
+            animation1.TimeCoeff = 0F;
+            animation1.TransparencyCoeff = 0F;
+            this.panelListaTrans.DefaultAnimation = animation1;
+            // 
             // FormEmpleados
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(930, 458);
+            this.Controls.Add(this.panelLista);
             this.Controls.Add(this.btnCerrarTarjeta);
             this.Controls.Add(this.btnPrinter);
             this.Controls.Add(this.panelTarjeta);
             this.Controls.Add(this.bunifuGradientPanel1);
             this.Controls.Add(this.dgvEmpleados);
             this.panelTarjetaTransition.SetDecoration(this, BunifuAnimatorNS.DecorationType.None);
+            this.panelListaTrans.SetDecoration(this, BunifuAnimatorNS.DecorationType.None);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "FormEmpleados";
             this.StartPosition = System.Windows.Forms.FormStartPosition.Manual;
@@ -477,6 +603,11 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictFotoTarjeta)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.btnPrinter)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.btnCerrarTarjeta)).EndInit();
+            this.panelLista.ResumeLayout(false);
+            this.panelLista.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.btnCerraLista)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.btnPrinterLista)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.btnPrinterEmpLista)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -513,5 +644,11 @@
         private System.Windows.Forms.DataGridViewButtonColumn tarjeta;
         private Bunifu.Framework.UI.BunifuImageButton btnExcel;
         private Bunifu.Framework.UI.BunifuImageButton btnPdf;
+        private System.Windows.Forms.Panel panelLista;
+        private Bunifu.Framework.UI.BunifuImageButton btnCerraLista;
+        private System.Windows.Forms.TextBox tbLista;
+        private Bunifu.Framework.UI.BunifuImageButton btnPrinterLista;
+        private Bunifu.Framework.UI.BunifuImageButton btnPrinterEmpLista;
+        private BunifuAnimatorNS.BunifuTransition panelListaTrans;
     }
 }

@@ -70,7 +70,7 @@ namespace DatosNegocios
             int retorno = 0;               
 
             MySqlCommand comando = new MySqlCommand(string.Format("update codigosacceso set codigoDeAcceso = '{0}', descripcionAcceso = '{1}', pTodos = '{2}' where idCodigoAcceso={3}",
-                Util.Encriptar(codA.CodigoDeAcceso), codA.DescripcionAcceso, codA.PTodos, codA.IdCodigoAcceso), Conexion.ObtenerConexion());
+                codA.CodigoDeAcceso, codA.DescripcionAcceso, codA.PTodos, codA.IdCodigoAcceso), Conexion.ObtenerConexion());
 
             retorno = comando.ExecuteNonQuery();
             return retorno;

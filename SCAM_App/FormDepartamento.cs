@@ -26,6 +26,11 @@ namespace SCAM_App
 
             dgvDepartamento.Columns["Codigo"].Visible = false;
 
+            panelLista.Visible = false;
+
+            btnCerrarDepto.Visible = false;
+            btnPrinterLista.Visible = false;
+
         }
 
         private void FormDepartamento_Load(object sender, EventArgs e)
@@ -288,6 +293,42 @@ namespace SCAM_App
 
                 MessageBox.Show("Error, El Archivo Actual está Abierto !!");
             }
+        }
+
+        private void btnCerrarDepto_Click(object sender, EventArgs e)
+        {
+            panelLista.Visible = false;
+
+            btnCerrarDepto.Visible = false;
+            btnPrinterLista.Visible = false;
+        }
+
+        private void btnPrinterDepLista_Click(object sender, EventArgs e)
+        {
+            string resultado = "";
+            int contador = 0;
+
+            resultado += "\t\t" + "Lista de Departamentos" + "\r\n" + "\r\n";
+
+            for (int i = 0; i < listaDeps.Count; i++)
+            {
+                resultado += "\t" + listaDeps[i].Descripcion + "\r\n";
+                tbLista.Text = resultado;
+
+                contador++;
+            }
+
+            resultado += "\r\n\t" + "Existen " + contador + " Departamentos Registrados " + "\r\n";
+            tbLista.Text = resultado;
+
+            panelLista.Invalidate();
+
+            panelListaTrans.ShowSync(panelLista);
+
+            panelLista.Visible = true;
+
+            btnCerrarDepto.Visible = true;
+            btnPrinterLista.Visible = true;
         }
     }
 }

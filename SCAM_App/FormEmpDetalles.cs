@@ -30,7 +30,19 @@ namespace SCAM_App
         string nombreRuta = "";
         string nombreImagen = "";
 
-        public string NombreRuta { get => nombreRuta; set => nombreRuta = value; }
+        public string NombreRuta
+        {
+            get
+            {
+                return nombreRuta;
+            }
+
+            set
+            {
+                nombreRuta = value;
+            }
+        }
+
 
         public FormEmpDetalles()
         {
@@ -110,7 +122,12 @@ namespace SCAM_App
 
                 fechaEntrada.Value = emp.FechaEntrada;
 
-                tbSalario.Text = emp.Salario.ToString("N2");
+                //NumberFormatInfo nfi = new CultureInfo("es-ES", false).NumberFormat;
+                //nfi.CurrencyDecimalDigits = 2;
+
+                //tbSalario.Text = emp.Salario.ToString("C", nfi);
+
+                tbSalario.Text = emp.Salario.ToString();
 
                 NombreRuta = emp.Foto.Replace("--", "\\"); // cambio las -- por barras para guardar en la variable la ruta existente en la base  //
 
@@ -329,7 +346,7 @@ namespace SCAM_App
             string paternTelefono = @"[0-9]{9}$";
             string pathernDni = @"^(([A-Z]\d{8})|(\d{8}-[A-Z]))$";
             string patherMail = @"\w+([-+.']\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*";
-            string pathernSalario = @"[^\\d,\\d]";
+            string pathernSalario = @"[0-9]";
 
             if (!Regex.IsMatch(tbNombre.Text, pathString) || tbNombre.Text.Trim().Length > 30)
             {
@@ -384,14 +401,18 @@ namespace SCAM_App
             else
                 errorProvider1.SetError(tbEmail, "");
 
-            if (!Regex.IsMatch(tbSalario.Text, pathernSalario))
+            if (!Regex.IsMatch(tbSalario.Text, pathernSalario) || tbSalario.Text.Length < 3)
             {
-                tbSalario.Text = tbSalario.Text.Replace(".", ",");
-                errorProvider1.SetError(tbSalario, "Tienes que Informar el Salário");
+                tbSalario.Text = tbSalario.Text.Replace(",", ".");
+                errorProvider1.SetError(tbSalario, "Tienes que Informar el Salário mayor que 99");
                 hayError = true;
             }
             else
+            {
                 errorProvider1.SetError(tbSalario, "");
+                tbSalario.Text = tbSalario.Text.Replace(",", ".");
+
+            }
 
             if (cbDepartamento.Text == "Seleccione un Departamento")
             {
@@ -430,24 +451,18 @@ namespace SCAM_App
             }
             else
                 errorProvider1.SetError(cbUsuario, "");
-            
+
 
             List<Empleado> yaExiste = EmpleadoDAO.yaExiste(tbNombre.Text, tbApellidos.Text, tbDni.Text); // Verifica si el Empleado o DNI ya exuste  //
             if (yaExiste.Count > 0 && tbIdEmpleado.Text == "")
                 tbIdEmpleado.Text = "0";
 
-            if(yaExiste.Count > 0 && yaExiste[0].IdEmpleado != Convert.ToInt32(tbIdEmpleado.Text))
+            if (yaExiste.Count > 0 && yaExiste[0].IdEmpleado != Convert.ToInt32(tbIdEmpleado.Text))
             {
                 MessageBox.Show("Error, El Empleado o El DNI ya Están Registrados !!!");
                 hayError = true;
             }
 
-            string vExt = emp.Foto.Substring(emp.Foto.Length - 3);
-            if ( vExt != "JPG" || vExt != "jpg" || vExt != "PNG" || vExt != "png")
-            {
-                MessageBox.Show("Error, El Formato de Imagen Tiene que ser jpg o png");
-                hayError = true;
-            }
 
 
             return hayError;

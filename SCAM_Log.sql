@@ -41,7 +41,6 @@ CREATE TABLE `usuarios` (
 
 LOCK TABLES `usuarios` WRITE;
 /*!40000 ALTER TABLE `usuarios` DISABLE KEYS */;
-INSERT INTO `usuarios` VALUES (1,'Admin','ADMI','admin','N1Jgr72zw/8=',1),(2,'Ray','RECC','a','VM0VReIH1vc=',1);
 /*!40000 ALTER TABLE `usuarios` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -68,8 +67,6 @@ CREATE TABLE `codigosAcceso` (
 
 LOCK TABLES `codigosacceso` WRITE;
 /*!40000 ALTER TABLE `codigosacceso` DISABLE KEYS */;
-INSERT INTO `codigosacceso` VALUES (1,'ATR1ZN5V6CplN4zE3CSPGXmRdb1cH0PXtszFlzIhmSE=','Administración',0),(2,'SdS32XamO/5SwbcA2JRHLg==','Entrada Principal',1);
-
 /*!40000 ALTER TABLE `codigosacceso` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -96,8 +93,6 @@ CREATE TABLE `departamentos` (
 
 LOCK TABLES `departamentos` WRITE;
 /*!40000 ALTER TABLE `departamentos` DISABLE KEYS */;
-INSERT INTO `departamentos` VALUES (1,'Administración',1),(2,'Finanzas',1);
-
 /*!40000 ALTER TABLE `departamentos` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -171,6 +166,33 @@ LOCK TABLES `accesosempleados` WRITE;
 /*!40000 ALTER TABLE `accesosempleados` ENABLE KEYS */;
 UNLOCK TABLES;
 
+----
+-- Table structure for table `logs`
+--
+
+DROP TABLE IF EXISTS `logs`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `logs` (
+  `idLog` int(11) NOT NULL AUTO_INCREMENT,
+  `descripcion` varchar(45) NOT NULL,
+  `fechaLog` timestamp NOT NULL,
+  `idUsuario` int(11) NOT NULL,
+  PRIMARY KEY (`idLog`),
+  KEY `fkLogs_Usuario_idx` (`idUsuario`),
+  CONSTRAINT `fkLogs_Usuario` FOREIGN KEY (`idUsuario`) REFERENCES `usuarios` (`idUsuario`) ON DELETE NO ACTION ON UPDATE NO ACTION
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `logs`
+--
+
+LOCK TABLES `logs` WRITE;
+/*!40000 ALTER TABLE `logs` DISABLE KEYS */;
+/*!40000 ALTER TABLE `logs` ENABLE KEYS */;
+UNLOCK TABLES;
+
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
@@ -181,4 +203,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 02-01-2018 11:46:19
+-- Dump completed on 02-11-2017 11:46:19

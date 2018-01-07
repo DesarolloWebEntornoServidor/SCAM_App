@@ -226,7 +226,7 @@ namespace SCAM_App
             else
                 errorProvider1.SetError(tbUsuarioReg, "");
 
-            if (tbPassReg.Text.Trim().Length > 20)
+            if (tbPassReg.Text.Trim().Length > 20 || tbPassReg.Text.Trim().Length < 1)
             {
                 errorProvider1.SetError(tbPassReg, "Error en el Tamaño de la Password ");
 
@@ -253,6 +253,8 @@ namespace SCAM_App
 
                     this.Close();
                     this.Dispose();
+
+                    Application.Exit();
 
                     break;
 
